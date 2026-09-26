@@ -11,6 +11,29 @@
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-riposte: "Riposte", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+@keyframes map-pin-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(2.15);
+    opacity: 0;
+  }
+}
+
+.map-pin-ring {
+  animation: map-pin-pulse 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pin-ring {
+    animation: none;
+    opacity: 0;
+  }
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

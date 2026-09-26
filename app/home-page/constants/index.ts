@@ -107,6 +107,29 @@ export const awardSectionPhotos = {
   },
 } as const satisfies Record<AwardId, AwardPhoto>;
 
+export const mapSectionContent = {
+  title: "From Around the World",
+  description: "Sourcing exceptional fruits from trusted growers across the globe.",
+  stats: [
+    { id: "fruits", value: 10, suffix: "K+", label: "Imported Fruits" },
+    { id: "customers", value: 50, suffix: "K+", label: "Customers Served" },
+    { id: "years", value: 5, suffix: "+", label: "Years Of Experience" },
+  ],
+  markers: [
+    { id: "usa", left: "21%", top: "35%" },
+    { id: "mexico", left: "21.2%", top: "45.5%" },
+    { id: "peru", left: "29.2%", top: "62.9%" },
+    { id: "brazil", left: "35.5%", top: "66%" },
+    { id: "spain", left: "49.1%", top: "35.7%" },
+    { id: "europe", left: "52.9%", top: "29.3%" },
+    { id: "east-africa", left: "61%", top: "57%" },
+    { id: "south-africa", left: "56.8%", top: "73.6%" },
+    { id: "china", left: "74.5%", top: "42%" },
+    { id: "southeast-asia", left: "78.2%", top: "50.5%" },
+    { id: "australia", left: "86%", top: "69%" },
+  ],
+};
+
 export const awardCollageSlots: {
   id: AwardId;
   src: string;
