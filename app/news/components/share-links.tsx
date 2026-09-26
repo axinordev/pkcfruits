@@ -1,7 +1,7 @@
 "use client";
 
 import { newsDetailContent, type ShareNetworkId } from "@/app/news/constants";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const shareUrl = {
   linkedin: (url: string) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
@@ -10,12 +10,21 @@ const shareUrl = {
     `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
 } satisfies Record<ShareNetworkId, (url: string, title: string) => string>;
 
-export default function ShareLinks({ title }: { title: string }) {
-  const [pageUrl, setPageUrl] = useState("");
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener("popstate", onStoreChange);
+  return () => window.removeEventListener("popstate", onStoreChange);
+}
 
-  useEffect(() => {
-    setPageUrl(window.location.href);
-  }, []);
+function getPageUrl() {
+  return window.location.href;
+}
+
+function getServerPageUrl() {
+  return "";
+}
+
+export default function ShareLinks({ title }: { title: string }) {
+  const pageUrl = useSyncExternalStore(subscribe, getPageUrl, getServerPageUrl);
 
   return (
     <ul aria-label={newsDetailContent.shareLabel} className="flex flex-row flex-wrap gap-x-5 gap-y-2 lg:flex-col lg:items-end lg:gap-2">
