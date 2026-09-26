@@ -6,6 +6,7 @@ import Button from "@/shared/ui/atoms/button";
 import Navbar from "@/shared/ui/molecules/navbar";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Mozilla_Headline } from "next/font/google";
 import AboutSection from "./about-section";
 
@@ -42,6 +43,13 @@ export default function HeroSection() {
           style={{ opacity: heroOpacity, scale: heroScale, pointerEvents: heroPointerEvents }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
+          <Image
+            src={heroSectionContent.customerBadge.src}
+            alt={heroSectionContent.customerBadge.alt}
+            width={heroSectionContent.customerBadge.width}
+            height={heroSectionContent.customerBadge.height}
+            className="pointer-events-none absolute top-[573.39px] left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100"
+          />
           <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6">
             <p className={mozillaHeadline.className}>{heroSectionContent.eyebrow}</p>
             <h1 className="text-center text-[75.57px] leading-[107.96px] font-bold tracking-normal">

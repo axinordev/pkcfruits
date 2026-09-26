@@ -4,6 +4,12 @@ export const heroSectionContent = {
   description:
     "PKC is one of South India's largest fresh fruit distributors importing, storing and delivering exotic fruit at the peak of freshness, every single day.",
   action: "Explore",
+  customerBadge: {
+    src: "/hero-customer-badge.png",
+    alt: "500K+ Happy Customers",
+    width: 567,
+    height: 406,
+  },
 };
 
 export const aboutSectionContent = {
