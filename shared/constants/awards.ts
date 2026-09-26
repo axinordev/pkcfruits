@@ -50,9 +50,3 @@ export const awards = [
 ] as const satisfies readonly Award[];
 
 export type AwardId = (typeof awards)[number]["id"];
-
-export function getAward(id: AwardId) {
-  const award = awards.find((item) => item.id === id);
-  if (!award) throw new Error(`Unknown award: ${id}`);
-  return award;
-}

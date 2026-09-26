@@ -1,3 +1,5 @@
+import { footerContent } from "@/shared/constants/site";
+import Badge from "@/shared/ui/atoms/badge";
 import Button from "@/shared/ui/atoms/button";
 import { ArrowRight, ArrowUp, Mail, MapPin, Phone } from "lucide-react";
 import { Manrope } from "next/font/google";
@@ -7,35 +9,15 @@ import type { ReactNode } from "react";
 
 const manrope = Manrope({ subsets: ["latin"], weight: "400" });
 
-const riposte = "font-['Riposte','Helvetica_Neue',Helvetica,Arial,sans-serif] font-light";
+const riposte = "font-riposte font-light";
 
-const usefulLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Products", href: "/product" },
-  { label: "Awards", href: "/awards" },
-  { label: "News and Events", href: "/news" },
-  { label: "Contact Us", href: "/contact" },
-] as const;
+const socialIcons: Record<(typeof footerContent.social)[number]["label"], ReactNode> = {
+  Facebook: <FacebookIcon />,
+  Instagram: <InstagramIcon />,
+  YouTube: <YouTubeIcon />,
+};
 
-const socialLinks: { label: string; href?: string; icon: ReactNode }[] = [
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/pkcfruits/",
-    icon: <FacebookIcon />,
-  },
-  {
-    label: "Instagram",
-    icon: <InstagramIcon />,
-  },
-  {
-    label: "YouTube",
-    icon: <YouTubeIcon />,
-  },
-];
-
-const socialClassName =
-  "flex size-7 items-center justify-center rounded-full bg-brand-primary text-white";
+const socialClassName = "flex size-7 items-center justify-center rounded-full bg-brand-primary text-white";
 
 export default function Footer() {
   return (
@@ -51,20 +33,15 @@ export default function Footer() {
       <div aria-hidden className="absolute inset-0 bg-black/65" />
       <div className="relative border-b border-white/10">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 py-16 lg:px-10 lg:pt-16 lg:pb-12">
-          <p className={`${riposte} inline-flex h-[30px] items-center rounded-full bg-[#FED7E4] px-3 text-sm leading-5 text-brand-primary/80`}>
-            Contact
-          </p>
+          <Badge className="h-[30px] rounded-full px-3 text-sm">{footerContent.badge}</Badge>
           <h2 className="mt-6 max-w-[18rem] text-center text-[32px] leading-tight font-bold lg:max-w-none lg:text-[40px] lg:leading-[50px] lg:whitespace-nowrap">
-            Let’s Bring Good Things Together
+            {footerContent.title}
           </h2>
           <p className={`${riposte} mt-4 max-w-[529px] text-center text-base leading-7 text-white/80 lg:text-lg`}>
-            Whether you’re looking to source premium fruits or explore a partnership, we’d love to hear from you.
+            {footerContent.description}
           </p>
-          <Button
-            href="/contact"
-            className={`${riposte} mt-8 h-12 w-auto rounded-full px-7 text-base text-[#FAF6F0]`}
-          >
-            Contact Us
+          <Button href={footerContent.action.href} className={`${riposte} mt-8 h-12 w-auto rounded-full px-7 text-base text-[#FAF6F0]`}>
+            {footerContent.action.label}
             <ArrowRight className="size-4" strokeWidth={2} />
           </Button>
 
@@ -75,15 +52,15 @@ export default function Footer() {
                   <Image src="/logo.png" alt="PKC Fruits" width={244} height={75} className="h-[75px] w-[244px] object-contain" />
                 </Link>
                 <ul className="mt-8 flex items-center gap-2.5 lg:mt-20">
-                  {socialLinks.map((item) => (
+                  {footerContent.social.map((item) => (
                     <li key={item.label}>
                       {item.href ? (
                         <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label} className={socialClassName}>
-                          {item.icon}
+                          {socialIcons[item.label]}
                         </a>
                       ) : (
                         <span role="img" aria-label={item.label} className={socialClassName}>
-                          {item.icon}
+                          {socialIcons[item.label]}
                         </span>
                       )}
                     </li>
@@ -94,7 +71,7 @@ export default function Footer() {
               <nav aria-label="Useful links">
                 <p className={`${riposte} text-xl leading-7`}>Useful Links</p>
                 <ul className="mt-2 flex flex-col">
-                  {usefulLinks.map((item) => (
+                  {footerContent.usefulLinks.map((item) => (
                     <li key={item.href}>
                       <Link href={item.href} className={`${riposte} inline-flex py-0.5 text-lg leading-7 text-white/80 hover:text-white`}>
                         {item.label}
@@ -108,21 +85,21 @@ export default function Footer() {
                 <li className="flex items-start gap-3.5">
                   <MapPin className="mt-1 size-[18px] shrink-0 text-brand-primary" strokeWidth={2} aria-hidden />
                   <p className={`${riposte} text-lg leading-7 text-white/80`}>
-                    17/2279, Alakapuri Building, MM Ali Road,
+                    {footerContent.address[0]}
                     <br />
-                    Kozhikode, Kerala 673002
+                    {footerContent.address[1]}
                   </p>
                 </li>
                 <li>
-                  <a href="mailto:pkcfruitsworld@gmail.com" className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}>
+                  <a href={`mailto:${footerContent.email}`} className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}>
                     <Mail className="size-[18px] shrink-0 text-brand-primary" strokeWidth={2} aria-hidden />
-                    pkcfruitsworld@gmail.com
+                    {footerContent.email}
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+919947858586" className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}>
+                  <a href={footerContent.phone.href} className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}>
                     <Phone className="size-[18px] shrink-0 text-brand-primary" strokeWidth={2} aria-hidden />
-                    +91 9947858586
+                    {footerContent.phone.label}
                   </a>
                 </li>
               </ul>
@@ -130,9 +107,9 @@ export default function Footer() {
 
             <div className="mt-8 border-t border-white/20 pt-4">
               <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                <p className={`${manrope.className} text-sm leading-9 text-white/50`}>© 2026 PKC Fruits - All rights reserved</p>
+                <p className={`${manrope.className} text-sm leading-9 text-white/50`}>{footerContent.copyright}</p>
                 <a href="#top" className="inline-flex items-center gap-2.5">
-                  <span className={`${riposte} text-lg leading-7 text-white/80`}>Back to top</span>
+                  <span className={`${riposte} text-lg leading-7 text-white/80`}>{footerContent.backToTop}</span>
                   <span className="flex size-7 items-center justify-center rounded-[5px] bg-brand-primary">
                     <ArrowUp className="size-3.5 text-white" strokeWidth={2.5} />
                   </span>

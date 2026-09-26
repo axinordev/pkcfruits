@@ -2,8 +2,6 @@ import { cn } from "cn";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-const riposte = "font-['Riposte','Helvetica_Neue',Helvetica,Arial,sans-serif] font-light";
-
 type ProductCardProps = {
   name: string;
   image: string;
@@ -25,13 +23,13 @@ export default function ProductCard({ name, image, alt, width, height, variant =
     >
       {isGrid ? (
         <div className="flex items-center justify-between px-5 pt-5">
-          <h3 className={`${riposte} text-[18px] leading-5 text-[#212221]`}>{name}</h3>
+          <h3 className="font-riposte text-[18px] leading-5 font-light text-ink">{name}</h3>
           <span className="flex size-7 items-center justify-center rounded-[5px] bg-brand-primary text-white">
             <ArrowRight className="size-3" strokeWidth={2.5} />
           </span>
         </div>
       ) : (
-        <h3 className={`${riposte} pt-7.5 text-center text-[18px] leading-5 text-[#212221]`}>{name}</h3>
+        <h3 className="font-riposte pt-7.5 text-center text-[18px] leading-5 font-light text-ink">{name}</h3>
       )}
       <div
         className={cn(

@@ -57,7 +57,7 @@ export default function HeroSection() {
             <h1 className="text-center text-[75.57px] leading-[107.96px] font-bold tracking-normal max-lg:!text-[34px] max-lg:!leading-[42px]">
               {heroSectionContent.title}
             </h1>
-            <p className="text-center font-['Riposte','Helvetica_Neue',Helvetica,Arial,sans-serif] text-[23.75px] leading-[42.11px] font-light tracking-normal max-lg:!text-[15px] max-lg:!leading-6">
+            <p className="font-riposte text-center text-[23.75px] leading-[42.11px] font-light tracking-normal max-lg:!text-[15px] max-lg:!leading-6">
               {heroSectionContent.description}
             </p>
             <Button>

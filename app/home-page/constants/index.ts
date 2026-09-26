@@ -1,3 +1,5 @@
+import type { Award, AwardId } from "@/shared/constants/awards";
+
 export const heroSectionContent = {
   eyebrow: "PKC Fruits",
   title: "Ripe. Real. Ready for you.",
@@ -52,3 +54,109 @@ export const aboutSectionContent = {
   action: "Read more",
   href: "/about",
 };
+
+export const newsSectionContent = {
+  badge: "News and Events",
+  title: "Recent News and Events",
+  viewAll: { label: "View All", href: "/news" },
+  stories: [
+    {
+      title: "Mr. Navas has been selected as a secretary of the federation of business organisation north zone, Kerala.",
+      date: "January 7, 2023",
+      image: "/news-federation.jpg",
+      imageAlt: "Mr. Navas shaking hands at Asia Fruit Logistica",
+      width: 1536,
+      height: 718,
+    },
+    {
+      title: "Mega Fruits and Kitchen Expo held at Kozhikode",
+      date: "January 7, 2023",
+      image: "/news-expo.jpg",
+      imageAlt: "Mega Fruits and Kitchen Expo stall in Kozhikode",
+      width: 1024,
+      height: 576,
+    },
+  ],
+};
+
+export const awardSectionContent = {
+  title: "Our Awards",
+  viewAll: { href: "/awards", label: "View all awards" },
+};
+
+type AwardPhoto = Pick<Award, "image" | "imageAlt" | "width" | "height">;
+
+export const awardSectionPhotos = {
+  secretary: {
+    image: "/awards/youth-award.jpg",
+    imageAlt: "Mr. Navas with officials at an award ceremony",
+    width: 960,
+    height: 720,
+  },
+  youth: {
+    image: "/awards/fruit-logistica.jpg",
+    imageAlt: "Mr. Navas shaking hands at a fruit trade show",
+    width: 2048,
+    height: 957,
+  },
+  logistica: {
+    image: "/awards/navas-portrait.jpg",
+    imageAlt: "Portrait of Mr. Navas",
+    width: 778,
+    height: 664,
+  },
+} as const satisfies Record<AwardId, AwardPhoto>;
+
+export const awardCollageSlots: {
+  id: AwardId;
+  src: string;
+  alt: string;
+  card: string;
+  image: string;
+  caption: string;
+  photo: string;
+  fromLeft: number;
+  fromTop: number;
+  toLeft: number;
+  toTop: number;
+}[] = [
+  {
+    id: "secretary",
+    src: awardSectionPhotos.secretary.image,
+    alt: awardSectionPhotos.secretary.imageAlt,
+    card: "h-[43.433%] w-[40.972%]",
+    image: "flex-[282]",
+    caption: "flex-[85] px-8 leading-7.25",
+    photo: "object-[center_42%]",
+    fromLeft: 29.514,
+    fromTop: 28.284,
+    toLeft: 5.556,
+    toTop: 0,
+  },
+  {
+    id: "youth",
+    src: awardSectionPhotos.youth.image,
+    alt: awardSectionPhotos.youth.imageAlt,
+    card: "h-[62.673%] w-[30.833%]",
+    image: "flex-[481]",
+    caption: "flex-[53] leading-5.5",
+    photo: "object-center",
+    fromLeft: 34.584,
+    fromTop: 18.664,
+    toLeft: 63.611,
+    toTop: 18.203,
+  },
+  {
+    id: "logistica",
+    src: awardSectionPhotos.logistica.image,
+    alt: awardSectionPhotos.logistica.imageAlt,
+    card: "h-[45.507%] w-[27.014%]",
+    image: "flex-[332]",
+    caption: "flex-[53] leading-5.5",
+    photo: "object-center",
+    fromLeft: 36.493,
+    fromTop: 27.247,
+    toLeft: 8.403,
+    toTop: 54.493,
+  },
+];

@@ -1,7 +1,7 @@
 import catalog from "@/shared/constants/products.json";
 import { cn } from "cn";
 
-const riposte = "font-['Riposte','Helvetica_Neue',Helvetica,Arial,sans-serif] font-light";
+const riposte = "font-riposte font-light";
 
 type Category = (typeof catalog.categories)[number];
 type Country = Category["countries"][number];
@@ -35,7 +35,7 @@ export function ProductCategoryToggle({ categories, categoryId, onSelect, classN
             className={cn(
               riposte,
               "h-full flex-1 rounded-[34px] text-[18px] leading-7",
-              selected ? "bg-brand-primary text-white" : "text-[#212221]",
+              selected ? "bg-brand-primary text-white" : "text-ink",
             )}
           >
             {item.label}
@@ -70,9 +70,9 @@ export default function ProductCountryFilters({ countries, countryId, onSelect, 
                 onClick={() => onSelect(item.id)}
                 className={cn(
                   riposte,
-                  "rounded-[21px] border px-2.5 py-2.5 text-[16px] leading-7 whitespace-nowrap text-[#212221] uppercase",
+                  "rounded-[21px] border px-2.5 py-2.5 text-[16px] leading-7 whitespace-nowrap text-ink uppercase",
                   selected
-                    ? "rounded-[30px] border-[rgba(226,26,96,0.2)] bg-[#FED7E4]"
+                    ? "rounded-[30px] border-[rgba(226,26,96,0.2)] bg-blush"
                     : "border-[rgba(33,34,33,0.5)] opacity-40 hover:opacity-70",
                 )}
               >
