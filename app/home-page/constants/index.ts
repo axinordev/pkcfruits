@@ -59,24 +59,6 @@ export const newsSectionContent = {
   badge: "News and Events",
   title: "Recent News and Events",
   viewAll: { label: "View All", href: "/news" },
-  stories: [
-    {
-      title: "Mr. Navas has been selected as a secretary of the federation of business organisation north zone, Kerala.",
-      date: "January 7, 2023",
-      image: "/news-federation.jpg",
-      imageAlt: "Mr. Navas shaking hands at Asia Fruit Logistica",
-      width: 1536,
-      height: 718,
-    },
-    {
-      title: "Mega Fruits and Kitchen Expo held at Kozhikode",
-      date: "January 7, 2023",
-      image: "/news-expo.jpg",
-      imageAlt: "Mega Fruits and Kitchen Expo stall in Kozhikode",
-      width: 1024,
-      height: 576,
-    },
-  ],
 };
 
 export const awardSectionContent = {

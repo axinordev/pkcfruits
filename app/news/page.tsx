@@ -1,10 +1,11 @@
 import { newsSectionContent } from "@/app/home-page/constants";
-import { newsPageContent } from "@/app/news/constants";
+import { listNewsStories, newsPageContent } from "@/app/news/constants";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { ArrowRight, Calendar } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = newsPageContent.metadata;
 
@@ -18,8 +19,8 @@ export default function NewsPage() {
         </Heading>
 
         <div className="mt-12 grid w-full min-w-0 items-stretch gap-5 lg:grid-cols-2">
-          {newsSectionContent.stories.map((story) => (
-            <article key={story.title} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
+          {listNewsStories().map((story) => (
+            <Link key={story.slug} href={story.href} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
               <div className="relative aspect-600/366 overflow-hidden rounded-[10px]">
                 <Image src={story.image} alt={story.imageAlt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" />
               </div>
@@ -33,7 +34,7 @@ export default function NewsPage() {
                   <ArrowRight className="size-3.5" strokeWidth={2} />
                 </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,0 +1,48 @@
+import { newsDetailContent, type NewsArticle } from "@/app/news/constants";
+import ArrowLink from "@/shared/ui/atoms/arrow-link";
+import Badge from "@/shared/ui/atoms/badge";
+import { ArrowRight, Calendar } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+export default function RelatedArticlesSection({ articles }: { articles: NewsArticle[] }) {
+  if (articles.length === 0) return null;
+
+  const { related } = newsDetailContent;
+
+  return (
+    <section className="bg-canvas text-ink">
+      <div className="mx-auto w-full min-w-0 max-w-360 px-20 pb-20 max-lg:px-5 max-lg:pb-12">
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-12 sm:flex-row sm:items-center">
+          <Badge>{related.badge}</Badge>
+          <ArrowLink href={related.viewAll.href}>{related.viewAll.label}</ArrowLink>
+        </div>
+
+        <div className="mt-8 grid items-stretch gap-5 lg:grid-cols-2">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/news/${article.slug}`}
+              className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+            >
+              <div className="relative aspect-600/366 overflow-hidden rounded-[10px]">
+                <Image src={article.card.src} alt={article.card.alt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" />
+                <div aria-hidden className="absolute inset-0 bg-black/5" />
+              </div>
+              <h2 className="font-riposte mt-3.75 text-[20px] leading-8 font-light text-[#253326]">{article.title}</h2>
+              <div className="mt-auto flex items-center justify-between gap-4 pt-4">
+                <p className="font-riposte flex items-center gap-1.25 text-[16px] leading-8 font-light text-brand-primary">
+                  <Calendar className="size-3.5 shrink-0 text-brand-primary" strokeWidth={2.25} aria-hidden />
+                  {article.date}
+                </p>
+                <span aria-hidden className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-primary text-brand-primary">
+                  <ArrowRight className="size-3.5" strokeWidth={2} />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

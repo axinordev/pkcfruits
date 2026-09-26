@@ -1,0 +1,61 @@
+{
+  "articles": [
+    {
+      "slug": "navas-federation-secretary",
+      "title": "Mr. Navas has been selected as a secretary of the federation of business organisation north zone, Kerala.",
+      "date": "January 7, 2023",
+      "card": {
+        "src": "/news-federation.jpg",
+        "alt": "Mr. Navas shaking hands at Asia Fruit Logistica",
+        "width": 1536,
+        "height": 718
+      },
+      "hero": {
+        "src": "/news/federation.jpg",
+        "alt": "Mr. Navas shaking hands at Asia Fruit Logistica 2022",
+        "width": 2048,
+        "height": 957
+      },
+      "paragraphs": [
+        "Mr. Navas has been selected as a secretary of the federation of business organisation north zone, Kerala."
+      ],
+      "feature": null,
+      "related": ["mega-fruits-and-kitchen-expo"]
+    },
+    {
+      "slug": "mega-fruits-and-kitchen-expo",
+      "title": "Mega Fruits and Kitchen Expo held at Kozhikode",
+      "date": "January 7, 2023",
+      "card": {
+        "src": "/news-expo.jpg",
+        "alt": "Mega Fruits and Kitchen Expo stall in Kozhikode",
+        "width": 1024,
+        "height": 576
+      },
+      "hero": {
+        "src": "/news/expo-hero.png",
+        "alt": "Children and staff at a fruit stall during the Mega Fruits and Kitchen Expo",
+        "width": 1672,
+        "height": 941
+      },
+      "paragraphs": [
+        "Most Malayalis are familiar with Mangosteen, at least the word, through the works of Vaikom Muhammed Basheer. But there may not be many who have actually seen the fruit. The fruit, mostly cultivated in Indonesia, is one of the exotic ones on display and sale at the Kitchen and Fruits Expo under way at the Jubilee Hall in Kozhikode since Wednesday.",
+        "At a time when the demand for imported fruits is rising, the expo features a variety of such fruits such as Ramputan from Malaysia, Dragon Fruit from Vietnam, Kiwis from New Zealand, Grape Fruits from Egypt, Blue Berries and Red Berries from Holland, Longon from Thailand, Shandong Pear from China Plums and Apples from USA and a whole range of native fruit items."
+      ],
+      "feature": {
+        "image": {
+          "src": "/news/expo-market.png",
+          "alt": "Wall of imported fruit on display at a supermarket",
+          "width": 1536,
+          "height": 1024
+        },
+        "heading": "The concern for safety among the local people",
+        "paragraphs": [
+          "The concern for safety among the local people is behind the sudden increase in the demand for imported fruits. “While many fruits we get here are pesticide ridden and chemically ripened, we export only the best to other countries and the process involved rigorous quality check. The same applies for imported fruits and this gives the buyer confidence that they are safer than the locally available fruits. The prices are a bit high, but there are people who do not care,” said Nawaz.P of PKC Fruits, the organisers of the expo.",
+          "That the prices of imported fruits have come down over the years has also contributed to the demand. “Earlier, the fruits were brought in flights and hence cost more. Now they are brought in ships, cutting down the cost to one-fourth,” Mr. Nawaz said, adding that apples from the U.S. and China are mostly in demand among the imported fruits. The expo also features various stalls that feature fertilizers and equipment for organic farming, jackfruit products and such."
+        ]
+      },
+      "related": ["navas-federation-secretary"]
+    }
+  ]
+}

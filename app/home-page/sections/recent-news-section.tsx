@@ -1,9 +1,11 @@
 import { newsSectionContent } from "@/app/home-page/constants";
+import { listNewsStories } from "@/app/news/constants";
 import ArrowLink from "@/shared/ui/atoms/arrow-link";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RecentNewsSection() {
   return (
@@ -18,8 +20,8 @@ export default function RecentNewsSection() {
         </div>
 
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
-          {newsSectionContent.stories.map((story) => (
-            <article key={story.title} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
+          {listNewsStories().map((story) => (
+            <Link key={story.slug} href={story.href} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
               <div className="relative aspect-600/366 overflow-hidden rounded-[10px]">
                 <Image src={story.image} alt={story.imageAlt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" />
                 <div aria-hidden className="absolute inset-0 bg-black/5" />
@@ -29,7 +31,7 @@ export default function RecentNewsSection() {
                 <Calendar className="size-3.5 shrink-0 text-brand-primary" strokeWidth={2.25} aria-hidden />
                 {story.date}
               </p>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
