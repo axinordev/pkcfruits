@@ -1,4 +1,5 @@
 import Footer from "@/shared/ui/molecules/footer";
+import { SiteHeader } from "@/shared/ui/molecules/navbar";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className="h-full antialiased"
     >
       <body id="top" className="min-h-full flex flex-col">
+        <SiteHeader />
         {children}
         <Footer />
       </body>

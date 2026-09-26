@@ -1,3 +1,15 @@
+export const navContent = {
+  links: [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Products", href: "/product" },
+    { label: "Awards", href: "/awards" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "News & Events", href: "/news" },
+  ],
+  action: { label: "Contact Us", href: "/contact" },
+} as const;
+
 export const footerContent = {
   badge: "Contact",
   title: "Let’s Bring Good Things Together",

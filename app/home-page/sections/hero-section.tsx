@@ -38,7 +38,7 @@ export default function HeroSection() {
         />
         <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 z-20">
-          <Navbar />
+          <Navbar variant="overlay" />
         </div>
         <motion.div
           style={{ opacity: heroOpacity, scale: heroScale, pointerEvents: heroPointerEvents }}
