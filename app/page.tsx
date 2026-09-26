@@ -1,10 +1,12 @@
-import { HeroSection } from "./home-page/sections"
+import { AwardSection, HeroSection, ProductSection, RecentNewsSection } from "./home-page/sections"
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <div className="min-h-screen"/>
+      <ProductSection />
+      <AwardSection />
+      <RecentNewsSection />
     </main>
   )
 }

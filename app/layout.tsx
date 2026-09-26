@@ -1,3 +1,4 @@
+import Footer from "@/shared/ui/molecules/footer";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -12,8 +13,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className="h-full antialiased"
     >
-      <body className="min-h-full flex flex-col">
-        {children}</body>
+      <body id="top" className="min-h-full flex flex-col">
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

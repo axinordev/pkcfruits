@@ -49,7 +49,7 @@ export default function HeroSection() {
             alt={heroSectionContent.customerBadge.alt}
             width={heroSectionContent.customerBadge.width}
             height={heroSectionContent.customerBadge.height}
-            className="pointer-events-none absolute top-[573.39px] left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:!top-auto max-lg:!bottom-4 max-lg:!left-4 max-lg:!h-auto max-lg:!w-[132px] max-lg:!border-0"
+            className="pointer-events-none absolute top-122.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:!top-auto max-lg:!bottom-4 max-lg:!left-4 max-lg:!h-auto max-lg:!w-[132px] max-lg:!border-0"
           />
           <HeroFruitMarqueeCard />
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 max-lg:mb-28 max-lg:gap-3 max-lg:px-5">

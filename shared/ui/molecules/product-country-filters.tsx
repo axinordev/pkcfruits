@@ -1,0 +1,87 @@
+import catalog from "@/shared/constants/products.json";
+import { cn } from "cn";
+
+const riposte = "font-['Riposte','Helvetica_Neue',Helvetica,Arial,sans-serif] font-light";
+
+type Category = (typeof catalog.categories)[number];
+type Country = Category["countries"][number];
+
+type ProductCategoryToggleProps = {
+  categories: readonly Category[];
+  categoryId: string;
+  onSelect: (id: string) => void;
+  className?: string;
+};
+
+export function ProductCategoryToggle({ categories, categoryId, onSelect, className }: ProductCategoryToggleProps) {
+  return (
+    <div
+      role="tablist"
+      aria-label="Product origin"
+      className={cn(
+        "flex h-12 w-89 shrink-0 items-stretch rounded-[34px] border border-brand-primary max-lg:w-full max-lg:max-w-89",
+        className,
+      )}
+    >
+      {categories.map((item) => {
+        const selected = item.id === categoryId;
+        return (
+          <button
+            key={item.id}
+            type="button"
+            role="tab"
+            aria-selected={selected}
+            onClick={() => onSelect(item.id)}
+            className={cn(
+              riposte,
+              "h-full flex-1 rounded-[34px] text-[18px] leading-7",
+              selected ? "bg-brand-primary text-white" : "text-[#212221]",
+            )}
+          >
+            {item.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+type ProductCountryFiltersProps = {
+  countries: readonly Country[];
+  countryId: string;
+  onSelect: (id: string) => void;
+  className?: string;
+};
+
+export default function ProductCountryFilters({ countries, countryId, onSelect, className }: ProductCountryFiltersProps) {
+  const rows = [...new Set(countries.map((item) => item.row))].map((row) => countries.filter((item) => item.row === row));
+
+  return (
+    <div className={cn("flex flex-col gap-4", className)}>
+      {rows.map((row) => (
+        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-x-4.5 gap-y-3">
+          {row.map((item) => {
+            const selected = item.id === countryId;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => onSelect(item.id)}
+                className={cn(
+                  riposte,
+                  "rounded-[21px] border px-2.5 py-2.5 text-[16px] leading-7 whitespace-nowrap text-[#212221] uppercase",
+                  selected
+                    ? "rounded-[30px] border-[rgba(226,26,96,0.2)] bg-[#FED7E4]"
+                    : "border-[rgba(33,34,33,0.5)] opacity-40 hover:opacity-70",
+                )}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
