@@ -14,7 +14,7 @@ export const contactPageContent = {
   },
   enquireTitle: "Enquire Now",
   sendLabel: "Send",
-  success: "Thank you. Your email app should open with this enquiry so you can send it to us.",
+  success: "Thank you. We have received your enquiry and will get back to you soon.",
   fields: [
     { name: "fullName", label: "Full Name", type: "text", autoComplete: "name" },
     { name: "mobile", label: "Mobile Number", type: "tel", autoComplete: "tel" },

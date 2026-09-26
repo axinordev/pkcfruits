@@ -6,6 +6,7 @@ import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Awards } from "./collections/Awards";
+import { Enquiries } from "./collections/Enquiries";
 import { Gallery } from "./collections/Gallery";
 import { Media } from "./collections/Media";
 import { News } from "./collections/News";
@@ -30,7 +31,7 @@ export default buildConfig({
       beforeDashboard: ["@/components/admin/SeedDashboardButton#default"],
     },
   },
-  collections: [Users, Media, Products, News, Gallery, Awards],
+  collections: [Users, Media, Products, News, Gallery, Awards, Enquiries],
   globals: [HomePage, AboutPage, ProductsPage, AwardsPage, GalleryPage, NewsPage, ContactPage],
   plugins: [cloudinaryStorage()],
   endpoints: [
