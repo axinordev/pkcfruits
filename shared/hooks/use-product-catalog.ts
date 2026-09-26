@@ -12,7 +12,7 @@ export type ProductCountry = ProductCategory["countries"][number];
 export function productsFor(ids: string[]) {
   return ids.flatMap((id) => {
     const fruit = fruits[id as keyof typeof fruits] as ProductFruit | undefined;
-    return fruit ? [fruit] : [];
+    return fruit ? [{ ...fruit, slug: id }] : [];
   });
 }
 

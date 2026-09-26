@@ -25,8 +25,8 @@ export default function ProductPage() {
         <ProductCountryFilters countries={category.countries} countryId={country.id} onSelect={setCountryId} className="mt-10" />
 
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {products.map((product) => (
-            <ProductCard key={`${country.id}-${product.name}`} {...product} variant="grid" />
+          {products.map(({ slug, ...product }) => (
+            <ProductCard key={`${country.id}-${slug}`} {...product} href={`/product/${slug}`} variant="grid" />
           ))}
         </div>
       </div>

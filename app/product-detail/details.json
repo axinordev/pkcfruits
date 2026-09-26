@@ -1,0 +1,145 @@
+{
+  "back": { "label": "Back", "href": "/product" },
+  "badge": "Products",
+  "related": {
+    "badge": "Relatable Products",
+    "viewAll": { "label": "View All", "href": "/product" }
+  },
+  "products": {
+    "kiwi": {
+      "name": "Kiwi",
+      "summary": "Our fresh Iranian Kiwis are carefully selected for their vibrant green flesh, juicy texture, and naturally balanced sweet-tart flavour. Sourced from trusted growers in Iran, they are handled with care to preserve their freshness and quality. Perfect for enjoying fresh, adding to fruit bowls and salads, or blending into refreshing smoothies.",
+      "origin": "Iran",
+      "availability": {
+        "label": "Seasonal",
+        "note": "( Typically available from November to February )"
+      },
+      "bestFor": "Fresh eating, fruit bowls, salads & smoothies",
+      "hero": {
+        "src": "/products/kiwi-hero.png",
+        "alt": "A whole kiwi beside a cut kiwi",
+        "width": 1536,
+        "height": 1024
+      },
+      "benefits": {
+        "title": "Health Benefits of Kiwi",
+        "body": "Kiwi is a nutrient-rich fruit packed with vitamin C, dietary fibre, antioxidants, potassium, and other essential nutrients. Its high vitamin C content helps support the body's natural immune function and protects cells from oxidative stress. The dietary fibre in kiwi promotes healthy digestion and can support regular bowel movements, while its natural enzymes may also help with the digestion of proteins. Kiwi provides potassium, which contributes to normal muscle and nerve function, and its high water content makes it a refreshing addition to a balanced diet. With its combination of nutrients, antioxidants, fibre, and natural freshness, kiwi is a healthy choice for everyday consumption.",
+        "image": {
+          "src": "/products/kiwi-nutrients.png",
+          "alt": "Bowl of sliced kiwi labeled with vitamin C, dietary fiber, antioxidants, and potassium",
+          "width": 1200,
+          "height": 980
+        }
+      },
+      "season": {
+        "title": "Availability",
+        "body": "Kiwi is a seasonal fruit, with availability depending on the growing and harvesting season in its country of origin. Our Iranian kiwis are generally available from late autumn through winter, with peak availability typically during November to February. Availability may vary slightly each year based on harvest conditions, crop quality, and supply."
+      },
+      "related": ["cherry", "apple", "apricot", "kiwi"]
+    },
+    "cherry": {
+      "name": "Cherry",
+      "summary": "Our fresh cherries are chosen for their deep colour, firm bite, and bright sweet flavour. Sourced from trusted growers, they are packed with care so they arrive ready for fresh snacking and seasonal displays.",
+      "origin": "Turkey",
+      "availability": {
+        "label": "Seasonal",
+        "note": "( Typically available from May to August )"
+      },
+      "bestFor": "Fresh eating, desserts & fruit platters",
+      "hero": {
+        "src": "/cherry.png",
+        "alt": "Cherries",
+        "width": 1024,
+        "height": 1024
+      },
+      "benefits": {
+        "title": "Health Benefits of Cherry",
+        "body": "Cherries bring natural sweetness with vitamin C, fibre, and antioxidants. Enjoyed fresh, they are a refreshing seasonal fruit for everyday snacking and for adding colour to fruit bowls.",
+        "image": null
+      },
+      "season": {
+        "title": "Availability",
+        "body": "Cherries are a seasonal fruit. Availability follows the harvest in the country of origin and can shift slightly each year with crop conditions and supply."
+      },
+      "related": ["kiwi", "apple", "apricot", "cherry"]
+    },
+    "apple": {
+      "name": "Red Apple",
+      "summary": "Our red apples are selected for their crisp bite, balanced sweetness, and reliable quality. Grown with care and handled to stay fresh, they suit everyday eating, fruit bowls, and retail displays.",
+      "origin": "Kashmir",
+      "availability": {
+        "label": "Seasonal",
+        "note": "( Typically available from September to March )"
+      },
+      "bestFor": "Fresh eating, fruit bowls & snacks",
+      "hero": {
+        "src": "/apple.png",
+        "alt": "Red apples",
+        "width": 648,
+        "height": 482
+      },
+      "benefits": {
+        "title": "Health Benefits of Red Apple",
+        "body": "Red apples are a familiar everyday fruit with fibre, vitamin C, and natural freshness. Their crisp texture makes them an easy choice for snacking and for fresh fruit displays.",
+        "image": null
+      },
+      "season": {
+        "title": "Availability",
+        "body": "Red apples follow the harvest season in their growing region. Peak supply is typically through autumn and winter, and availability can vary with crop quality and demand."
+      },
+      "related": ["cherry", "kiwi", "apricot", "apple"]
+    },
+    "apricot": {
+      "name": "Apricot",
+      "summary": "Our apricots are chosen for their golden colour, soft aroma, and sweet-tart taste. They are handled carefully from harvest so the fruit stays fresh for eating and seasonal displays.",
+      "origin": "Turkey",
+      "availability": {
+        "label": "Seasonal",
+        "note": "( Typically available from May to July )"
+      },
+      "bestFor": "Fresh eating, desserts & fruit salads",
+      "hero": {
+        "src": "/apricot.png",
+        "alt": "Apricots",
+        "width": 1024,
+        "height": 1024
+      },
+      "benefits": {
+        "title": "Health Benefits of Apricot",
+        "body": "Apricots offer a juicy seasonal bite with fibre, vitamin C, and natural sweetness. They work well eaten fresh or added to fruit salads and desserts.",
+        "image": null
+      },
+      "season": {
+        "title": "Availability",
+        "body": "Apricots have a short seasonal window. Supply depends on the harvest in the country of origin and can vary year to year with growing conditions."
+      },
+      "related": ["cherry", "apple", "kiwi", "apricot"]
+    },
+    "orange": {
+      "name": "Orange",
+      "summary": "Our oranges are selected for their bright colour, juicy segments, and lively citrus flavour. Sourced from trusted growers, they are packed to keep their freshness for juicing and fresh eating.",
+      "origin": "Australia",
+      "availability": {
+        "label": "Seasonal",
+        "note": "( Typically available from June to October )"
+      },
+      "bestFor": "Juicing, fresh eating & fruit displays",
+      "hero": {
+        "src": "/orange.png",
+        "alt": "Oranges",
+        "width": 1536,
+        "height": 1024
+      },
+      "benefits": {
+        "title": "Health Benefits of Orange",
+        "body": "Oranges are known for vitamin C, a juicy texture, and a fresh citrus taste. They are an easy everyday fruit for juicing, snacking, and fruit displays.",
+        "image": null
+      },
+      "season": {
+        "title": "Availability",
+        "body": "Oranges follow the harvest season of their growing region. Peak months depend on origin, and supply can shift slightly with crop conditions each year."
+      },
+      "related": ["apple", "kiwi", "cherry", "orange"]
+    }
+  }
+}

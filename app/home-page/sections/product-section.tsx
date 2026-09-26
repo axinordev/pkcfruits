@@ -30,8 +30,8 @@ export default function ProductSection() {
         <ProductCountryFilters countries={category.countries} countryId={country.id} onSelect={setCountryId} className="mt-13.25" />
 
         <div ref={scrollerRef} className="mt-12 flex gap-5 overflow-x-auto scroll-smooth pb-1 scrollbar-none">
-          {products.map((product) => (
-            <ProductCard key={product.name} {...product} />
+          {products.map(({ slug, ...product }) => (
+            <ProductCard key={slug} {...product} href={`/product/${slug}`} />
           ))}
         </div>
 

@@ -1,6 +1,7 @@
 import { cn } from "cn";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type ProductCardProps = {
   name: string;
@@ -8,19 +9,19 @@ type ProductCardProps = {
   alt: string;
   width: number;
   height: number;
+  href?: string;
   variant?: "carousel" | "grid";
 };
 
-export default function ProductCard({ name, image, alt, width, height, variant = "carousel" }: ProductCardProps) {
+export default function ProductCard({ name, image, alt, width, height, href, variant = "carousel" }: ProductCardProps) {
   const isGrid = variant === "grid";
+  const className = cn(
+    "block box-border rounded-[20px] border border-[rgba(250,246,240,0.2)] bg-white shadow-[0px_1px_6px_rgba(0,0,0,0.05)]",
+    isGrid ? "w-full" : "h-103 w-92.5 shrink-0 max-lg:h-85 max-lg:w-70",
+  );
 
-  return (
-    <article
-      className={cn(
-        "box-border rounded-[20px] border border-[rgba(250,246,240,0.2)] bg-white shadow-[0px_1px_6px_rgba(0,0,0,0.05)]",
-        isGrid ? "w-full" : "h-103 w-92.5 shrink-0 max-lg:h-85 max-lg:w-70",
-      )}
-    >
+  const card = (
+    <>
       {isGrid ? (
         <div className="flex items-center justify-between px-5 pt-5">
           <h3 className="font-riposte text-[18px] leading-5 font-light text-ink">{name}</h3>
@@ -54,6 +55,16 @@ export default function ProductCard({ name, image, alt, width, height, variant =
           className="absolute top-7 left-1/2 h-55 w-72.5 -translate-x-1/2 object-contain max-lg:top-4 max-lg:h-45 max-lg:w-52.5"
         />
       </div>
-    </article>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className={className}>
+        {card}
+      </Link>
+    );
+  }
+
+  return <article className={className}>{card}</article>;
 }
