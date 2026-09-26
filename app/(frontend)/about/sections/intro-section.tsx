@@ -1,18 +1,27 @@
 "use client";
 
-import { aboutPageContent } from "@/app/about/constants";
 import { useCountUps } from "@/app/home-page/hooks/use-count-up";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
+import { useMemo } from "react";
 
 const manrope = Manrope({ subsets: ["latin"], weight: "800" });
-const statTargets = aboutPageContent.stats.map((stat) => stat.value);
 
-export default function IntroSection() {
-  const { rootRef, values } = useCountUps(statTargets);
-  const { intro, stats } = aboutPageContent;
+type IntroSectionProps = {
+  intro: {
+    badge: string;
+    title: string;
+    paragraphs: string[];
+    image: { src: string; alt: string } | null;
+  };
+  stats: { id: string; value: number; suffix: string; label: string }[];
+};
+
+export default function IntroSection({ intro, stats }: IntroSectionProps) {
+  const targets = useMemo(() => stats.map((stat) => stat.value), [stats]);
+  const { rootRef, values } = useCountUps(targets);
 
   return (
     <section className="bg-canvas text-ink">
@@ -34,14 +43,16 @@ export default function IntroSection() {
 
           <div className="lg:pt-15">
             <div className="relative aspect-780/743 overflow-hidden rounded-2xl">
-              <Image
-                src={intro.image.src}
-                alt={intro.image.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 780px, 100vw"
-                className="object-cover"
-              />
+              {intro.image ? (
+                <Image
+                  src={intro.image.src}
+                  alt={intro.image.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 780px, 100vw"
+                  className="object-cover"
+                />
+              ) : null}
               <div aria-hidden className="absolute inset-0 bg-black/10" />
             </div>
           </div>

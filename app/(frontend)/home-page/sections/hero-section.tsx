@@ -1,6 +1,6 @@
 "use client";
 
-import { heroSectionContent } from "@/app/home-page/constants";
+import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
 import Button from "@/shared/ui/atoms/button";
 import Navbar from "@/shared/ui/molecules/navbar";
@@ -16,7 +16,16 @@ const mozillaHeadline = Mozilla_Headline({
   adjustFontFallback: false,
 });
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  eyeLabel: string;
+  title: string;
+  description: string;
+  button: string;
+  fruits: MarqueeFruit[];
+  about: { title: string; description: string; button: string };
+};
+
+export default function HeroSection({ eyeLabel, title, description, button, fruits, about }: HeroSectionProps) {
   const {
     sectionRef,
     imageScale,
@@ -45,23 +54,23 @@ export default function HeroSection() {
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
           <Image
-            src={heroSectionContent.customerBadge.src}
-            alt={heroSectionContent.customerBadge.alt}
-            width={heroSectionContent.customerBadge.width}
-            height={heroSectionContent.customerBadge.height}
+            src="/hero-customer-badge.png"
+            alt="500K+ Happy Customers"
+            width={567}
+            height={406}
             className="pointer-events-none absolute top-122.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:!top-auto max-lg:!bottom-4 max-lg:!left-4 max-lg:!h-auto max-lg:!w-[132px] max-lg:!border-0"
           />
-          <HeroFruitMarqueeCard />
+          <HeroFruitMarqueeCard fruits={fruits} />
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 max-lg:mb-28 max-lg:gap-3 max-lg:px-5">
-            <p className={mozillaHeadline.className}>{heroSectionContent.eyebrow}</p>
+            <p className={mozillaHeadline.className}>{eyeLabel}</p>
             <h1 className="text-center text-[75.57px] leading-[107.96px] font-bold tracking-normal max-lg:!text-[34px] max-lg:!leading-[42px]">
-              {heroSectionContent.title}
+              {title}
             </h1>
             <p className="font-riposte text-center text-[23.75px] leading-[42.11px] font-light tracking-normal max-lg:!text-[15px] max-lg:!leading-6">
-              {heroSectionContent.description}
+              {description}
             </p>
             <Button>
-              {heroSectionContent.action} <ArrowRight />
+              {button} <ArrowRight />
             </Button>
           </div>
         </motion.div>
@@ -69,7 +78,7 @@ export default function HeroSection() {
           style={{ opacity: aboutOpacity, scale: aboutScale, pointerEvents: aboutPointerEvents }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
-          <AboutSection />
+          <AboutSection {...about} />
         </motion.div>
       </div>
     </section>

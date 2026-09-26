@@ -1,5 +1,3 @@
-import { newsSectionContent } from "@/app/home-page/constants";
-import { listNewsStories } from "@/app/news/constants";
 import ArrowLink from "@/shared/ui/atoms/arrow-link";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
@@ -7,23 +5,32 @@ import { Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function RecentNewsSection() {
+type Story = {
+  slug: string;
+  title: string;
+  date: string;
+  image: string;
+  imageAlt: string;
+  href: string;
+};
+
+export default function RecentNewsSection({ badge, title, button, stories }: { badge: string; title: string; button: string; stories: Story[] }) {
   return (
     <section id="news" className="bg-canvas text-ink">
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 pt-22.5 pb-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <Badge>{newsSectionContent.badge}</Badge>
-            <Heading className="mt-7.5 max-lg:mt-4">{newsSectionContent.title}</Heading>
+            <Badge>{badge}</Badge>
+            <Heading className="mt-7.5 max-lg:mt-4">{title}</Heading>
           </div>
-          <ArrowLink href={newsSectionContent.viewAll.href}>{newsSectionContent.viewAll.label}</ArrowLink>
+          <ArrowLink href="/news">{button}</ArrowLink>
         </div>
 
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
-          {listNewsStories().map((story) => (
+          {stories.map((story) => (
             <Link key={story.slug} href={story.href} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
               <div className="relative aspect-600/366 overflow-hidden rounded-[10px]">
-                <Image src={story.image} alt={story.imageAlt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" />
+                {story.image ? <Image src={story.image} alt={story.imageAlt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" /> : null}
                 <div aria-hidden className="absolute inset-0 bg-black/5" />
               </div>
               <h3 className="font-riposte mt-3.75 text-[20px] leading-8 font-light text-[#253326]">{story.title}</h3>

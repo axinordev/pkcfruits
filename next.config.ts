@@ -1,7 +1,17 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    root: path.resolve(dirname),
+  },
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" }],
+  },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);

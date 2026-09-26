@@ -1,5 +1,4 @@
 import ShareLinks from "@/app/news/components/share-links";
-import { newsDetailContent, type NewsArticle } from "@/app/news/constants";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { ArrowLeft, Calendar } from "lucide-react";
@@ -9,15 +8,22 @@ import Link from "next/link";
 const intro = "font-riposte text-[18px] leading-8 font-light text-[#253326]";
 const featureCopy = "font-riposte text-[20px] leading-9 font-light text-[#253326]";
 
-export default function ArticleSection({ article }: { article: NewsArticle }) {
-  const { back, shareLabel } = newsDetailContent;
+type ArticleView = {
+  title: string;
+  date: string;
+  paragraphs: string[];
+  cover: { src: string; alt: string } | null;
+  feature: { heading: string; paragraphs: string[]; image: { src: string; alt: string } } | null;
+};
+
+export default function ArticleSection({ article }: { article: ArticleView }) {
 
   return (
     <section className="overflow-x-clip bg-canvas text-ink">
       <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col px-20 pt-10 pb-20 max-lg:px-5 max-lg:pt-8 max-lg:pb-12">
-        <Link href={back.href} className="font-riposte inline-flex items-center gap-2.5 text-[16px] leading-6 font-light text-[#253326]">
+        <Link href="/news" className="font-riposte inline-flex items-center gap-2.5 text-[16px] leading-6 font-light text-[#253326]">
           <ArrowLeft className="size-3" strokeWidth={2} />
-          {back.label}
+          Back
         </Link>
 
         <div className="mt-8 flex items-center justify-between gap-4">
@@ -25,7 +31,7 @@ export default function ArticleSection({ article }: { article: NewsArticle }) {
             <Calendar className="size-3.5 shrink-0" strokeWidth={2.25} aria-hidden />
             {article.date}
           </Badge>
-          <Badge className="text-brand-primary">{shareLabel}</Badge>
+          <Badge className="text-brand-primary">Share</Badge>
         </div>
 
         <div className="mt-6 flex flex-col items-start gap-5 lg:flex-row lg:justify-between lg:gap-10">
@@ -36,14 +42,16 @@ export default function ArticleSection({ article }: { article: NewsArticle }) {
         </div>
 
         <div className="relative mt-10 aspect-[1279/749] overflow-hidden rounded-2xl">
+          {article.cover ? (
           <Image
-            src={article.hero.src}
-            alt={article.hero.alt}
+            src={article.cover.src}
+            alt={article.cover.alt}
             fill
             priority
             sizes="(min-width: 1024px) 1280px, 100vw"
             className="object-cover"
           />
+          ) : null}
           <div aria-hidden className="absolute inset-0 bg-black/10" />
         </div>
 

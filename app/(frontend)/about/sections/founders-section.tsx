@@ -1,11 +1,16 @@
-import { aboutPageContent } from "@/app/about/constants";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import Image from "next/image";
 
-export default function FoundersSection() {
-  const { founders } = aboutPageContent;
+type FoundersSectionProps = {
+  founders: {
+    badge: string;
+    title: string;
+    members: { name: string; role: string; image: { src: string; alt: string } }[];
+  };
+};
 
+export default function FoundersSection({ founders }: FoundersSectionProps) {
   return (
     <section className="bg-canvas text-ink">
       <div className="mx-auto flex w-full max-w-360 flex-col items-center px-20 pt-30 pb-30 max-lg:px-5 max-lg:py-14">
@@ -16,8 +21,8 @@ export default function FoundersSection() {
           {founders.members.map((member) => (
             <article key={member.name} className="relative aspect-630/786 overflow-hidden rounded-2xl">
               <Image
-                src={member.image}
-                alt={member.imageAlt}
+                src={member.image.src}
+                alt={member.image.alt}
                 width={1086}
                 height={1448}
                 sizes="(min-width: 768px) 630px, 100vw"

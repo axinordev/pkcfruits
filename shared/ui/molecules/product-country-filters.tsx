@@ -1,10 +1,10 @@
-import catalog from "@/shared/constants/products.json";
+import type { ProductCategory, ProductCountry } from "@/shared/product-catalog";
 import { cn } from "cn";
 
 const riposte = "font-riposte font-light";
 
-type Category = (typeof catalog.categories)[number];
-type Country = Category["countries"][number];
+type Category = ProductCategory;
+type Country = ProductCountry;
 
 type ProductCategoryToggleProps = {
   categories: readonly Category[];

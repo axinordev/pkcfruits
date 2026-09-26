@@ -1,15 +1,22 @@
-import { aboutPageContent } from "@/app/about/constants";
 import { FoundersSection, IntroSection, StorySection } from "@/app/about/sections";
-import type { Metadata } from "next";
+import { getAboutPage } from "@/lib/content";
+import { getSeoMetadata } from "@/shared/seo";
 
-export const metadata: Metadata = aboutPageContent.metadata;
+export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
+export async function generateMetadata() {
+  const page = await getAboutPage();
+  return getSeoMetadata(page.seo);
+}
+
+export default async function AboutPage() {
+  const page = await getAboutPage();
+
   return (
     <main>
-      <IntroSection />
-      <StorySection />
-      <FoundersSection />
+      <IntroSection intro={page.intro} stats={page.stats} />
+      <StorySection story={page.story} />
+      <FoundersSection founders={page.founders} />
     </main>
   );
 }

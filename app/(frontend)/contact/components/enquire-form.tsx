@@ -1,15 +1,31 @@
 "use client";
 
-import { contactPageContent } from "@/app/contact/constants";
 import Button from "@/shared/ui/atoms/button";
 import { useState, type FormEvent } from "react";
 
 const fieldClassName =
   "w-full rounded-xl border border-[rgba(196,195,198,0.6)] bg-[rgba(244,244,244,0.4)] px-4 font-riposte text-[16px] font-light text-ink outline-none focus:border-brand-primary";
 
-export default function EnquireForm() {
+type EnquireFormProps = {
+  enquireTitle: string;
+  nameLabel: string;
+  mobileLabel: string;
+  emailLabel: string;
+  messageLabel: string;
+  sendLabel: string;
+  success: string;
+  email: string;
+};
+
+export default function EnquireForm({ page }: { page: EnquireFormProps }) {
   const [sent, setSent] = useState(false);
-  const { enquireTitle, fields, sendLabel, success, email } = contactPageContent;
+  const { enquireTitle, sendLabel, success, email } = page;
+  const fields = [
+    { name: "fullName", label: page.nameLabel, type: "text", autoComplete: "name" },
+    { name: "mobile", label: page.mobileLabel, type: "tel", autoComplete: "tel" },
+    { name: "email", label: page.emailLabel, type: "email", autoComplete: "email" },
+    { name: "message", label: page.messageLabel, type: "textarea", autoComplete: "off" },
+  ];
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

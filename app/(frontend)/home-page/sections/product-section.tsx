@@ -9,8 +9,11 @@ import ProductCard from "@/shared/ui/molecules/product-card";
 import ProductCountryFilters, { ProductCategoryToggle } from "@/shared/ui/molecules/product-country-filters";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function ProductSection() {
-  const { catalog, category, country, products, selectCategory, setCountryId } = useProductCatalog();
+import type { ProductCatalog } from "@/shared/product-catalog";
+
+export default function ProductSection({ catalog }: { catalog: ProductCatalog }) {
+  const { category, country, products, selectCategory, setCountryId } = useProductCatalog(catalog);
+  if (!category || !country) return null;
   const { scrollerRef, canScrollLeft, canScrollRight, scrollByCard } = useProductScroller(`${category.id}-${country.id}`);
 
   const controls = [
@@ -50,7 +53,7 @@ export default function ProductSection() {
               </button>
             ))}
           </div>
-          <ArrowLink href={catalog.explore.href}>{catalog.explore.label}</ArrowLink>
+          <ArrowLink href="/product">{catalog.button}</ArrowLink>
         </div>
       </div>
     </section>

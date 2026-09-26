@@ -1,13 +1,19 @@
-import { contactPageContent } from "@/app/contact/constants";
 import { ContactSection } from "@/app/contact/sections";
-import type { Metadata } from "next";
+import { getContactPage } from "@/lib/content";
+import { getSeoMetadata } from "@/shared/seo";
 
-export const metadata: Metadata = contactPageContent.metadata;
+export const dynamic = "force-dynamic";
 
-export default function ContactPage() {
+export async function generateMetadata() {
+  const page = await getContactPage();
+  return getSeoMetadata(page.seo);
+}
+
+export default async function ContactPage() {
+  const page = await getContactPage();
   return (
     <main>
-      <ContactSection />
+      <ContactSection page={page} />
     </main>
   );
 }

@@ -2,20 +2,32 @@
   "name": "pkc-fruits",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "payload": "payload",
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types"
   },
   "dependencies": {
+    "@payloadcms/db-mongodb": "^3.90.2",
+    "@payloadcms/next": "^3.90.2",
+    "@payloadcms/plugin-cloud-storage": "^3.90.2",
+    "@payloadcms/richtext-lexical": "^3.90.2",
+    "cloudinary": "^2.11.0",
     "cn": "^0.4.0",
     "daisyui": "^5.7.46",
     "framer-motion": "^13.4.4",
+    "graphql": "16.8.1",
     "lucide-react": "^1.48.0",
     "next": "16.3.6",
+    "payload": "^3.90.2",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -33,6 +45,7 @@
     "unrs-resolver"
   ],
   "trustedDependencies": [
+    "esbuild",
     "sharp",
     "unrs-resolver"
   ]
