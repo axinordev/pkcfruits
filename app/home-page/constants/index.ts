@@ -12,6 +12,39 @@ export const heroSectionContent = {
   },
 };
 
+export const heroFruitCards = [
+  {
+    label: "New Arrivals",
+    name: "[Australian Citrus]",
+    image: "/orange.png",
+    imageAlt: "Australian citrus oranges",
+    imageWidth: 1536,
+    imageHeight: 1024,
+    cardClass: "bg-[#FDF4CE]",
+    panelClass: "border-[rgba(244,180,0,0.05)] bg-[rgba(244,180,0,0.15)]",
+  },
+  {
+    label: "New Arrivals",
+    name: "[Red Apple]",
+    image: "/apple.png",
+    imageAlt: "Red apples",
+    imageWidth: 648,
+    imageHeight: 482,
+    cardClass: "bg-[#FFF3EF]",
+    panelClass: "border-[rgba(230,104,58,0.1)] bg-[rgba(230,104,58,0.15)]",
+  },
+  {
+    label: "New Arrivals",
+    name: "[Kiwi]",
+    image: "/kiwi.png",
+    imageAlt: "Kiwi",
+    imageWidth: 1536,
+    imageHeight: 1024,
+    cardClass: "bg-[#FFFCE3]",
+    panelClass: "border-[rgba(0,136,82,0.1)] bg-[rgba(0,136,16,0.1)]",
+  },
+];
+
 export const aboutSectionContent = {
   title: "About PKC FRUITS",
   description:
