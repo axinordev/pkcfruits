@@ -80,10 +80,7 @@ export function buildCatalog(
   const fruits: ProductCatalog["fruits"] = {};
   const groups = new Map<
     string,
-    Map<
-      string,
-      { label: string; row: number; order: number; products: string[] }
-    >
+    Map<string, { label: string; order: number; products: string[] }>
   >();
 
   for (const product of products) {
@@ -94,7 +91,6 @@ export function buildCatalog(
       const countries = groups.get(place.category) ?? new Map();
       const current = countries.get(place.country) ?? {
         label: place.country,
-        row: Number(place.row ?? 0),
         order: place.order ?? 999,
         products: [],
       };
@@ -117,7 +113,6 @@ export function buildCatalog(
           .map((country) => ({
             id: slugify(country.label),
             label: country.label,
-            row: country.row,
             products: country.products,
           })),
       },

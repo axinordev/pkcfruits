@@ -89,16 +89,6 @@ export const Products: CollectionConfig = {
             ],
           },
           { name: "country", type: "text", required: true, label: "Country" },
-          {
-            name: "row",
-            type: "select",
-            label: "Row",
-            defaultValue: "0",
-            options: [
-              { label: "First row", value: "0" },
-              { label: "Second row", value: "1" },
-            ],
-          },
           { name: "order", type: "number", admin: { hidden: true } },
         ],
       },

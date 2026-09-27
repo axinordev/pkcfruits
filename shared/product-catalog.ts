@@ -10,7 +10,6 @@ export type CatalogProduct = {
 export type ProductCountry = {
   id: string;
   label: string;
-  row: number;
   products: string[];
 };
 

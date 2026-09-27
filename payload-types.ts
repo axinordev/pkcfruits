@@ -219,7 +219,6 @@ export interface Product {
     | {
         category: 'imported' | 'indian';
         country: string;
-        row?: ('0' | '1') | null;
         order?: number | null;
         id?: string | null;
       }[]
@@ -461,7 +460,6 @@ export interface ProductsSelect<T extends boolean = true> {
     | {
         category?: T;
         country?: T;
-        row?: T;
         order?: T;
         id?: T;
       };

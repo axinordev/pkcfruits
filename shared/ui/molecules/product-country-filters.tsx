@@ -65,9 +65,11 @@ export default function ProductCountryFilters({
   onSelect,
   className,
 }: ProductCountryFiltersProps) {
-  const rows = [...new Set(countries.map((item) => item.row))].map((row) =>
-    countries.filter((item) => item.row === row),
-  );
+  const midpoint = Math.ceil(countries.length / 2);
+  const rows =
+    countries.length > 1
+      ? [countries.slice(0, midpoint), countries.slice(midpoint)]
+      : [countries];
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>

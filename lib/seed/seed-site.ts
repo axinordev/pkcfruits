@@ -115,7 +115,6 @@ export async function seedSite(payload: Payload) {
               {
                 category: category.id,
                 country: country.label,
-                row: String(country.row),
                 order,
               },
             ]
