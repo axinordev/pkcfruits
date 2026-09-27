@@ -204,6 +204,7 @@ export async function seedSite(payload: Payload) {
       const slug = `${row.id}-${galleryOrder}`;
       const saved = await ensure("gallery", slug, {
         slug,
+        kind: "photo",
         alt: photoItem.alt,
         order: galleryOrder,
         image: await photo(photoItem.src, photoItem.alt),

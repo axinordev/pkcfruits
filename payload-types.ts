@@ -249,14 +249,22 @@ export interface News {
   createdAt: string;
 }
 /**
- * Photos on the gallery page, in order.
+ * Photos and YouTube videos on the gallery page. The site shows them on separate tabs.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery".
  */
 export interface Gallery {
   id: string;
-  image: string | Media;
+  kind: 'photo' | 'video';
+  image?: (string | null) | Media;
+  /**
+   * Paste a YouTube link, such as https://www.youtube.com/watch?v=...
+   */
+  youtubeUrl?: string | null;
+  /**
+   * Photo description, or the title shown with the video.
+   */
   alt: string;
   order: number;
   slug?: string | null;
@@ -483,7 +491,9 @@ export interface NewsSelect<T extends boolean = true> {
  * via the `definition` "gallery_select".
  */
 export interface GallerySelect<T extends boolean = true> {
+  kind?: T;
   image?: T;
+  youtubeUrl?: T;
   alt?: T;
   order?: T;
   slug?: T;

@@ -50,7 +50,7 @@ export default function HeroSection({
         <motion.div
           aria-hidden
           style={{ scale: imageScale }}
-          className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 origin-top bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-[position:left_32%]"
         />
         <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 z-20">

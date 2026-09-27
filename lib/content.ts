@@ -3,6 +3,7 @@ import { getPayload } from "payload";
 import { cache } from "react";
 
 import { slugify } from "@/lib/cms/access";
+import { youtubeEmbed } from "@/lib/youtube";
 import type { Award, Media, News, Product } from "@/payload-types";
 import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
 
@@ -305,13 +306,24 @@ export const getGalleryPage = cache(async () => {
       sort: "order",
     }),
   ]);
-  return {
-    ...page,
-    photos: result.docs.flatMap((item) => {
-      const image = cmsImage(item.image, item.alt);
-      return image ? [{ ...image, alt: item.alt || image.alt }] : [];
-    }),
-  };
+  const photos = result.docs.flatMap((item) => {
+    if (item.kind === "video") return [];
+    const image = cmsImage(item.image, item.alt);
+    return image ? [{ ...image, alt: item.alt || image.alt }] : [];
+  });
+  const videos = result.docs.flatMap((item) => {
+    if (item.kind !== "video") return [];
+    const embed = youtubeEmbed(item.youtubeUrl);
+    if (!embed) return [];
+    return [
+      {
+        slug: item.slug || item.id,
+        title: item.alt,
+        src: embed.src,
+      },
+    ];
+  });
+  return { ...page, photos, videos };
 });
 
 export const getNewsList = cache(async () => {

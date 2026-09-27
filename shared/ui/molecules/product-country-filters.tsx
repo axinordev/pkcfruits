@@ -1,16 +1,16 @@
-import type { ProductCategory, ProductCountry } from "@/shared/product-catalog";
+import type { ProductCountry } from "@/shared/product-catalog";
 import { cn } from "cn";
 
 const riposte = "font-riposte font-light";
 
-type Category = ProductCategory;
 type Country = ProductCountry;
 
 type ProductCategoryToggleProps = {
-  categories: readonly Category[];
+  categories: readonly { id: string; label: string }[];
   categoryId: string;
   onSelect: (id: string) => void;
   className?: string;
+  label?: string;
 };
 
 export function ProductCategoryToggle({
@@ -18,11 +18,12 @@ export function ProductCategoryToggle({
   categoryId,
   onSelect,
   className,
+  label = "Product origin",
 }: ProductCategoryToggleProps) {
   return (
     <div
       role="tablist"
-      aria-label="Product origin"
+      aria-label={label}
       className={cn(
         "flex h-12 w-89 shrink-0 items-stretch rounded-[34px] border border-brand-primary max-lg:w-full max-lg:max-w-89",
         className,

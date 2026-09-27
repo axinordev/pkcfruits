@@ -1,27 +1,90 @@
 import type { CollectionConfig } from "payload";
 
 import { contentAccess, slugify } from "@/lib/cms/access";
+import { youtubeVideoId } from "@/lib/youtube";
+
+function itemKind(data: unknown) {
+  if (!data || typeof data !== "object" || !("kind" in data)) return "photo";
+  return data.kind === "video" ? "video" : "photo";
+}
 
 export const Gallery: CollectionConfig = {
   slug: "gallery",
-  labels: { singular: "Gallery photo", plural: "Gallery" },
+  labels: { singular: "Gallery item", plural: "Gallery" },
   admin: {
     group: "Content",
     useAsTitle: "alt",
-    defaultColumns: ["alt", "order"],
-    description: "Photos on the gallery page, in order.",
+    defaultColumns: ["alt", "kind", "order"],
+    description:
+      "Photos and YouTube videos on the gallery page. The site shows them on separate tabs.",
   },
   access: contentAccess,
   defaultSort: "order",
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (data && !data.kind) data.kind = "photo";
+        return data;
+      },
+    ],
+  },
   fields: [
+    {
+      name: "kind",
+      type: "select",
+      required: true,
+      defaultValue: "photo",
+      label: "Type",
+      options: [
+        { label: "Photo", value: "photo" },
+        { label: "Video", value: "video" },
+      ],
+    },
     {
       name: "image",
       type: "upload",
       relationTo: "media",
-      required: true,
       label: "Photo",
+      admin: {
+        condition: (data) => itemKind(data) !== "video",
+      },
+      validate: (
+        value: unknown,
+        { siblingData }: { siblingData: unknown },
+      ) => {
+        if (itemKind(siblingData) === "video") return true;
+        return value ? true : "Add a photo.";
+      },
     },
-    { name: "alt", type: "text", required: true, label: "Description" },
+    {
+      name: "youtubeUrl",
+      type: "text",
+      label: "YouTube link",
+      admin: {
+        condition: (data) => itemKind(data) === "video",
+        description:
+          "Paste a YouTube link, such as https://www.youtube.com/watch?v=...",
+      },
+      validate: (
+        value: unknown,
+        { siblingData }: { siblingData: unknown },
+      ) => {
+        if (itemKind(siblingData) !== "video") return true;
+        if (typeof value !== "string" || !youtubeVideoId(value)) {
+          return "Add a YouTube link, such as https://www.youtube.com/watch?v=...";
+        }
+        return true;
+      },
+    },
+    {
+      name: "alt",
+      type: "text",
+      required: true,
+      label: "Description",
+      admin: {
+        description: "Photo description, or the title shown with the video.",
+      },
+    },
     {
       name: "order",
       type: "number",

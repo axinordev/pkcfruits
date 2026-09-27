@@ -32,8 +32,8 @@ export function useProductScroller(resetKey: string) {
 
   function scrollByCard(direction: 1 | -1) {
     const scroller = scrollerRef.current;
-    const card = scroller?.querySelector("article");
-    if (!scroller || !card) return;
+    const card = scroller?.firstElementChild;
+    if (!scroller || !(card instanceof HTMLElement)) return;
     scroller.scrollBy({
       left: direction * (card.getBoundingClientRect().width + 20),
       behavior: "smooth",
