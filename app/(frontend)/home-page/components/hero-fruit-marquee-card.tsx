@@ -1,10 +1,17 @@
 "use client";
 
-import { useHeroFruitMarquee, type MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
+import {
+  useHeroFruitMarquee,
+  type MarqueeFruit,
+} from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
-export default function HeroFruitMarqueeCard({ fruits }: { fruits: MarqueeFruit[] }) {
+export default function HeroFruitMarqueeCard({
+  fruits,
+}: {
+  fruits: MarqueeFruit[];
+}) {
   const reduceMotion = useReducedMotion();
   const fruit = useHeroFruitMarquee(fruits);
   if (!fruit) return null;
@@ -24,7 +31,9 @@ export default function HeroFruitMarqueeCard({ fruits }: { fruits: MarqueeFruit[
             <p className="font-riposte text-[20px] leading-5 font-light text-[rgba(33,34,33,0.8)] opacity-70">
               {fruit.label}
             </p>
-            <p className="font-riposte text-[16px] leading-5 font-light text-ink">{fruit.name}</p>
+            <p className="font-riposte text-[16px] leading-5 font-light text-ink">
+              {fruit.name}
+            </p>
           </div>
           <div className="mt-5 h-px bg-ink opacity-20" aria-hidden />
           <div

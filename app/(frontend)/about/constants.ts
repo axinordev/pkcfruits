@@ -6,7 +6,8 @@ export const aboutPageContent = {
   },
   intro: {
     badge: "About Us",
-    title: "PKC Fruits, one of the biggest distributors of fresh fruits in South India.",
+    title:
+      "PKC Fruits, one of the biggest distributors of fresh fruits in South India.",
     paragraphs: [
       "PKC fruits have sturdy distribution channels across every city in South India. We import from other Asian, African and European countries and more than 500 persons are employed directly and indirectly through us.",
       "PKC fruits have completed 3 decades of service in the business sector, we are proud to say that we have achieved what we always wanted to be. We realised through our experience that even though it is really difficult to always stay transparent in any business sector, It actually would have a huge impact on how your peers react to you.",

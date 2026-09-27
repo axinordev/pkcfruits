@@ -16,8 +16,20 @@ export function useAwardSection() {
     target: stageRef,
     offset: ["start 0.95", "start 0.22"],
   });
-  const spread = useTransform(scrollYProgress, (progress) => (reduceMotion ? 1 : easeOut(progress)));
-  const arrowOpacity = useTransform(spread, [0.45, 1], [reduceMotion ? 1 : 0, 1]);
+  const spread = useTransform(scrollYProgress, (progress) =>
+    reduceMotion ? 1 : easeOut(progress),
+  );
+  const arrowOpacity = useTransform(
+    spread,
+    [0.45, 1],
+    [reduceMotion ? 1 : 0, 1],
+  );
 
-  return { stageRef, reduceMotion, spread, arrowOpacity, spreadVar: "var(--spread, 1)" };
+  return {
+    stageRef,
+    reduceMotion,
+    spread,
+    arrowOpacity,
+    spreadVar: "var(--spread, 1)",
+  };
 }

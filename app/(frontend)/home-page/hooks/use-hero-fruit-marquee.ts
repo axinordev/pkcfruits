@@ -5,9 +5,18 @@ import { useEffect, useState } from "react";
 const ROTATE_MS = 3200;
 
 const styles = [
-  { cardClass: "bg-[#FDF4CE]", panelClass: "border-[rgba(244,180,0,0.05)] bg-[rgba(244,180,0,0.15)]" },
-  { cardClass: "bg-[#FFF3EF]", panelClass: "border-[rgba(230,104,58,0.1)] bg-[rgba(230,104,58,0.15)]" },
-  { cardClass: "bg-[#FFFCE3]", panelClass: "border-[rgba(0,136,82,0.1)] bg-[rgba(0,136,16,0.1)]" },
+  {
+    cardClass: "bg-[#FDF4CE]",
+    panelClass: "border-[rgba(244,180,0,0.05)] bg-[rgba(244,180,0,0.15)]",
+  },
+  {
+    cardClass: "bg-[#FFF3EF]",
+    panelClass: "border-[rgba(230,104,58,0.1)] bg-[rgba(230,104,58,0.15)]",
+  },
+  {
+    cardClass: "bg-[#FFFCE3]",
+    panelClass: "border-[rgba(0,136,82,0.1)] bg-[rgba(0,136,16,0.1)]",
+  },
 ];
 
 export type MarqueeFruit = {

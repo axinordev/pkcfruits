@@ -47,43 +47,183 @@
       "id": "imported",
       "label": "Imported",
       "countries": [
-        { "id": "iran", "label": "Iran", "row": 0, "products": ["cherry", "kiwi", "apple", "apricot"] },
-        { "id": "turkey", "label": "Turkey", "row": 0, "products": ["cherry", "apricot", "apple", "kiwi"] },
-        { "id": "italy", "label": "Italy", "row": 0, "products": ["kiwi", "apple", "cherry", "orange"] },
-        { "id": "chile", "label": "Chile", "row": 0, "products": ["apple", "kiwi", "cherry", "apricot"] },
-        { "id": "usa", "label": "USA", "row": 0, "products": ["apple", "cherry", "orange"] },
-        { "id": "china", "label": "China", "row": 0, "products": ["apple", "kiwi", "orange"] },
-        { "id": "australia", "label": "Australia", "row": 0, "products": ["orange", "apple", "kiwi"] },
-        { "id": "vietnam", "label": "Vietnam", "row": 0, "products": ["orange", "kiwi"] },
-        { "id": "thailand", "label": "Thailand", "row": 0, "products": ["orange", "kiwi"] },
-        { "id": "malaysia", "label": "Malaysia", "row": 0, "products": ["orange"] },
-        { "id": "new-zealand", "label": "New Zealand", "row": 0, "products": ["kiwi", "apple", "apricot"] },
-        { "id": "serbia", "label": "Serbia", "row": 1, "products": ["apple", "cherry", "apricot"] },
-        { "id": "poland", "label": "Poland", "row": 1, "products": ["apple", "cherry"] },
-        { "id": "belgium", "label": "Belgium", "row": 1, "products": ["apple", "cherry"] },
+        {
+          "id": "iran",
+          "label": "Iran",
+          "row": 0,
+          "products": ["cherry", "kiwi", "apple", "apricot"]
+        },
+        {
+          "id": "turkey",
+          "label": "Turkey",
+          "row": 0,
+          "products": ["cherry", "apricot", "apple", "kiwi"]
+        },
+        {
+          "id": "italy",
+          "label": "Italy",
+          "row": 0,
+          "products": ["kiwi", "apple", "cherry", "orange"]
+        },
+        {
+          "id": "chile",
+          "label": "Chile",
+          "row": 0,
+          "products": ["apple", "kiwi", "cherry", "apricot"]
+        },
+        {
+          "id": "usa",
+          "label": "USA",
+          "row": 0,
+          "products": ["apple", "cherry", "orange"]
+        },
+        {
+          "id": "china",
+          "label": "China",
+          "row": 0,
+          "products": ["apple", "kiwi", "orange"]
+        },
+        {
+          "id": "australia",
+          "label": "Australia",
+          "row": 0,
+          "products": ["orange", "apple", "kiwi"]
+        },
+        {
+          "id": "vietnam",
+          "label": "Vietnam",
+          "row": 0,
+          "products": ["orange", "kiwi"]
+        },
+        {
+          "id": "thailand",
+          "label": "Thailand",
+          "row": 0,
+          "products": ["orange", "kiwi"]
+        },
+        {
+          "id": "malaysia",
+          "label": "Malaysia",
+          "row": 0,
+          "products": ["orange"]
+        },
+        {
+          "id": "new-zealand",
+          "label": "New Zealand",
+          "row": 0,
+          "products": ["kiwi", "apple", "apricot"]
+        },
+        {
+          "id": "serbia",
+          "label": "Serbia",
+          "row": 1,
+          "products": ["apple", "cherry", "apricot"]
+        },
+        {
+          "id": "poland",
+          "label": "Poland",
+          "row": 1,
+          "products": ["apple", "cherry"]
+        },
+        {
+          "id": "belgium",
+          "label": "Belgium",
+          "row": 1,
+          "products": ["apple", "cherry"]
+        },
         { "id": "brazil", "label": "Brazil", "row": 1, "products": ["orange"] },
-        { "id": "peru", "label": "Peru", "row": 1, "products": ["kiwi", "orange"] },
-        { "id": "spain", "label": "Spain", "row": 1, "products": ["orange", "apricot", "cherry"] },
-        { "id": "mexico", "label": "Mexico", "row": 1, "products": ["orange", "apple"] },
+        {
+          "id": "peru",
+          "label": "Peru",
+          "row": 1,
+          "products": ["kiwi", "orange"]
+        },
+        {
+          "id": "spain",
+          "label": "Spain",
+          "row": 1,
+          "products": ["orange", "apricot", "cherry"]
+        },
+        {
+          "id": "mexico",
+          "label": "Mexico",
+          "row": 1,
+          "products": ["orange", "apple"]
+        },
         { "id": "egypt", "label": "Egypt", "row": 1, "products": ["orange"] },
-        { "id": "south-africa", "label": "South Africa", "row": 1, "products": ["orange", "apple", "kiwi"] },
-        { "id": "france", "label": "France", "row": 1, "products": ["apple", "cherry", "apricot"] }
+        {
+          "id": "south-africa",
+          "label": "South Africa",
+          "row": 1,
+          "products": ["orange", "apple", "kiwi"]
+        },
+        {
+          "id": "france",
+          "label": "France",
+          "row": 1,
+          "products": ["apple", "cherry", "apricot"]
+        }
       ]
     },
     {
       "id": "indian",
       "label": "Indian",
       "countries": [
-        { "id": "kashmir", "label": "Kashmir", "row": 0, "products": ["apple", "cherry", "apricot"] },
-        { "id": "himachal", "label": "Himachal", "row": 0, "products": ["apple", "cherry"] },
-        { "id": "maharashtra", "label": "Maharashtra", "row": 0, "products": ["orange"] },
-        { "id": "tamil-nadu", "label": "Tamil Nadu", "row": 0, "products": ["orange"] },
-        { "id": "karnataka", "label": "Karnataka", "row": 0, "products": ["orange", "apple"] },
+        {
+          "id": "kashmir",
+          "label": "Kashmir",
+          "row": 0,
+          "products": ["apple", "cherry", "apricot"]
+        },
+        {
+          "id": "himachal",
+          "label": "Himachal",
+          "row": 0,
+          "products": ["apple", "cherry"]
+        },
+        {
+          "id": "maharashtra",
+          "label": "Maharashtra",
+          "row": 0,
+          "products": ["orange"]
+        },
+        {
+          "id": "tamil-nadu",
+          "label": "Tamil Nadu",
+          "row": 0,
+          "products": ["orange"]
+        },
+        {
+          "id": "karnataka",
+          "label": "Karnataka",
+          "row": 0,
+          "products": ["orange", "apple"]
+        },
         { "id": "kerala", "label": "Kerala", "row": 1, "products": ["orange"] },
-        { "id": "andhra-pradesh", "label": "Andhra Pradesh", "row": 1, "products": ["orange"] },
-        { "id": "gujarat", "label": "Gujarat", "row": 1, "products": ["apple", "orange"] },
-        { "id": "punjab", "label": "Punjab", "row": 1, "products": ["orange", "apple"] },
-        { "id": "uttar-pradesh", "label": "Uttar Pradesh", "row": 1, "products": ["apple", "orange"] }
+        {
+          "id": "andhra-pradesh",
+          "label": "Andhra Pradesh",
+          "row": 1,
+          "products": ["orange"]
+        },
+        {
+          "id": "gujarat",
+          "label": "Gujarat",
+          "row": 1,
+          "products": ["apple", "orange"]
+        },
+        {
+          "id": "punjab",
+          "label": "Punjab",
+          "row": 1,
+          "products": ["orange", "apple"]
+        },
+        {
+          "id": "uttar-pradesh",
+          "label": "Uttar Pradesh",
+          "row": 1,
+          "products": ["apple", "orange"]
+        }
       ]
     }
   ]

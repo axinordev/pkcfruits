@@ -24,7 +24,10 @@ export const footerContent = {
     { label: "News and Events", href: "/news" },
     { label: "Contact Us", href: "/contact" },
   ],
-  address: ["17/2279, Alakapuri Building, MM Ali Road,", "Kozhikode, Kerala 673002"],
+  address: [
+    "17/2279, Alakapuri Building, MM Ali Road,",
+    "Kozhikode, Kerala 673002",
+  ],
   email: "pkcfruitsworld@gmail.com",
   phone: { label: "+91 9947858586", href: "tel:+919947858586" },
   social: [

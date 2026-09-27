@@ -16,8 +16,20 @@ export const Awards: CollectionConfig = {
   fields: [
     { name: "title", type: "text", required: true },
     { name: "summary", type: "textarea", label: "Short text" },
-    { name: "image", type: "upload", relationTo: "media", required: true, label: "Photo" },
-    { name: "order", type: "number", required: true, defaultValue: 0, label: "Order" },
+    {
+      name: "image",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+      label: "Photo",
+    },
+    {
+      name: "order",
+      type: "number",
+      required: true,
+      defaultValue: 0,
+      label: "Order",
+    },
     {
       name: "slug",
       type: "text",
@@ -27,7 +39,8 @@ export const Awards: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, siblingData }) => {
-            if (typeof value === "string" && value.trim()) return slugify(value);
+            if (typeof value === "string" && value.trim())
+              return slugify(value);
             return slugify(String(siblingData?.title || "award"));
           },
         ],

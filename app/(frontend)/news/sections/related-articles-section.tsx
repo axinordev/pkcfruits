@@ -13,7 +13,13 @@ type RelatedStory = {
   href: string;
 };
 
-export default function RelatedArticlesSection({ articles, badge }: { articles: RelatedStory[]; badge: string }) {
+export default function RelatedArticlesSection({
+  articles,
+  badge,
+}: {
+  articles: RelatedStory[];
+  badge: string;
+}) {
   if (articles.length === 0) return null;
 
   return (
@@ -26,18 +32,39 @@ export default function RelatedArticlesSection({ articles, badge }: { articles: 
 
         <div className="mt-8 grid items-stretch gap-5 lg:grid-cols-2">
           {articles.map((article) => (
-            <Link key={article.slug} href={article.href} className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
+            <Link
+              key={article.slug}
+              href={article.href}
+              className="flex flex-col rounded-2xl bg-white p-3.75 shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+            >
               <div className="relative aspect-600/366 overflow-hidden rounded-[10px]">
-                {article.image ? <Image src={article.image} alt={article.imageAlt} fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" /> : null}
+                {article.image ? (
+                  <Image
+                    src={article.image}
+                    alt={article.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 600px, 100vw"
+                    className="object-cover"
+                  />
+                ) : null}
                 <div aria-hidden className="absolute inset-0 bg-black/5" />
               </div>
-              <h2 className="font-riposte mt-3.75 text-[20px] leading-8 font-light text-[#253326]">{article.title}</h2>
+              <h2 className="font-riposte mt-3.75 text-[20px] leading-8 font-light text-[#253326]">
+                {article.title}
+              </h2>
               <div className="mt-auto flex items-center justify-between gap-4 pt-4">
                 <p className="font-riposte flex items-center gap-1.25 text-[16px] leading-8 font-light text-brand-primary">
-                  <Calendar className="size-3.5 shrink-0 text-brand-primary" strokeWidth={2.25} aria-hidden />
+                  <Calendar
+                    className="size-3.5 shrink-0 text-brand-primary"
+                    strokeWidth={2.25}
+                    aria-hidden
+                  />
                   {article.date}
                 </p>
-                <span aria-hidden className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-primary text-brand-primary">
+                <span
+                  aria-hidden
+                  className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-primary text-brand-primary"
+                >
                   <ArrowRight className="size-3.5" strokeWidth={2} />
                 </span>
               </div>

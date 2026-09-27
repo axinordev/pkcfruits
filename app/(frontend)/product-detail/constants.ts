@@ -9,7 +9,8 @@ export const productDetailContent = {
   related: details.related,
 };
 
-export type ProductDetail = (typeof details.products)[keyof typeof details.products];
+export type ProductDetail =
+  (typeof details.products)[keyof typeof details.products];
 
 export function productSlugs() {
   return Object.keys(details.products);

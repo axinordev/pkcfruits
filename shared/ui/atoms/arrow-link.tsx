@@ -9,9 +9,19 @@ type ArrowLinkProps = {
   children: ReactNode;
 };
 
-export default function ArrowLink({ href, className, children }: ArrowLinkProps) {
+export default function ArrowLink({
+  href,
+  className,
+  children,
+}: ArrowLinkProps) {
   return (
-    <Link href={href} className={cn("font-riposte flex items-center gap-2.5 text-[20px] leading-9.75 font-light text-ink", className)}>
+    <Link
+      href={href}
+      className={cn(
+        "font-riposte flex items-center gap-2.5 text-[20px] leading-9.75 font-light text-ink",
+        className,
+      )}
+    >
       {children}
       <span className="flex size-7 items-center justify-center rounded-[5px] bg-brand-primary text-white">
         <ArrowRight className="size-3" strokeWidth={2.5} />

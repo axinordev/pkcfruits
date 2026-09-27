@@ -12,9 +12,18 @@ function publicId(filename: string) {
 
 const adapter: Adapter = () => ({
   name: "cloudinary",
-  generateURL: ({ filename }) => cloudinary.url(publicId(filename), { secure: true, resource_type: "image" }),
+  generateURL: ({ filename }) =>
+    cloudinary.url(publicId(filename), {
+      secure: true,
+      resource_type: "image",
+    }),
   handleUpload: async ({ file }) => {
-    const options = { folder, public_id: file.filename.split(".").slice(0, -1).join("."), overwrite: true, resource_type: "image" as const };
+    const options = {
+      folder,
+      public_id: file.filename.split(".").slice(0, -1).join("."),
+      overwrite: true,
+      resource_type: "image" as const,
+    };
     if (file.tempFilePath) {
       await cloudinary.uploader.upload(file.tempFilePath, options);
       return;
@@ -27,10 +36,15 @@ const adapter: Adapter = () => ({
     throw new Error("No file data provided for upload");
   },
   handleDelete: async ({ filename }) => {
-    await cloudinary.uploader.destroy(publicId(filename), { resource_type: "image" });
+    await cloudinary.uploader.destroy(publicId(filename), {
+      resource_type: "image",
+    });
   },
   staticHandler: (_req, { params }) => {
-    const url = cloudinary.url(publicId(params.filename), { secure: true, resource_type: "image" });
+    const url = cloudinary.url(publicId(params.filename), {
+      secure: true,
+      resource_type: "image",
+    });
     return Response.redirect(url, 302);
   },
 });
@@ -48,7 +62,11 @@ export function cloudinaryStorage(): Plugin {
         adapter,
         disableLocalStorage: true,
         disablePayloadAccessControl: true,
-        generateFileURL: ({ filename }) => cloudinary.url(publicId(filename), { secure: true, resource_type: "image" }),
+        generateFileURL: ({ filename }) =>
+          cloudinary.url(publicId(filename), {
+            secure: true,
+            resource_type: "image",
+          }),
       },
     },
   });

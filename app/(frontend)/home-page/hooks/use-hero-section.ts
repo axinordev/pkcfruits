@@ -30,12 +30,26 @@ export function useHeroSection() {
     };
   }, [scrollYProgress]);
 
-  const imageScale = useTransform(scrollYProgress, [0, 0.7], [1, reduceMotion ? 1 : 1.28]);
+  const imageScale = useTransform(
+    scrollYProgress,
+    [0, 0.7],
+    [1, reduceMotion ? 1 : 1.28],
+  );
   const heroOpacity = useTransform(scrollYProgress, [0.08, 0.42], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0.08, 0.42], [1, reduceMotion ? 1 : 1.12]);
+  const heroScale = useTransform(
+    scrollYProgress,
+    [0.08, 0.42],
+    [1, reduceMotion ? 1 : 1.12],
+  );
   const aboutOpacity = useTransform(scrollYProgress, [0.45, 0.78], [0, 1]);
-  const aboutScale = useTransform(scrollYProgress, [0.45, 0.78], [reduceMotion ? 1 : 0.72, 1]);
-  const heroPointerEvents = useTransform(scrollYProgress, (value) => (value < 0.45 ? "auto" : "none"));
+  const aboutScale = useTransform(
+    scrollYProgress,
+    [0.45, 0.78],
+    [reduceMotion ? 1 : 0.72, 1],
+  );
+  const heroPointerEvents = useTransform(scrollYProgress, (value) =>
+    value < 0.45 ? "auto" : "none",
+  );
   const aboutPointerEvents = useTransform(scrollYProgress, (value) =>
     value > 0.45 ? "auto" : "none",
   );

@@ -16,7 +16,10 @@ type SharedProps = {
 };
 
 type ButtonAsButton = SharedProps &
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children"> & {
+  Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "className" | "children"
+  > & {
     href?: undefined;
   };
 
@@ -39,7 +42,10 @@ export default function Button({
       <Link
         href={href}
         className={classes}
-        {...(props as Omit<ComponentProps<typeof Link>, "href" | "className" | "children">)}
+        {...(props as Omit<
+          ComponentProps<typeof Link>,
+          "href" | "className" | "children"
+        >)}
       >
         {children}
       </Link>
@@ -47,7 +53,10 @@ export default function Button({
   }
 
   return (
-    <button className={classes} {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}>
+    <button
+      className={classes}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );

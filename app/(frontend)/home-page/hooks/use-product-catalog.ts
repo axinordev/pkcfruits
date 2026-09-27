@@ -1,3 +1,6 @@
 "use client";
 
-export { productsFor, useProductCatalog } from "@/shared/hooks/use-product-catalog";
+export {
+  productsFor,
+  useProductCatalog,
+} from "@/shared/hooks/use-product-catalog";

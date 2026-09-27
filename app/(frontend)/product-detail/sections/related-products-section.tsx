@@ -3,7 +3,11 @@ import ArrowLink from "@/shared/ui/atoms/arrow-link";
 import Badge from "@/shared/ui/atoms/badge";
 import ProductCard from "@/shared/ui/molecules/product-card";
 
-export default function RelatedProductsSection({ products }: { products: CatalogProduct[] }) {
+export default function RelatedProductsSection({
+  products,
+}: {
+  products: CatalogProduct[];
+}) {
   if (products.length === 0) return null;
 
   return (
@@ -15,7 +19,12 @@ export default function RelatedProductsSection({ products }: { products: Catalog
         </div>
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
           {products.map(({ slug, ...product }) => (
-            <ProductCard key={slug} {...product} href={`/product/${slug}`} variant="grid" />
+            <ProductCard
+              key={slug}
+              {...product}
+              href={`/product/${slug}`}
+              variant="grid"
+            />
           ))}
         </div>
       </div>

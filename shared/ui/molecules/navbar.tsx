@@ -33,7 +33,14 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
       )}
     >
       <Link href="/" className="shrink-0" aria-label="PKC Fruits home">
-        <Image src="/logo.png" alt="PKC Fruits" width={188} height={58} priority className="h-10 w-auto lg:h-13" />
+        <Image
+          src="/logo.png"
+          alt="PKC Fruits"
+          width={188}
+          height={58}
+          priority
+          className="h-10 w-auto lg:h-13"
+        />
       </Link>
 
       <ul className="hidden items-center gap-8 lg:flex xl:gap-10">
@@ -46,10 +53,19 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "inline-flex items-center gap-2 text-[15px] leading-none whitespace-nowrap",
-                  overlay ? "text-white" : active ? "text-brand-primary" : "text-[#3d3d3d] hover:text-ink",
+                  overlay
+                    ? "text-white"
+                    : active
+                      ? "text-brand-primary"
+                      : "text-[#3d3d3d] hover:text-ink",
                 )}
               >
-                {active ? <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-brand-primary" /> : null}
+                {active ? (
+                  <span
+                    aria-hidden
+                    className="size-1.5 shrink-0 rounded-full bg-brand-primary"
+                  />
+                ) : null}
                 {item.label}
               </Link>
             </li>
@@ -81,7 +97,9 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
           id="site-menu"
           className={cn(
             "absolute inset-x-0 top-full z-30 flex flex-col border-b px-5 py-3 lg:hidden",
-            overlay ? "border-white/20 bg-black/80 text-white backdrop-blur-md" : "border-[#E6E6E6] bg-canvas",
+            overlay
+              ? "border-white/20 bg-black/80 text-white backdrop-blur-md"
+              : "border-[#E6E6E6] bg-canvas",
           )}
         >
           {navContent.links.map((item) => {
@@ -92,15 +110,24 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
                   href={item.href}
                   className={cn(
                     "flex items-center gap-2 py-2.5 text-[15px]",
-                    active ? "text-brand-primary" : overlay ? "text-white" : "text-[#3d3d3d]",
+                    active
+                      ? "text-brand-primary"
+                      : overlay
+                        ? "text-white"
+                        : "text-[#3d3d3d]",
                   )}
                 >
-                  {active ? <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-brand-primary" /> : null}
+                  {active ? (
+                    <span
+                      aria-hidden
+                      className="size-1.5 shrink-0 rounded-full bg-brand-primary"
+                    />
+                  ) : null}
                   {item.label}
                 </Link>
               </li>
             );
-            })}
+          })}
           <li className="pt-2">
             <Link
               href={navContent.action.href}

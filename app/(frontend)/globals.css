@@ -2,13 +2,11 @@
 @plugin "daisyui";
 @source "./product-detail";
 
-
-
 @theme {
-  --color-brand-primary: #E21A60;
-  --color-canvas: #F4F4F4;
+  --color-brand-primary: #e21a60;
+  --color-canvas: #f4f4f4;
   --color-ink: #212221;
-  --color-blush: #FED7E4;
+  --color-blush: #fed7e4;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-riposte: "Riposte", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

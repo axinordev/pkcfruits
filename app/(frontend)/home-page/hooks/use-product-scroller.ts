@@ -9,13 +9,15 @@ export function useProductScroller(resetKey: string) {
 
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (!scroller) return;
+    if (!scroller || resetKey.length === 0) return;
 
     scroller.scrollLeft = 0;
 
     const update = () => {
       setCanScrollLeft(scroller.scrollLeft > 4);
-      setCanScrollRight(scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 4);
+      setCanScrollRight(
+        scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 4,
+      );
     };
 
     update();
@@ -32,7 +34,10 @@ export function useProductScroller(resetKey: string) {
     const scroller = scrollerRef.current;
     const card = scroller?.querySelector("article");
     if (!scroller || !card) return;
-    scroller.scrollBy({ left: direction * (card.getBoundingClientRect().width + 20), behavior: "smooth" });
+    scroller.scrollBy({
+      left: direction * (card.getBoundingClientRect().width + 20),
+      behavior: "smooth",
+    });
   }
 
   return { scrollerRef, canScrollLeft, canScrollRight, scrollByCard };

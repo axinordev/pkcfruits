@@ -4,14 +4,24 @@ import { contentAccess, section } from "@/lib/cms/access";
 
 const statFields = [
   { name: "value", type: "number" as const, required: true, label: "Number" },
-  { name: "suffix", type: "text" as const, required: true, label: "Suffix", admin: { description: "For example K+ or +" } },
+  {
+    name: "suffix",
+    type: "text" as const,
+    required: true,
+    label: "Suffix",
+    admin: { description: "For example K+ or +" },
+  },
   { name: "label", type: "text" as const, required: true, label: "Label" },
 ];
 
 export const HomePage: GlobalConfig = {
   slug: "home-page",
   label: "Home Page",
-  admin: { group: "Pages", description: "Headings for each part of the home page, plus the products, awards, and news to show." },
+  admin: {
+    group: "Pages",
+    description:
+      "Headings for each part of the home page, plus the products, awards, and news to show.",
+  },
   access: contentAccess,
   fields: [
     section("SEO", [
@@ -21,7 +31,12 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "title", type: "text", required: true, label: "Meta title" },
-          { name: "description", type: "textarea", required: true, label: "Meta description" },
+          {
+            name: "description",
+            type: "textarea",
+            required: true,
+            label: "Meta description",
+          },
         ],
       },
     ]),
@@ -31,10 +46,26 @@ export const HomePage: GlobalConfig = {
         type: "group",
         label: false,
         fields: [
-          { name: "eyeLabel", type: "text", required: true, label: "Eye label" },
+          {
+            name: "eyeLabel",
+            type: "text",
+            required: true,
+            label: "Eye label",
+          },
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "description", type: "textarea", required: true, label: "Description" },
-          { name: "button", type: "text", required: true, label: "Button", defaultValue: "Explore" },
+          {
+            name: "description",
+            type: "textarea",
+            required: true,
+            label: "Description",
+          },
+          {
+            name: "button",
+            type: "text",
+            required: true,
+            label: "Button",
+            defaultValue: "Explore",
+          },
         ],
       },
     ]),
@@ -45,8 +76,19 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "description", type: "textarea", required: true, label: "Description" },
-          { name: "button", type: "text", required: true, label: "Button", defaultValue: "Read more" },
+          {
+            name: "description",
+            type: "textarea",
+            required: true,
+            label: "Description",
+          },
+          {
+            name: "button",
+            type: "text",
+            required: true,
+            label: "Button",
+            defaultValue: "Read more",
+          },
         ],
       },
     ]),
@@ -58,8 +100,20 @@ export const HomePage: GlobalConfig = {
         fields: [
           { name: "badge", type: "text", required: true, label: "Eye label" },
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "button", type: "text", required: true, label: "Button", defaultValue: "Explore All" },
-          { name: "products", type: "relationship", relationTo: "products", hasMany: true, label: "Products to show" },
+          {
+            name: "button",
+            type: "text",
+            required: true,
+            label: "Button",
+            defaultValue: "Explore All",
+          },
+          {
+            name: "products",
+            type: "relationship",
+            relationTo: "products",
+            hasMany: true,
+            label: "Products to show",
+          },
         ],
       },
     ]),
@@ -70,8 +124,18 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "description", type: "textarea", required: true, label: "Description" },
-          { name: "stats", type: "array", label: "Numbers", fields: statFields },
+          {
+            name: "description",
+            type: "textarea",
+            required: true,
+            label: "Description",
+          },
+          {
+            name: "stats",
+            type: "array",
+            label: "Numbers",
+            fields: statFields,
+          },
         ],
       },
     ]),
@@ -82,7 +146,13 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "awards", type: "relationship", relationTo: "awards", hasMany: true, label: "Awards to show" },
+          {
+            name: "awards",
+            type: "relationship",
+            relationTo: "awards",
+            hasMany: true,
+            label: "Awards to show",
+          },
         ],
       },
     ]),
@@ -94,8 +164,20 @@ export const HomePage: GlobalConfig = {
         fields: [
           { name: "badge", type: "text", required: true, label: "Eye label" },
           { name: "title", type: "text", required: true, label: "Title" },
-          { name: "button", type: "text", required: true, label: "Button", defaultValue: "View All" },
-          { name: "news", type: "relationship", relationTo: "news", hasMany: true, label: "Stories to show" },
+          {
+            name: "button",
+            type: "text",
+            required: true,
+            label: "Button",
+            defaultValue: "View All",
+          },
+          {
+            name: "news",
+            type: "relationship",
+            relationTo: "news",
+            hasMany: true,
+            label: "Stories to show",
+          },
         ],
       },
     ]),

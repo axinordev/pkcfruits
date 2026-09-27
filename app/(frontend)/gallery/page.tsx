@@ -11,10 +11,42 @@ const narrow = "(min-width: 1024px) 504px, 100vw";
 const half = "(min-width: 1024px) 630px, 100vw";
 
 const rowLayouts = [
-  { id: "harvest", aspect: "453 / 163", className: "gallery-harvest", photos: [{ aspect: "270 / 163", sizes: wide }, { aspect: "178 / 163", sizes: narrow }] },
-  { id: "market", aspect: "453 / 170", className: "gallery-market", photos: [{ aspect: "178 / 170", sizes: narrow }, { aspect: "270 / 170", sizes: wide }] },
-  { id: "orchard", aspect: "453 / 188", className: "gallery-orchard", photos: [{ aspect: "224 / 188", sizes: half }, { aspect: "224 / 188", sizes: half }] },
-  { id: "grove", aspect: "453 / 140", className: "gallery-grove", photos: [{ aspect: "178 / 140", sizes: narrow }, { aspect: "270 / 140", sizes: wide }] },
+  {
+    id: "harvest",
+    aspect: "453 / 163",
+    className: "gallery-harvest",
+    photos: [
+      { aspect: "270 / 163", sizes: wide },
+      { aspect: "178 / 163", sizes: narrow },
+    ],
+  },
+  {
+    id: "market",
+    aspect: "453 / 170",
+    className: "gallery-market",
+    photos: [
+      { aspect: "178 / 170", sizes: narrow },
+      { aspect: "270 / 170", sizes: wide },
+    ],
+  },
+  {
+    id: "orchard",
+    aspect: "453 / 188",
+    className: "gallery-orchard",
+    photos: [
+      { aspect: "224 / 188", sizes: half },
+      { aspect: "224 / 188", sizes: half },
+    ],
+  },
+  {
+    id: "grove",
+    aspect: "453 / 140",
+    className: "gallery-grove",
+    photos: [
+      { aspect: "178 / 140", sizes: narrow },
+      { aspect: "270 / 140", sizes: wide },
+    ],
+  },
 ];
 
 const galleryLayout = `
@@ -38,7 +70,10 @@ export default async function GalleryPage() {
   const page = await getGalleryPage();
   const rows = [];
   for (let index = 0; index < page.photos.length; index += 2) {
-    rows.push({ layout: rowLayouts[(index / 2) % rowLayouts.length], photos: page.photos.slice(index, index + 2) });
+    rows.push({
+      layout: rowLayouts[(index / 2) % rowLayouts.length],
+      photos: page.photos.slice(index, index + 2),
+    });
   }
 
   return (
@@ -53,7 +88,7 @@ export default async function GalleryPage() {
         <div className="mt-12 flex w-full min-w-0 flex-col gap-5">
           {rows.map((row, rowIndex) => (
             <div
-              key={`${row.layout.id}-${rowIndex}`}
+              key={row.photos.map((photo) => photo.src).join("|")}
               className={`gallery-row ${row.layout.className} grid grid-cols-1 gap-5`}
               style={{ ["--row-aspect" as string]: row.layout.aspect }}
             >
@@ -61,9 +96,19 @@ export default async function GalleryPage() {
                 <div
                   key={photo.src}
                   className="gallery-photo relative overflow-hidden rounded-2xl"
-                  style={{ ["--photo-aspect" as string]: row.layout.photos[index]?.aspect ?? "1 / 1" }}
+                  style={{
+                    ["--photo-aspect" as string]:
+                      row.layout.photos[index]?.aspect ?? "1 / 1",
+                  }}
                 >
-                  <Image src={photo.src} alt={photo.alt} fill priority={rowIndex === 0 && index === 0} sizes={row.layout.photos[index]?.sizes ?? wide} className="object-cover" />
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    priority={rowIndex === 0 && index === 0}
+                    sizes={row.layout.photos[index]?.sizes ?? wide}
+                    className="object-cover"
+                  />
                 </div>
               ))}
             </div>

@@ -13,7 +13,15 @@ type ProductCardProps = {
   variant?: "carousel" | "grid";
 };
 
-export default function ProductCard({ name, image, alt, width, height, href, variant = "carousel" }: ProductCardProps) {
+export default function ProductCard({
+  name,
+  image,
+  alt,
+  width,
+  height,
+  href,
+  variant = "carousel",
+}: ProductCardProps) {
   const isGrid = variant === "grid";
   const className = cn(
     "block box-border rounded-[20px] border border-[rgba(250,246,240,0.2)] bg-white shadow-[0px_1px_6px_rgba(0,0,0,0.05)]",
@@ -24,18 +32,24 @@ export default function ProductCard({ name, image, alt, width, height, href, var
     <>
       {isGrid ? (
         <div className="flex items-center justify-between px-5 pt-5">
-          <h3 className="font-riposte text-[18px] leading-5 font-light text-ink">{name}</h3>
+          <h3 className="font-riposte text-[18px] leading-5 font-light text-ink">
+            {name}
+          </h3>
           <span className="flex size-7 items-center justify-center rounded-[5px] bg-brand-primary text-white">
             <ArrowRight className="size-3" strokeWidth={2.5} />
           </span>
         </div>
       ) : (
-        <h3 className="font-riposte pt-7.5 text-center text-[18px] leading-5 font-light text-ink">{name}</h3>
+        <h3 className="font-riposte pt-7.5 text-center text-[18px] leading-5 font-light text-ink">
+          {name}
+        </h3>
       )}
       <div
         className={cn(
           "relative overflow-hidden rounded-[20px] border border-[rgba(244,180,0,0.05)] bg-[rgba(244,180,0,0.1)] backdrop-blur-[4.5px]",
-          isGrid ? "mx-4 mt-4 mb-4 h-72 max-lg:h-60" : "mx-auto mt-8.5 h-77 w-82.5 max-lg:mt-6 max-lg:h-60 max-lg:w-62",
+          isGrid
+            ? "mx-4 mt-4 mb-4 h-72 max-lg:h-60"
+            : "mx-auto mt-8.5 h-77 w-82.5 max-lg:mt-6 max-lg:h-60 max-lg:w-62",
         )}
       >
         <div

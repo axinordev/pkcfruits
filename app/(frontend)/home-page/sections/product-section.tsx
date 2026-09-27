@@ -6,19 +6,39 @@ import ArrowLink from "@/shared/ui/atoms/arrow-link";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import ProductCard from "@/shared/ui/molecules/product-card";
-import ProductCountryFilters, { ProductCategoryToggle } from "@/shared/ui/molecules/product-country-filters";
+import ProductCountryFilters, {
+  ProductCategoryToggle,
+} from "@/shared/ui/molecules/product-country-filters";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import type { ProductCatalog } from "@/shared/product-catalog";
 
-export default function ProductSection({ catalog }: { catalog: ProductCatalog }) {
-  const { category, country, products, selectCategory, setCountryId } = useProductCatalog(catalog);
+export default function ProductSection({
+  catalog,
+}: {
+  catalog: ProductCatalog;
+}) {
+  const { category, country, products, selectCategory, setCountryId } =
+    useProductCatalog(catalog);
+  const { scrollerRef, canScrollLeft, canScrollRight, scrollByCard } =
+    useProductScroller(
+      category && country ? `${category.id}-${country.id}` : "",
+    );
   if (!category || !country) return null;
-  const { scrollerRef, canScrollLeft, canScrollRight, scrollByCard } = useProductScroller(`${category.id}-${country.id}`);
 
   const controls = [
-    { direction: -1 as const, label: "Previous products", disabled: !canScrollLeft, icon: ArrowLeft },
-    { direction: 1 as const, label: "Next products", disabled: !canScrollRight, icon: ArrowRight },
+    {
+      direction: -1 as const,
+      label: "Previous products",
+      disabled: !canScrollLeft,
+      icon: ArrowLeft,
+    },
+    {
+      direction: 1 as const,
+      label: "Next products",
+      disabled: !canScrollRight,
+      icon: ArrowRight,
+    },
   ];
 
   return (
@@ -29,10 +49,23 @@ export default function ProductSection({ catalog }: { catalog: ProductCatalog })
         </div>
         <Heading className="mt-5 text-center">{catalog.title}</Heading>
 
-        <ProductCategoryToggle categories={catalog.categories} categoryId={category.id} onSelect={selectCategory} className="mx-auto mt-10" />
-        <ProductCountryFilters countries={category.countries} countryId={country.id} onSelect={setCountryId} className="mt-13.25" />
+        <ProductCategoryToggle
+          categories={catalog.categories}
+          categoryId={category.id}
+          onSelect={selectCategory}
+          className="mx-auto mt-10"
+        />
+        <ProductCountryFilters
+          countries={category.countries}
+          countryId={country.id}
+          onSelect={setCountryId}
+          className="mt-13.25"
+        />
 
-        <div ref={scrollerRef} className="mt-12 flex gap-5 overflow-x-auto scroll-smooth pb-1 scrollbar-none">
+        <div
+          ref={scrollerRef}
+          className="mt-12 flex gap-5 overflow-x-auto scroll-smooth pb-1 scrollbar-none"
+        >
           {products.map(({ slug, ...product }) => (
             <ProductCard key={slug} {...product} href={`/product/${slug}`} />
           ))}

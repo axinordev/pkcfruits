@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
     root: path.resolve(dirname),
   },
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
+    ],
   },
 };
 

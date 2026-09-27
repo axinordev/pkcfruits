@@ -9,14 +9,21 @@ type NewsArticlePageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: NewsArticlePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NewsArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = await getNewsArticle(slug);
   if (!article) return { title: "News | PKC Fruits" };
-  return { title: `${article.title} | PKC Fruits`, description: article.paragraphs[0] };
+  return {
+    title: `${article.title} | PKC Fruits`,
+    description: article.paragraphs[0],
+  };
 }
 
-export default async function NewsArticlePage({ params }: NewsArticlePageProps) {
+export default async function NewsArticlePage({
+  params,
+}: NewsArticlePageProps) {
   const { slug } = await params;
   const article = await getNewsArticle(slug);
   if (!article) notFound();
@@ -24,7 +31,10 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
   return (
     <main className="min-w-0">
       <ArticleSection article={article} />
-      <RelatedArticlesSection articles={article.related} badge={article.relatedBadge} />
+      <RelatedArticlesSection
+        articles={article.related}
+        badge={article.relatedBadge}
+      />
     </main>
   );
 }

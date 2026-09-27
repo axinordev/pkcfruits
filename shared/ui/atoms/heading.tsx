@@ -10,6 +10,10 @@ type HeadingProps = {
 const sectionTitle =
   "text-[40px] leading-12.5 font-bold tracking-normal max-lg:text-[28px]! max-lg:leading-9!";
 
-export default function Heading({ as: Tag = "h2", className, children }: HeadingProps) {
+export default function Heading({
+  as: Tag = "h2",
+  className,
+  children,
+}: HeadingProps) {
   return <Tag className={cn(sectionTitle, className)}>{children}</Tag>;
 }

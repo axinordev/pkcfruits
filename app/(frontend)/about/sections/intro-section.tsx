@@ -34,7 +34,10 @@ export default function IntroSection({ intro, stats }: IntroSectionProps) {
             </Heading>
             <div className="mt-6 flex max-w-[452px] flex-col gap-2.5">
               {intro.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="font-riposte text-[18px] leading-7 font-light text-[#253326]/80">
+                <p
+                  key={paragraph}
+                  className="font-riposte text-[18px] leading-7 font-light text-[#253326]/80"
+                >
                   {paragraph}
                 </p>
               ))}
@@ -64,7 +67,9 @@ export default function IntroSection({ intro, stats }: IntroSectionProps) {
         >
           {stats.map((stat, index) => (
             <li key={stat.id} className="min-w-0 px-1">
-              <p className={`${manrope.className} text-[28px] leading-10 font-extrabold tracking-normal capitalize lg:text-[40px] lg:leading-15`}>
+              <p
+                className={`${manrope.className} text-[28px] leading-10 font-extrabold tracking-normal capitalize lg:text-[40px] lg:leading-15`}
+              >
                 {values[index]}
                 {stat.suffix}
               </p>

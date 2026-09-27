@@ -13,7 +13,12 @@ type ProductCategoryToggleProps = {
   className?: string;
 };
 
-export function ProductCategoryToggle({ categories, categoryId, onSelect, className }: ProductCategoryToggleProps) {
+export function ProductCategoryToggle({
+  categories,
+  categoryId,
+  onSelect,
+  className,
+}: ProductCategoryToggleProps) {
   return (
     <div
       role="tablist"
@@ -53,13 +58,23 @@ type ProductCountryFiltersProps = {
   className?: string;
 };
 
-export default function ProductCountryFilters({ countries, countryId, onSelect, className }: ProductCountryFiltersProps) {
-  const rows = [...new Set(countries.map((item) => item.row))].map((row) => countries.filter((item) => item.row === row));
+export default function ProductCountryFilters({
+  countries,
+  countryId,
+  onSelect,
+  className,
+}: ProductCountryFiltersProps) {
+  const rows = [...new Set(countries.map((item) => item.row))].map((row) =>
+    countries.filter((item) => item.row === row),
+  );
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>
       {rows.map((row) => (
-        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-x-4.5 gap-y-3">
+        <div
+          key={row[0]?.id}
+          className="flex flex-wrap justify-center gap-x-4.5 gap-y-3"
+        >
           {row.map((item) => {
             const selected = item.id === countryId;
             return (

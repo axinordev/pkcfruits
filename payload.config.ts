@@ -14,7 +14,13 @@ import { Products } from "./collections/Products";
 import { Users } from "./collections/Users";
 import { AboutPage } from "./globals/AboutPage";
 import { HomePage } from "./globals/HomePage";
-import { AwardsPage, ContactPage, GalleryPage, NewsPage, ProductsPage } from "./globals/PageSettings";
+import {
+  AwardsPage,
+  ContactPage,
+  GalleryPage,
+  NewsPage,
+  ProductsPage,
+} from "./globals/PageSettings";
 import { seedSite } from "./lib/seed/seed-site";
 import { cloudinaryStorage } from "./plugins/cloudinary-storage";
 
@@ -32,14 +38,26 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Products, News, Gallery, Awards, Enquiries],
-  globals: [HomePage, AboutPage, ProductsPage, AwardsPage, GalleryPage, NewsPage, ContactPage],
+  globals: [
+    HomePage,
+    AboutPage,
+    ProductsPage,
+    AwardsPage,
+    GalleryPage,
+    NewsPage,
+    ContactPage,
+  ],
   plugins: [cloudinaryStorage()],
   endpoints: [
     {
       path: "/seed-site",
       method: "post",
       handler: async (req) => {
-        if (!req.user) return Response.json({ message: "Sign in to seed content." }, { status: 401 });
+        if (!req.user)
+          return Response.json(
+            { message: "Sign in to seed content." },
+            { status: 401 },
+          );
         const result = await seedSite(req.payload);
         return Response.json(result);
       },

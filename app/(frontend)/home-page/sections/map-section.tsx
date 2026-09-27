@@ -28,7 +28,11 @@ type MapSectionProps = {
   stats: { id: string; value: number; suffix: string; label: string }[];
 };
 
-export default function MapSection({ title, description, stats }: MapSectionProps) {
+export default function MapSection({
+  title,
+  description,
+  stats,
+}: MapSectionProps) {
   const targets = useMemo(() => stats.map((stat) => stat.value), [stats]);
   const { rootRef, values } = useCountUps(targets);
 
@@ -38,11 +42,15 @@ export default function MapSection({ title, description, stats }: MapSectionProp
         <ul ref={rootRef} className="grid grid-cols-3 gap-4 text-center">
           {stats.map((stat, index) => (
             <li key={stat.id}>
-              <p className={`${manrope.className} text-[40px] leading-15 font-extrabold tracking-normal max-lg:text-[28px] max-lg:leading-10`}>
+              <p
+                className={`${manrope.className} text-[40px] leading-15 font-extrabold tracking-normal max-lg:text-[28px] max-lg:leading-10`}
+              >
                 {values[index]}
                 {stat.suffix}
               </p>
-              <p className="font-riposte text-[16px] leading-6.5 font-light text-[#FFFFF0]/80 capitalize">{stat.label}</p>
+              <p className="font-riposte text-[16px] leading-6.5 font-light text-[#FFFFF0]/80 capitalize">
+                {stat.label}
+              </p>
             </li>
           ))}
         </ul>
@@ -57,7 +65,14 @@ export default function MapSection({ title, description, stats }: MapSectionProp
         </div>
 
         <div className="relative mt-16 max-lg:mt-10">
-          <Image src="/world-map.svg" alt="" width={2000} height={1201} unoptimized className="h-auto w-full" />
+          <Image
+            src="/world-map.svg"
+            alt=""
+            width={2000}
+            height={1201}
+            unoptimized
+            className="h-auto w-full"
+          />
           <ul className="absolute inset-0">
             {markers.map((marker, index) => (
               <li key={marker.id}>
@@ -66,8 +81,14 @@ export default function MapSection({ title, description, stats }: MapSectionProp
                   style={{ left: marker.left, top: marker.top }}
                   className="absolute size-4.5 -translate-x-1/2 -translate-y-1/2 max-lg:size-3.5"
                 >
-                  <span className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary" style={{ animationDelay: `${index * 0.18}s` }} />
-                  <span className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary" style={{ animationDelay: `${0.9 + index * 0.18}s` }} />
+                  <span
+                    className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
+                    style={{ animationDelay: `${index * 0.18}s` }}
+                  />
+                  <span
+                    className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
+                    style={{ animationDelay: `${0.9 + index * 0.18}s` }}
+                  />
                   <span className="absolute inset-1 rounded-full bg-brand-primary max-lg:inset-0.75" />
                 </span>
               </li>

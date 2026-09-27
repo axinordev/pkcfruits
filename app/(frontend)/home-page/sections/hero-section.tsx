@@ -25,7 +25,14 @@ type HeroSectionProps = {
   about: { title: string; description: string; button: string };
 };
 
-export default function HeroSection({ eyeLabel, title, description, button, fruits, about }: HeroSectionProps) {
+export default function HeroSection({
+  eyeLabel,
+  title,
+  description,
+  button,
+  fruits,
+  about,
+}: HeroSectionProps) {
   const {
     sectionRef,
     imageScale,
@@ -50,7 +57,11 @@ export default function HeroSection({ eyeLabel, title, description, button, frui
           <Navbar variant="overlay" />
         </div>
         <motion.div
-          style={{ opacity: heroOpacity, scale: heroScale, pointerEvents: heroPointerEvents }}
+          style={{
+            opacity: heroOpacity,
+            scale: heroScale,
+            pointerEvents: heroPointerEvents,
+          }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
           <Image
@@ -75,7 +86,11 @@ export default function HeroSection({ eyeLabel, title, description, button, frui
           </div>
         </motion.div>
         <motion.div
-          style={{ opacity: aboutOpacity, scale: aboutScale, pointerEvents: aboutPointerEvents }}
+          style={{
+            opacity: aboutOpacity,
+            scale: aboutScale,
+            pointerEvents: aboutPointerEvents,
+          }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
           <AboutSection {...about} />

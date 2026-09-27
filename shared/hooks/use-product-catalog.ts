@@ -13,9 +13,12 @@ export function productsFor(catalog: ProductCatalog, ids: string[]) {
 export function useProductCatalog(catalog: ProductCatalog) {
   const firstCategory = catalog.categories[0];
   const [categoryId, setCategoryId] = useState(firstCategory?.id ?? "");
-  const category = catalog.categories.find((item) => item.id === categoryId) ?? firstCategory;
+  const category =
+    catalog.categories.find((item) => item.id === categoryId) ?? firstCategory;
   const [countryId, setCountryId] = useState(category?.countries[0]?.id ?? "");
-  const country = category?.countries.find((item) => item.id === countryId) ?? category?.countries[0];
+  const country =
+    category?.countries.find((item) => item.id === countryId) ??
+    category?.countries[0];
 
   function selectCategory(id: string) {
     const next = catalog.categories.find((item) => item.id === id);

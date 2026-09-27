@@ -8,15 +8,28 @@ import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
 
 export const getCMS = cache(async () => getPayload({ config }));
 
-export type CmsImage = { src: string; alt: string; width: number; height: number };
+export type CmsImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 
 function isMedia(value: unknown): value is Media {
   return Boolean(value && typeof value === "object" && "url" in value);
 }
 
-export function cmsImage(value: string | Media | null | undefined, alt = ""): CmsImage | null {
+export function cmsImage(
+  value: string | Media | null | undefined,
+  alt = "",
+): CmsImage | null {
   if (!isMedia(value) || !value.url) return null;
-  return { src: value.url, alt: value.alt || alt, width: value.width || 1200, height: value.height || 800 };
+  return {
+    src: value.url,
+    alt: value.alt || alt,
+    width: value.width || 1200,
+    height: value.height || 800,
+  };
 }
 
 export function paragraphs(value?: string | null) {
@@ -30,10 +43,17 @@ export function formatDate(value?: string | null) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(date);
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
 }
 
-function populated<T extends { id: string }>(value: string | T | null | undefined): T | null {
+function populated<T extends { id: string }>(
+  value: string | T | null | undefined,
+): T | null {
   if (!value || typeof value === "string") return null;
   return value;
 }
@@ -41,12 +61,28 @@ function populated<T extends { id: string }>(value: string | T | null | undefine
 function cardFromProduct(product: Product): CatalogProduct | null {
   const image = cmsImage(product.image, product.name);
   if (!image || !product.slug) return null;
-  return { slug: product.slug, name: `[${product.name}]`, image: image.src, alt: image.alt, width: image.width, height: image.height };
+  return {
+    slug: product.slug,
+    name: `[${product.name}]`,
+    image: image.src,
+    alt: image.alt,
+    width: image.width,
+    height: image.height,
+  };
 }
 
-export function buildCatalog(products: Product[], headings: { badge: string; title: string; button: string }): ProductCatalog {
+export function buildCatalog(
+  products: Product[],
+  headings: { badge: string; title: string; button: string },
+): ProductCatalog {
   const fruits: ProductCatalog["fruits"] = {};
-  const groups = new Map<string, Map<string, { label: string; row: number; order: number; products: string[] }>>();
+  const groups = new Map<
+    string,
+    Map<
+      string,
+      { label: string; row: number; order: number; products: string[] }
+    >
+  >();
 
   for (const product of products) {
     const card = cardFromProduct(product);
@@ -75,8 +111,13 @@ export function buildCatalog(products: Product[], headings: { badge: string; tit
         id,
         label: labels[id],
         countries: [...countries.values()]
-          .sort((a, b) => a.order - b.order)
-          .map((country) => ({ id: slugify(country.label), label: country.label, row: country.row, products: country.products })),
+          .toSorted((a, b) => a.order - b.order)
+          .map((country) => ({
+            id: slugify(country.label),
+            label: country.label,
+            row: country.row,
+            products: country.products,
+          })),
       },
     ];
   });
@@ -108,15 +149,22 @@ export const getHomePage = cache(async () => {
   });
 
   return {
-    seo: { title: home.seo?.title ?? "", description: home.seo?.description ?? "" },
+    seo: {
+      title: home.seo?.title ?? "",
+      description: home.seo?.description ?? "",
+    },
     hero: {
       eyeLabel: home.hero?.eyeLabel ?? "",
       title: home.hero?.title ?? "",
       description: home.hero?.description ?? "",
       button: home.hero?.button ?? "",
-      fruits: productCards(products).slice(0, 3).map((fruit) => ({ ...fruit, name: fruit.name })),
+      fruits: productCards(products).slice(0, 3),
     },
-    about: { title: home.about?.title ?? "", description: home.about?.description ?? "", button: home.about?.button ?? "" },
+    about: {
+      title: home.about?.title ?? "",
+      description: home.about?.description ?? "",
+      button: home.about?.button ?? "",
+    },
     catalog: buildCatalog(products, {
       badge: home.productsSection?.badge ?? "",
       title: home.productsSection?.title ?? "",
@@ -125,10 +173,20 @@ export const getHomePage = cache(async () => {
     world: {
       title: home.world?.title ?? "",
       description: home.world?.description ?? "",
-      stats: (home.world?.stats ?? []).map((stat) => ({ id: stat.id || stat.label, value: stat.value, suffix: stat.suffix, label: stat.label })),
+      stats: (home.world?.stats ?? []).map((stat) => ({
+        id: stat.id || stat.label,
+        value: stat.value,
+        suffix: stat.suffix,
+        label: stat.label,
+      })),
     },
     awards: { title: home.awardsSection?.title ?? "", items: awards },
-    news: { badge: home.newsSection?.badge ?? "", title: home.newsSection?.title ?? "", button: home.newsSection?.button ?? "", stories },
+    news: {
+      badge: home.newsSection?.badge ?? "",
+      title: home.newsSection?.title ?? "",
+      button: home.newsSection?.button ?? "",
+      stories,
+    },
   };
 });
 
@@ -168,8 +226,16 @@ export const getAboutPage = cache(async () => {
       paragraphs: paragraphs(page.introBody),
       image: cmsImage(page.introImage, page.introBadge),
     },
-    stats: (page.stats ?? []).map((stat) => ({ id: stat.id || stat.label, value: stat.value, suffix: stat.suffix, label: stat.label })),
-    story: { image: cmsImage(page.storyImage), paragraphs: paragraphs(page.storyBody) },
+    stats: (page.stats ?? []).map((stat) => ({
+      id: stat.id || stat.label,
+      value: stat.value,
+      suffix: stat.suffix,
+      label: stat.label,
+    })),
+    story: {
+      image: cmsImage(page.storyImage),
+      paragraphs: paragraphs(page.storyBody),
+    },
     founders: {
       badge: page.foundersBadge ?? "",
       title: page.foundersTitle ?? "",
@@ -181,19 +247,37 @@ export const getAboutPage = cache(async () => {
   };
 });
 
-async function pageHeading(slug: "products-page" | "awards-page" | "gallery-page" | "news-page") {
+async function pageHeading(
+  slug: "products-page" | "awards-page" | "gallery-page" | "news-page",
+) {
   const payload = await getCMS();
   const page = await payload.findGlobal({ slug, depth: 0 });
-  return { seo: { title: page.seoTitle ?? "", description: page.seoDescription ?? "" }, badge: page.badge ?? "", title: page.title ?? "" };
+  return {
+    seo: { title: page.seoTitle ?? "", description: page.seoDescription ?? "" },
+    badge: page.badge ?? "",
+    title: page.title ?? "",
+  };
 }
 
 export const getProductsPage = cache(async () => {
   const payload = await getCMS();
   const [page, result] = await Promise.all([
     pageHeading("products-page"),
-    payload.find({ collection: "products", limit: 100, depth: 1, sort: "name" }),
+    payload.find({
+      collection: "products",
+      limit: 100,
+      depth: 1,
+      sort: "name",
+    }),
   ]);
-  return { ...page, catalog: buildCatalog(result.docs, { badge: page.badge, title: page.title, button: "Explore All" }) };
+  return {
+    ...page,
+    catalog: buildCatalog(result.docs, {
+      badge: page.badge,
+      title: page.title,
+      button: "Explore All",
+    }),
+  };
 });
 
 export const getAwardsPage = cache(async () => {
@@ -203,14 +287,23 @@ export const getAwardsPage = cache(async () => {
     payload.find({ collection: "awards", limit: 100, depth: 1, sort: "order" }),
   ]);
   const [first = "", second = ""] = page.title.split("\n");
-  return { ...page, titleLines: [first, second], awards: result.docs.map(awardView) };
+  return {
+    ...page,
+    titleLines: [first, second],
+    awards: result.docs.map(awardView),
+  };
 });
 
 export const getGalleryPage = cache(async () => {
   const payload = await getCMS();
   const [page, result] = await Promise.all([
     pageHeading("gallery-page"),
-    payload.find({ collection: "gallery", limit: 100, depth: 1, sort: "order" }),
+    payload.find({
+      collection: "gallery",
+      limit: 100,
+      depth: 1,
+      sort: "order",
+    }),
   ]);
   return {
     ...page,
@@ -232,18 +325,35 @@ export const getNewsList = cache(async () => {
 
 export const getNewsArticle = cache(async (slug: string) => {
   const payload = await getCMS();
-  const result = await payload.find({ collection: "news", where: { slug: { equals: slug } }, limit: 1, depth: 2 });
+  const result = await payload.find({
+    collection: "news",
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 2,
+  });
   const article = result.docs[0];
   if (!article) return null;
-  const cover = cmsImage(article.cover, article.title) ?? cmsImage(article.image, article.title);
-  const featureImage = cmsImage(article.featureImage, article.featureHeading ?? "");
+  const cover =
+    cmsImage(article.cover, article.title) ??
+    cmsImage(article.image, article.title);
+  const featureImage = cmsImage(
+    article.featureImage,
+    article.featureHeading ?? "",
+  );
   const page = await pageHeading("news-page");
   return {
     title: article.title,
     date: formatDate(article.date),
     paragraphs: paragraphs(article.body),
     cover,
-    feature: article.featureHeading && featureImage ? { heading: article.featureHeading, paragraphs: paragraphs(article.featureBody), image: featureImage } : null,
+    feature:
+      article.featureHeading && featureImage
+        ? {
+            heading: article.featureHeading,
+            paragraphs: paragraphs(article.featureBody),
+            image: featureImage,
+          }
+        : null,
     related: (article.related ?? []).flatMap((item) => {
       const story = populated<News>(item);
       return story ? [newsCard(story)] : [];
@@ -254,10 +364,17 @@ export const getNewsArticle = cache(async (slug: string) => {
 
 export const getProduct = cache(async (slug: string) => {
   const payload = await getCMS();
-  const result = await payload.find({ collection: "products", where: { slug: { equals: slug } }, limit: 1, depth: 2 });
+  const result = await payload.find({
+    collection: "products",
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 2,
+  });
   const product = result.docs[0];
   if (!product) return null;
-  const image = cmsImage(product.detailImage, product.name) ?? cmsImage(product.image, product.name);
+  const image =
+    cmsImage(product.detailImage, product.name) ??
+    cmsImage(product.image, product.name);
   const benefitsImage = cmsImage(product.benefitsImage, product.name);
   const page = await pageHeading("products-page");
   return {

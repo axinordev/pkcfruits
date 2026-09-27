@@ -1,4 +1,8 @@
-import { FoundersSection, IntroSection, StorySection } from "@/app/about/sections";
+import {
+  FoundersSection,
+  IntroSection,
+  StorySection,
+} from "@/app/about/sections";
 import { getAboutPage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 

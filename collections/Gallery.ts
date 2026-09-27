@@ -14,9 +14,21 @@ export const Gallery: CollectionConfig = {
   access: contentAccess,
   defaultSort: "order",
   fields: [
-    { name: "image", type: "upload", relationTo: "media", required: true, label: "Photo" },
+    {
+      name: "image",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+      label: "Photo",
+    },
     { name: "alt", type: "text", required: true, label: "Description" },
-    { name: "order", type: "number", required: true, defaultValue: 0, label: "Order" },
+    {
+      name: "order",
+      type: "number",
+      required: true,
+      defaultValue: 0,
+      label: "Order",
+    },
     {
       name: "slug",
       type: "text",
@@ -26,7 +38,8 @@ export const Gallery: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, siblingData }) => {
-            if (typeof value === "string" && value.trim()) return slugify(value);
+            if (typeof value === "string" && value.trim())
+              return slugify(value);
             return slugify(String(siblingData?.alt || "photo"));
           },
         ],

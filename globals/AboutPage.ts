@@ -10,13 +10,23 @@ export const AboutPage: GlobalConfig = {
   fields: [
     section("SEO", [
       { name: "seoTitle", type: "text", required: true, label: "Meta title" },
-      { name: "seoDescription", type: "textarea", required: true, label: "Meta description" },
+      {
+        name: "seoDescription",
+        type: "textarea",
+        required: true,
+        label: "Meta description",
+      },
     ]),
     section("Intro", [
       { name: "introBadge", type: "text", required: true, label: "Eye label" },
       { name: "introTitle", type: "textarea", required: true, label: "Title" },
       { name: "introBody", type: "textarea", required: true, label: "Text" },
-      { name: "introImage", type: "upload", relationTo: "media", label: "Photo" },
+      {
+        name: "introImage",
+        type: "upload",
+        relationTo: "media",
+        label: "Photo",
+      },
       {
         name: "stats",
         type: "array",
@@ -29,11 +39,21 @@ export const AboutPage: GlobalConfig = {
       },
     ]),
     section("Story", [
-      { name: "storyImage", type: "upload", relationTo: "media", label: "Photo" },
+      {
+        name: "storyImage",
+        type: "upload",
+        relationTo: "media",
+        label: "Photo",
+      },
       { name: "storyBody", type: "textarea", required: true, label: "Text" },
     ]),
     section("Founders", [
-      { name: "foundersBadge", type: "text", required: true, label: "Eye label" },
+      {
+        name: "foundersBadge",
+        type: "text",
+        required: true,
+        label: "Eye label",
+      },
       { name: "foundersTitle", type: "text", required: true, label: "Title" },
       {
         name: "founders",
@@ -42,7 +62,13 @@ export const AboutPage: GlobalConfig = {
         fields: [
           { name: "name", type: "text", required: true },
           { name: "role", type: "text", required: true, label: "Role" },
-          { name: "photo", type: "upload", relationTo: "media", required: true, label: "Photo" },
+          {
+            name: "photo",
+            type: "upload",
+            relationTo: "media",
+            required: true,
+            label: "Photo",
+          },
         ],
       },
     ]),

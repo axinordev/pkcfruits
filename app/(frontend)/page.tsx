@@ -1,4 +1,10 @@
-import { AwardSection, HeroSection, MapSection, ProductSection, RecentNewsSection } from "./home-page/sections";
+import {
+  AwardSection,
+  HeroSection,
+  MapSection,
+  ProductSection,
+  RecentNewsSection,
+} from "./home-page/sections";
 import { getHomePage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 

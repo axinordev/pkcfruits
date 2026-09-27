@@ -22,7 +22,8 @@ export const newsDetailContent = {
 } as const;
 
 export type NewsArticle = (typeof articles.articles)[number];
-export type ShareNetworkId = (typeof newsDetailContent.shareNetworks)[number]["id"];
+export type ShareNetworkId =
+  (typeof newsDetailContent.shareNetworks)[number]["id"];
 
 export function newsSlugs() {
   return articles.articles.map((article) => article.slug);

@@ -91,7 +91,8 @@ export const awardSectionPhotos = {
 
 export const mapSectionContent = {
   title: "From Around the World",
-  description: "Sourcing exceptional fruits from trusted growers across the globe.",
+  description:
+    "Sourcing exceptional fruits from trusted growers across the globe.",
   stats: [
     { id: "fruits", value: 10, suffix: "K+", label: "Imported Fruits" },
     { id: "customers", value: 50, suffix: "K+", label: "Customers Served" },
