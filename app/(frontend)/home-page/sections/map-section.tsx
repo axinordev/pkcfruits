@@ -9,17 +9,17 @@ import { useMemo } from "react";
 const manrope = Manrope({ subsets: ["latin"], weight: "800" });
 
 const markers = [
-  { id: "usa", left: "21%", top: "35%" },
-  { id: "mexico", left: "21.2%", top: "45.5%" },
-  { id: "peru", left: "29.2%", top: "62.9%" },
-  { id: "brazil", left: "35.5%", top: "66%" },
-  { id: "spain", left: "49.1%", top: "35.7%" },
-  { id: "europe", left: "52.9%", top: "29.3%" },
-  { id: "east-africa", left: "61%", top: "57%" },
-  { id: "south-africa", left: "56.8%", top: "73.6%" },
-  { id: "china", left: "74.5%", top: "42%" },
-  { id: "southeast-asia", left: "78.2%", top: "50.5%" },
-  { id: "australia", left: "86%", top: "69%" },
+  { id: "usa", name: "USA", left: "21%", top: "35%" },
+  { id: "mexico", name: "Mexico", left: "21.2%", top: "45.5%" },
+  { id: "peru", name: "Peru", left: "29.2%", top: "62.9%" },
+  { id: "brazil", name: "Brazil", left: "35.5%", top: "66%" },
+  { id: "spain", name: "Spain", left: "49.1%", top: "35.7%" },
+  { id: "europe", name: "Europe", left: "52.9%", top: "29.3%" },
+  { id: "east-africa", name: "East Africa", left: "61%", top: "57%" },
+  { id: "south-africa", name: "South Africa", left: "56.8%", top: "73.6%" },
+  { id: "china", name: "China", left: "74.5%", top: "42%" },
+  { id: "southeast-asia", name: "Thailand", left: "78.2%", top: "50.5%" },
+  { id: "australia", name: "Australia", left: "86%", top: "69%" },
 ];
 
 type MapSectionProps = {
@@ -75,21 +75,36 @@ export default function MapSection({
           />
           <ul className="absolute inset-0">
             {markers.map((marker, index) => (
-              <li key={marker.id}>
-                <span
-                  aria-hidden
-                  style={{ left: marker.left, top: marker.top }}
-                  className="absolute size-4.5 -translate-x-1/2 -translate-y-1/2 max-lg:size-3.5"
-                >
+              <li
+                key={marker.id}
+                style={{ left: marker.left, top: marker.top }}
+                className="group absolute z-0 -translate-x-1/2 -translate-y-1/2 p-2 hover:z-20"
+              >
+                <span className="relative block size-6 max-lg:size-5">
                   <span
+                    aria-hidden
                     className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
                     style={{ animationDelay: `${index * 0.18}s` }}
                   />
                   <span
+                    aria-hidden
                     className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
                     style={{ animationDelay: `${0.9 + index * 0.18}s` }}
                   />
-                  <span className="absolute inset-1 rounded-full bg-brand-primary max-lg:inset-0.75" />
+                  <span
+                    aria-hidden
+                    className="absolute inset-1 rounded-full bg-brand-primary max-lg:inset-0.75"
+                  />
+                  <span
+                    role="tooltip"
+                    className={`font-riposte pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-[13px] leading-none font-medium whitespace-nowrap text-brand-primary opacity-0 transition-opacity duration-150 group-hover:opacity-100 ${
+                      Number.parseFloat(marker.left) > 75
+                        ? "right-full mr-2"
+                        : "left-full ml-2"
+                    }`}
+                  >
+                    {marker.name}
+                  </span>
                 </span>
               </li>
             ))}
