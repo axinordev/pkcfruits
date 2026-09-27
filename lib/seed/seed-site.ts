@@ -17,6 +17,7 @@ import articlesFile from "@/app/news/articles.json";
 import detailsFile from "@/app/product-detail/details.json";
 import { awards } from "@/shared/constants/awards";
 import catalog from "@/shared/constants/products.json";
+import { footerContent } from "@/shared/constants/site";
 
 const details = detailsFile.products;
 
@@ -27,6 +28,12 @@ function mimeType(filename: string) {
   if (ext === ".webp") return "image/webp";
   return "application/octet-stream";
 }
+
+const defaultSocial = [
+  { platform: "facebook" as const, url: "https://www.facebook.com/pkcfruits/" },
+  { platform: "instagram" as const, url: "" },
+  { platform: "youtube" as const, url: "" },
+];
 
 function text(parts: readonly string[]) {
   return parts.join("\n\n");
@@ -377,7 +384,24 @@ export async function seedSite(payload: Payload) {
         address: contactPageContent.address,
         email: contactPageContent.email,
         phone: contactPageContent.phone.label,
+        social: defaultSocial,
         mapEmbed: contactPageContent.map.src,
+      },
+    });
+  }
+
+  const saved = await payload.findGlobal({ slug: "contact-page", depth: 0 });
+  const oneLineAddress = footerContent.address.join(" ");
+  const socialMissing = !saved.social?.length;
+  const addressNeedsBreak = saved.address === oneLineAddress;
+  if (socialMissing || addressNeedsBreak) {
+    await payload.updateGlobal({
+      slug: "contact-page",
+      data: {
+        ...(socialMissing ? { social: defaultSocial } : {}),
+        ...(addressNeedsBreak
+          ? { address: footerContent.address.join("\n") }
+          : {}),
       },
     });
   }

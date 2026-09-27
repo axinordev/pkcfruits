@@ -4,8 +4,9 @@ import { cache } from "react";
 
 import { slugify } from "@/lib/cms/access";
 import { youtubeEmbed } from "@/lib/youtube";
-import type { Award, Media, News, Product } from "@/payload-types";
+import type { Award, ContactPage, Media, News, Product } from "@/payload-types";
 import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
+import { footerContent } from "@/shared/constants/site";
 
 export const getCMS = cache(async () => getPayload({ config }));
 
@@ -409,9 +410,69 @@ export const getProduct = cache(async (slug: string) => {
   };
 });
 
+const socialPlatforms = ["facebook", "instagram", "youtube"] as const;
+
+export type SocialPlatform = (typeof socialPlatforms)[number];
+
+const socialLabels: Record<SocialPlatform, string> = {
+  facebook: "Facebook",
+  instagram: "Instagram",
+  youtube: "YouTube",
+};
+
+export type SiteContact = {
+  address: string;
+  email: string;
+  phone: string;
+  social: { platform: SocialPlatform; label: string; href: string }[];
+};
+
+function isSocialPlatform(value: string): value is SocialPlatform {
+  return socialPlatforms.some((platform) => platform === value);
+}
+
+function siteContactFrom(page: {
+  address?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  social?: ContactPage["social"];
+}): SiteContact {
+  const social = (page.social ?? []).flatMap((item) => {
+    const platform = item.platform ?? "";
+    if (!isSocialPlatform(platform)) return [];
+    return [
+      {
+        platform,
+        label: socialLabels[platform],
+        href: item.url?.trim() ?? "",
+      },
+    ];
+  });
+
+  return {
+    address: page.address?.trim() || footerContent.address.join("\n"),
+    email: page.email?.trim() || footerContent.email,
+    phone: page.phone?.trim() || footerContent.phone.label,
+    social: social.length
+      ? social
+      : footerContent.social.map((item) => ({
+          platform: item.label.toLowerCase() as SocialPlatform,
+          label: item.label,
+          href: item.href,
+        })),
+  };
+}
+
+export const getSiteContact = cache(async () => {
+  const payload = await getCMS();
+  const page = await payload.findGlobal({ slug: "contact-page", depth: 0 });
+  return siteContactFrom(page);
+});
+
 export const getContactPage = cache(async () => {
   const payload = await getCMS();
   const page = await payload.findGlobal({ slug: "contact-page", depth: 1 });
+  const contact = siteContactFrom(page);
   return {
     seo: { title: page.seoTitle ?? "", description: page.seoDescription ?? "" },
     badge: page.badge ?? "",
@@ -424,9 +485,9 @@ export const getContactPage = cache(async () => {
     messageLabel: page.messageLabel ?? "",
     sendLabel: page.sendLabel ?? "",
     success: page.success ?? "",
-    address: page.address ?? "",
-    email: page.email ?? "",
-    phone: page.phone ?? "",
+    address: contact.address,
+    email: contact.email,
+    phone: contact.phone,
     mapEmbed: page.mapEmbed ?? "",
   };
 });

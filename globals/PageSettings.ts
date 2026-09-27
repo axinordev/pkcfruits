@@ -102,9 +102,56 @@ export const ContactPage: GlobalConfig = {
       },
     ]),
     section("Details", [
-      { name: "address", type: "textarea", required: true, label: "Address" },
-      { name: "email", type: "email", required: true, label: "Email" },
-      { name: "phone", type: "text", required: true, label: "Phone" },
+      {
+        name: "address",
+        type: "textarea",
+        required: true,
+        label: "Address",
+        admin: {
+          description:
+            "Shown in the footer and on the contact page. Start a new line to break the address.",
+        },
+      },
+      {
+        name: "email",
+        type: "email",
+        required: true,
+        label: "Email",
+        admin: { description: "Shown in the footer and on the contact page." },
+      },
+      {
+        name: "phone",
+        type: "text",
+        required: true,
+        label: "Phone",
+        admin: {
+          description:
+            "Shown as written, for example +91 9947858586. Used in the footer and on the contact page.",
+        },
+      },
+      {
+        name: "social",
+        type: "array",
+        label: "Social links",
+        admin: {
+          description:
+            "Icons in the footer. Leave a link blank to show the icon only.",
+        },
+        fields: [
+          {
+            name: "platform",
+            type: "select",
+            required: true,
+            label: "Platform",
+            options: [
+              { label: "Facebook", value: "facebook" },
+              { label: "Instagram", value: "instagram" },
+              { label: "YouTube", value: "youtube" },
+            ],
+          },
+          { name: "url", type: "text", label: "Link" },
+        ],
+      },
       { name: "mapEmbed", type: "textarea", label: "Map embed link" },
     ]),
   ],

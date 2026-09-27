@@ -1,3 +1,4 @@
+import { getSiteContact, type SocialPlatform } from "@/lib/content";
 import { footerContent } from "@/shared/constants/site";
 import Badge from "@/shared/ui/atoms/badge";
 import Button from "@/shared/ui/atoms/button";
@@ -11,19 +12,19 @@ const manrope = Manrope({ subsets: ["latin"], weight: "400" });
 
 const riposte = "font-riposte font-light";
 
-const socialIcons: Record<
-  (typeof footerContent.social)[number]["label"],
-  ReactNode
-> = {
-  Facebook: <FacebookIcon />,
-  Instagram: <InstagramIcon />,
-  YouTube: <YouTubeIcon />,
+const socialIcons: Record<SocialPlatform, ReactNode> = {
+  facebook: <FacebookIcon />,
+  instagram: <InstagramIcon />,
+  youtube: <YouTubeIcon />,
 };
 
 const socialClassName =
   "flex size-7 items-center justify-center rounded-full bg-brand-primary text-white";
 
-export default function Footer() {
+export default async function Footer() {
+  const contact = await getSiteContact();
+  const phoneHref = `tel:${contact.phone.replace(/[^\d+]/g, "")}`;
+
   return (
     <footer className="relative isolate overflow-hidden text-white">
       <Image
@@ -69,8 +70,8 @@ export default function Footer() {
                   />
                 </Link>
                 <ul className="mt-8 flex items-center gap-2.5 lg:mt-20">
-                  {footerContent.social.map((item) => (
-                    <li key={item.label}>
+                  {contact.social.map((item) => (
+                    <li key={item.platform}>
                       {item.href ? (
                         <a
                           href={item.href}
@@ -79,11 +80,11 @@ export default function Footer() {
                           aria-label={item.label}
                           className={socialClassName}
                         >
-                          {socialIcons[item.label]}
+                          {socialIcons[item.platform]}
                         </a>
                       ) : (
                         <span className={socialClassName}>
-                          {socialIcons[item.label]}
+                          {socialIcons[item.platform]}
                           <span className="sr-only">{item.label}</span>
                         </span>
                       )}
@@ -115,15 +116,15 @@ export default function Footer() {
                     strokeWidth={2}
                     aria-hidden
                   />
-                  <p className={`${riposte} text-lg leading-7 text-white/80`}>
-                    {footerContent.address[0]}
-                    <br />
-                    {footerContent.address[1]}
+                  <p
+                    className={`${riposte} text-lg leading-7 whitespace-pre-line text-white/80`}
+                  >
+                    {contact.address}
                   </p>
                 </li>
                 <li>
                   <a
-                    href={`mailto:${footerContent.email}`}
+                    href={`mailto:${contact.email}`}
                     className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}
                   >
                     <Mail
@@ -131,12 +132,12 @@ export default function Footer() {
                       strokeWidth={2}
                       aria-hidden
                     />
-                    {footerContent.email}
+                    {contact.email}
                   </a>
                 </li>
                 <li>
                   <a
-                    href={footerContent.phone.href}
+                    href={phoneHref}
                     className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}
                   >
                     <Phone
@@ -144,7 +145,7 @@ export default function Footer() {
                       strokeWidth={2}
                       aria-hidden
                     />
-                    {footerContent.phone.label}
+                    {contact.phone}
                   </a>
                 </li>
               </ul>

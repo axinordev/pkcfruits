@@ -727,9 +727,28 @@ export interface ContactPage {
   messageLabel: string;
   sendLabel: string;
   success: string;
+  /**
+   * Shown in the footer and on the contact page. Start a new line to break the address.
+   */
   address: string;
+  /**
+   * Shown in the footer and on the contact page.
+   */
   email: string;
+  /**
+   * Shown as written, for example +91 9947858586. Used in the footer and on the contact page.
+   */
   phone: string;
+  /**
+   * Icons in the footer. Leave a link blank to show the icon only.
+   */
+  social?:
+    | {
+        platform: 'facebook' | 'instagram' | 'youtube';
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   mapEmbed?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -907,6 +926,13 @@ export interface ContactPageSelect<T extends boolean = true> {
   address?: T;
   email?: T;
   phone?: T;
+  social?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
   mapEmbed?: T;
   updatedAt?: T;
   createdAt?: T;

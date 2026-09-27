@@ -92,7 +92,8 @@ export default function HeroSection({
             <p className="font-riposte text-center text-[23.75px] leading-[42.11px] font-light tracking-normal max-lg:!text-[15px] max-lg:!leading-6">
               {description}
             </p>
-            <Button>
+          
+           <Button href="/product">
               {button} <ArrowRight />
             </Button>
           </div>

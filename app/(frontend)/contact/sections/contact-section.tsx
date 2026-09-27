@@ -57,7 +57,7 @@ export default function ContactSection({ page }: { page: ContactPageView }) {
                 height={20}
                 className="mt-1 shrink-0"
               />
-              <p className="font-riposte max-w-[555px] text-[18px] leading-7 font-light text-[#253326]/80">
+              <p className="font-riposte max-w-[555px] text-[18px] leading-7 font-light whitespace-pre-line text-[#253326]/80">
                 {address}
               </p>
             </li>

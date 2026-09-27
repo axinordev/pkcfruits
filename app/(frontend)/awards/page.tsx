@@ -53,17 +53,11 @@ export default async function AwardsPage() {
                     </h2>
                     <p className="relative mt-1 max-h-11 overflow-hidden text-[14px] leading-[22px] text-[#3d3d3d]">
                       {card.summary}
-                      <span className="font-riposte absolute right-0 bottom-0 bg-white pl-4 font-light text-brand-primary">
-                        … Read more
-                      </span>
                     </p>
                   </>
                 ) : (
                   <p className="relative max-h-[4.5rem] overflow-hidden text-[16px] leading-6 font-semibold text-ink">
                     {card.title}
-                    <span className="font-riposte absolute right-0 bottom-0 bg-white pl-4 text-[15px] font-normal text-brand-primary">
-                      Read more
-                    </span>
                   </p>
                 )}
               </div>
