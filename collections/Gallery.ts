@@ -48,10 +48,7 @@ export const Gallery: CollectionConfig = {
       admin: {
         condition: (data) => itemKind(data) !== "video",
       },
-      validate: (
-        value: unknown,
-        { siblingData }: { siblingData: unknown },
-      ) => {
+      validate: (value: unknown, { siblingData }: { siblingData: unknown }) => {
         if (itemKind(siblingData) === "video") return true;
         return value ? true : "Add a photo.";
       },
@@ -65,10 +62,7 @@ export const Gallery: CollectionConfig = {
         description:
           "Paste a YouTube link, such as https://www.youtube.com/watch?v=...",
       },
-      validate: (
-        value: unknown,
-        { siblingData }: { siblingData: unknown },
-      ) => {
+      validate: (value: unknown, { siblingData }: { siblingData: unknown }) => {
         if (itemKind(siblingData) !== "video") return true;
         if (typeof value !== "string" || !youtubeVideoId(value)) {
           return "Add a YouTube link, such as https://www.youtube.com/watch?v=...";

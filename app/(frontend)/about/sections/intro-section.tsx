@@ -26,13 +26,13 @@ export default function IntroSection({ intro, stats }: IntroSectionProps) {
   return (
     <section className="bg-canvas text-ink">
       <div className="mx-auto w-full max-w-360 px-20 pt-20 pb-15 max-lg:px-5 max-lg:pt-12 max-lg:pb-12">
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,473px)_minmax(0,1fr)] lg:gap-x-[25px]">
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,473px)_minmax(0,1fr)] lg:gap-x-6.25">
           <div className="flex h-full flex-col items-start">
             <Badge>{intro.badge}</Badge>
-            <Heading as="h1" className="mt-7.5 max-w-[473px] max-lg:mt-4">
+            <Heading as="h1" className="mt-7.5 max-w-118.25 max-lg:mt-4">
               {intro.title}
             </Heading>
-            <div className="mt-6 flex max-w-[452px] flex-col gap-2.5">
+            <div className="mt-6 flex max-w-113 flex-col gap-2.5">
               {intro.paragraphs.map((paragraph) => (
                 <p
                   key={paragraph}
@@ -63,7 +63,7 @@ export default function IntroSection({ intro, stats }: IntroSectionProps) {
 
         <ul
           ref={rootRef}
-          className="mx-auto mt-10 grid w-full max-w-[910px] grid-cols-3 items-center rounded-2xl bg-[#253326] px-3 py-8 text-center text-[#FAF6F0] lg:mt-35 lg:h-[162px] lg:px-6 lg:py-0"
+          className="mx-auto mt-10 grid w-full max-w-227.5 grid-cols-3 items-center rounded-2xl bg-[#253326] px-3 py-8 text-center text-[#FAF6F0] lg:mt-35 lg:h-40.5 lg:px-6 lg:py-0"
         >
           {stats.map((stat, index) => (
             <li key={stat.id} className="min-w-0 px-1">
