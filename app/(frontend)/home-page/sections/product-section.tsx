@@ -59,12 +59,12 @@ export default function ProductSection({
           countries={category.countries}
           countryId={country.id}
           onSelect={setCountryId}
-          className="mt-13.25"
+          className="mt-13.25 [&_div]:justify-start"
         />
 
         <div
           ref={scrollerRef}
-          className="mt-12 flex gap-5 overflow-x-auto scroll-smooth pb-1 scrollbar-none"
+          className="mt-12 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5"
         >
           {products.map(({ slug, ...product }) => (
             <ProductCard key={slug} {...product} href={`/product/${slug}`} />

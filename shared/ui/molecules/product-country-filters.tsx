@@ -72,11 +72,11 @@ export default function ProductCountryFilters({
       : [countries];
 
   return (
-    <div className={cn("flex flex-col gap-4", className)}>
+    <div className={cn("flex flex-col gap-2.5", className)}>
       {rows.map((row) => (
         <div
           key={row[0]?.id}
-          className="flex flex-wrap justify-center gap-x-4.5 gap-y-3"
+          className="flex flex-wrap justify-center gap-2.5"
         >
           {row.map((item) => {
             const selected = item.id === countryId;
@@ -88,10 +88,10 @@ export default function ProductCountryFilters({
                 onClick={() => onSelect(item.id)}
                 className={cn(
                   riposte,
-                  "rounded-[21px] border px-2.5 py-2.5 text-[16px] leading-7 whitespace-nowrap text-ink uppercase",
+                  "flex h-[38px] min-w-[79px] items-center justify-center gap-2.5 rounded-[30px] border px-2.5 text-[16px] leading-none whitespace-nowrap uppercase opacity-100",
                   selected
-                    ? "rounded-[30px] border-[rgba(226,26,96,0.2)] bg-blush"
-                    : "border-[rgba(33,34,33,0.5)] opacity-40 hover:opacity-70",
+                    ? "border-[rgba(226,26,96,0.2)] bg-blush text-ink"
+                    : "border-[#21222180] text-[#21222180]",
                 )}
               >
                 {item.label}

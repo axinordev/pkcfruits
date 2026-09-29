@@ -153,9 +153,9 @@ function ViewAllAwards({ className }: { className?: string }) {
     <Link
       href="/awards"
       aria-label="View all awards"
-      className={`flex size-18 items-center justify-center rounded-full bg-brand-primary text-white ${className ?? ""}`}
+      className={`group flex size-18 items-center justify-center rounded-full bg-brand-primary text-white ${className ?? ""}`}
     >
-      <ArrowRight className="size-7" strokeWidth={2.2} />
+      <ArrowRight className="size-7 group-hover:-rotate-45 transition-transform duration-300" strokeWidth={2.2} />
     </Link>
   );
 }
