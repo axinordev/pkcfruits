@@ -43,53 +43,55 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
         />
       </Link>
 
-      <ul className="hidden items-center gap-8 lg:flex xl:gap-10">
-        {navContent.links.map((item) => {
-          const active = !overlay && isCurrent(pathname, item.href);
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "inline-flex items-center gap-2 text-[15px] leading-none whitespace-nowrap",
-                  overlay
-                    ? "text-white"
-                    : active
-                      ? "text-brand-primary"
-                      : "text-[#3d3d3d] hover:text-ink",
-                )}
-              >
-                {active ? (
-                  <span
-                    aria-hidden
-                    className="size-1.5 shrink-0 rounded-full bg-brand-primary"
-                  />
-                ) : null}
-                {item.label}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="flex shrink-0 items-center gap-8 xl:gap-10">
+        <ul className="hidden items-center gap-8 lg:flex xl:gap-10">
+          {navContent.links.map((item) => {
+            const active = !overlay && isCurrent(pathname, item.href);
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "inline-flex items-center justify-center gap-2 align-middle font-riposte text-center text-[18px] leading-6 font-light tracking-normal whitespace-nowrap",
+                    overlay
+                      ? "text-white"
+                      : active
+                        ? "text-brand-primary"
+                        : "text-[#3d3d3d] hover:text-ink",
+                  )}
+                >
+                  {active ? (
+                    <span
+                      aria-hidden
+                      className="size-1.5 shrink-0 rounded-full bg-brand-primary"
+                    />
+                  ) : null}
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
 
-      <div className="flex shrink-0 items-center gap-2">
-        <Link
-          href={navContent.action.href}
-          className="hidden h-11 items-center justify-center rounded-full bg-brand-primary px-6 text-[15px] font-medium whitespace-nowrap text-white lg:inline-flex"
-        >
-          {navContent.action.label}
-        </Link>
-        <button
-          type="button"
-          className="inline-flex size-10 shrink-0 items-center justify-center lg:hidden"
-          aria-expanded={open}
-          aria-controls="site-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setMenuPath(open ? null : pathname)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href={navContent.action.href}
+            className="hidden h-11 items-center justify-center rounded-full bg-brand-primary px-6 text-[15px] font-medium whitespace-nowrap text-white lg:inline-flex"
+          >
+            {navContent.action.label}
+          </Link>
+          <button
+            type="button"
+            className="inline-flex size-10 shrink-0 items-center justify-center lg:hidden"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setMenuPath(open ? null : pathname)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
 
       {open ? (

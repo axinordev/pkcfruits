@@ -5,7 +5,7 @@ import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
 import Button from "@/shared/ui/atoms/button";
 import Navbar from "@/shared/ui/molecules/navbar";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Mozilla_Headline } from "next/font/google";
 import HeroFruitMarqueeCard from "../components/hero-fruit-marquee-card";
@@ -98,6 +98,34 @@ export default function HeroSection({
             </Button>
           </div>
         </motion.div>
+        <motion.button
+          type="button"
+          style={{
+            opacity: heroOpacity,
+            pointerEvents: heroPointerEvents,
+          }}
+          onClick={() => {
+            const section = sectionRef.current;
+            if (!section) return;
+            const distance = section.offsetHeight - window.innerHeight;
+            const top = window.scrollY + section.getBoundingClientRect().top;
+            window.scrollTo({
+              top: top + distance * 0.82,
+              behavior: "smooth",
+            });
+          }}
+          className="absolute bottom-8 left-1/2 z-20 flex flex-col -translate-x-1/2 items-center gap-3 whitespace-nowrap text-white group"
+        >
+          <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
+            Scroll down
+          </span>
+          <span className="inline-flex size-12 items-center justify-center rounded-full border border-white cursor-pointer">
+            <ArrowDown
+              className="size-6 group-hover:animate-bounce"
+              aria-hidden
+            />
+          </span>
+        </motion.button>
         <motion.div
           style={{
             opacity: aboutOpacity,
