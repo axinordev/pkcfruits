@@ -219,6 +219,7 @@ export default function EnquireForm({ page }: { page: EnquireFormProps }) {
         ? createPortal(
             <dialog
               ref={dialogRef}
+              data-lenis-prevent
               aria-labelledby={titleId}
               onClose={() => setStatus("idle")}
               className="m-auto w-[min(100%-2.5rem,440px)] rounded-[20px] border-0 bg-white p-8 text-center shadow-[0px_8px_32px_rgba(0,0,0,0.12)] backdrop:bg-ink/50"

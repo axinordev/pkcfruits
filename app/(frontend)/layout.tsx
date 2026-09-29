@@ -1,5 +1,6 @@
 import Footer from "@/shared/ui/molecules/footer";
 import { SiteHeader } from "@/shared/ui/molecules/navbar";
+import SmoothScroll from "@/shared/ui/smooth-scroll";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -13,9 +14,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
       <body id="top" className="min-h-full flex flex-col">
-        <SiteHeader />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <SiteHeader />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

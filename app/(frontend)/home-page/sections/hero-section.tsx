@@ -5,6 +5,7 @@ import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
 import Button from "@/shared/ui/atoms/button";
 import Navbar from "@/shared/ui/molecules/navbar";
 import { motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Mozilla_Headline } from "next/font/google";
@@ -44,6 +45,7 @@ export default function HeroSection({
     heroPointerEvents,
     aboutPointerEvents,
   } = useHeroSection();
+  const lenis = useLenis();
 
   return (
     <section ref={sectionRef} className="relative h-[200vh]">
@@ -109,10 +111,12 @@ export default function HeroSection({
             if (!section) return;
             const distance = section.offsetHeight - window.innerHeight;
             const top = window.scrollY + section.getBoundingClientRect().top;
-            window.scrollTo({
-              top: top + distance * 0.82,
-              behavior: "smooth",
-            });
+            const target = top + distance * 0.82;
+            if (lenis) {
+              lenis.scrollTo(target);
+              return;
+            }
+            window.scrollTo({ top: target, behavior: "smooth" });
           }}
           className="absolute bottom-8 left-1/2 z-20 flex flex-col -translate-x-1/2 items-center gap-3 whitespace-nowrap text-white group"
         >
