@@ -51,7 +51,7 @@ export default function HeroSection({
         <motion.div
           aria-hidden
           style={{ scale: imageScale }}
-          className="absolute inset-0 origin-top bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-[position:left_32%]"
+          className="absolute inset-0 origin-top bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-[position:left_33%]"
         />
         <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 z-20">
@@ -70,7 +70,7 @@ export default function HeroSection({
             alt="500K+ Happy Customers"
             width={567}
             height={406}
-            className="pointer-events-none absolute top-122.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:hidden"
+            className="pointer-events-none absolute top-142.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:hidden"
           />
           <HeroFruitMarqueeCard fruits={fruits} />
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 max-lg:mb-28 max-lg:gap-3 max-lg:px-5">

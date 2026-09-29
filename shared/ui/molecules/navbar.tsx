@@ -28,7 +28,7 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
       className={cn(
         "relative flex items-center justify-between gap-4 px-5 py-3 lg:px-10 lg:py-4 xl:px-16",
         overlay
-          ? "border-b border-white/20 bg-black/25 text-white backdrop-blur-md"
+          ? "bg-white/10 text-white/10 backdrop-blur-sm"
           : " top-0 z-40 border-b border-[#E6E6E6] bg-canvas text-[#3d3d3d]",
       )}
     >

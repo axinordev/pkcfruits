@@ -1,4 +1,5 @@
 import Button from "@/shared/ui/atoms/button";
+import { ArrowRight } from "lucide-react";
 
 export default function AboutSection({
   title,
@@ -19,6 +20,7 @@ export default function AboutSection({
       </p>
       <Button href="/about" variant="primary">
         {button}
+        <ArrowRight />
       </Button>
     </div>
   );
