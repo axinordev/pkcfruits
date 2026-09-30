@@ -1,10 +1,7 @@
 "use client";
 
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
-import {
-  HERO_ABOUT_SCROLL,
-  useHeroSection,
-} from "@/app/home-page/hooks/use-hero-section";
+import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
 import Button from "@/shared/ui/atoms/button";
 import Navbar from "@/shared/ui/molecules/navbar";
 import { motion } from "framer-motion";
@@ -52,6 +49,7 @@ export default function HeroSection({
     cardY,
     buttonOpacity,
     scrollCuePointerEvents,
+    aboutScrollRef,
   } = useHeroSection();
   const lenis = useLenis();
 
@@ -60,7 +58,7 @@ export default function HeroSection({
     if (!section) return;
     const distance = section.offsetHeight - window.innerHeight;
     const top = window.scrollY + section.getBoundingClientRect().top;
-    const target = top + distance * HERO_ABOUT_SCROLL;
+    const target = top + distance * aboutScrollRef.current;
     if (lenis) {
       lenis.scrollTo(target);
       return;
@@ -69,7 +67,7 @@ export default function HeroSection({
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[250vh]">
+    <section ref={sectionRef} className="relative h-[200vh] lg:h-[250vh]">
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
@@ -99,7 +97,7 @@ export default function HeroSection({
             scale: heroScale,
             pointerEvents: heroPointerEvents,
           }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-72 lg:px-0 lg:pt-0 lg:pb-0"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:px-0 lg:pt-0 lg:pb-0"
         >
           <Image
             src="/hero-customer-badge.png"
@@ -135,7 +133,7 @@ export default function HeroSection({
           <motion.div
             ref={clusterRef}
             style={{ y: cardY }}
-            className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center lg:bottom-9 lg:items-end lg:px-12"
+            className="z-20 flex flex-col items-center gap-5 lg:absolute lg:inset-x-0 lg:bottom-9 lg:items-end lg:gap-0 lg:px-12"
           >
             <div ref={cardRef}>
               <HeroFruitMarqueeCard fruits={fruits} />
@@ -143,7 +141,7 @@ export default function HeroSection({
             <button
               type="button"
               onClick={scrollToAbout}
-              className="group mt-4 mb-8 flex flex-col items-center gap-3 whitespace-nowrap text-white lg:hidden"
+              className="group flex flex-col items-center gap-3 whitespace-nowrap text-white lg:hidden"
             >
               <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
                 Scroll down

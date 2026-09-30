@@ -17,8 +17,9 @@ export function useHeroSection() {
   const reduceMotion = useReducedMotion();
   const scrollYProgress = useMotionValue(0);
   const zoomProgress = useMotionValue(0);
-  const cardY = useMotionValue(220);
-  const scrollCueOpacity = useMotionValue(0);
+  const cardY = useMotionValue(0);
+  const scrollCueOpacity = useMotionValue(1);
+  const aboutScrollRef = useRef(0.82);
 
   useLayoutEffect(() => {
     const update = () => {
@@ -32,12 +33,15 @@ export function useHeroSection() {
       );
       const progress = distance > 0 ? traveled / distance : 0;
       scrollYProgress.set(progress);
-      const zoom = reduceMotion
-        ? progress
-        : Math.min(
+      const desktop = window.matchMedia("(min-width: 1024px)").matches;
+      const holdZoom = desktop && !reduceMotion;
+      aboutScrollRef.current = holdZoom ? HERO_ABOUT_SCROLL : 0.82;
+      const zoom = holdZoom
+        ? Math.min(
             1,
             Math.max(0, (progress - CARD_REVEAL_END) / (1 - CARD_REVEAL_END)),
-          );
+          )
+        : progress;
       zoomProgress.set(zoom);
 
       const cluster = clusterRef.current;
@@ -49,21 +53,23 @@ export function useHeroSection() {
           : 0;
       const fullShift =
         parent && card ? Math.max(0, parent.clientHeight - cardMid) : 0;
-      const reveal = reduceMotion
-        ? 1
-        : Math.min(1, Math.max(0, progress / CARD_REVEAL_END));
+      const reveal =
+        desktop && !reduceMotion
+          ? Math.min(1, Math.max(0, progress / CARD_REVEAL_END))
+          : 1;
       cardY.set((1 - reveal) * fullShift);
 
-      const cue = reduceMotion
-        ? 1
-        : Math.min(
-            1,
-            Math.max(
-              0,
-              (progress - SCROLL_CUE_START) /
-                (SCROLL_CUE_END - SCROLL_CUE_START),
-            ),
-          );
+      const cue =
+        desktop && !reduceMotion
+          ? Math.min(
+              1,
+              Math.max(
+                0,
+                (progress - SCROLL_CUE_START) /
+                  (SCROLL_CUE_END - SCROLL_CUE_START),
+              ),
+            )
+          : 1;
       scrollCueOpacity.set(cue);
     };
 
@@ -75,6 +81,7 @@ export function useHeroSection() {
       window.removeEventListener("resize", update);
     };
   }, [cardY, reduceMotion, scrollCueOpacity, scrollYProgress, zoomProgress]);
+
 
   const imageScale = useTransform(
     zoomProgress,
@@ -123,5 +130,6 @@ export function useHeroSection() {
     cardY,
     buttonOpacity,
     scrollCuePointerEvents,
+    aboutScrollRef,
   };
 }
