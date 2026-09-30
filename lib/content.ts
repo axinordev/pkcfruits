@@ -6,9 +6,18 @@ import { slugify } from "@/lib/cms/access";
 import { youtubeEmbed } from "@/lib/youtube";
 import type { Award, ContactPage, Media, News, Product } from "@/payload-types";
 import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
+import { aboutSectionContent } from "@/app/home-page/constants";
 import { footerContent } from "@/shared/constants/site";
 
 export const getCMS = cache(async () => getPayload({ config }));
+
+function aboutLinkLabel(button: string | null | undefined) {
+  const label = button?.trim() ?? "";
+  if (!label || label.toLowerCase() === "read more") {
+    return aboutSectionContent.action;
+  }
+  return label;
+}
 
 export type CmsImage = {
   src: string;
@@ -160,7 +169,7 @@ export const getHomePage = cache(async () => {
     about: {
       title: home.about?.title ?? "",
       description: home.about?.description ?? "",
-      button: home.about?.button ?? "",
+      button: aboutLinkLabel(home.about?.button),
     },
     catalog: buildCatalog(products, {
       badge: home.productsSection?.badge ?? "",

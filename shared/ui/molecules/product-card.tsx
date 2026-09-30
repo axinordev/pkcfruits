@@ -23,6 +23,9 @@ export default function ProductCard({
   variant = "carousel",
 }: ProductCardProps) {
   const isGrid = variant === "grid";
+  const sizes = isGrid
+    ? "(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 380px"
+    : "(max-width: 1024px) 210px, 290px";
   const className = cn(
     "block box-border bg-white",
     isGrid
@@ -48,6 +51,7 @@ export default function ProductCard({
           alt={alt}
           width={width}
           height={height}
+          sizes={sizes}
           className="absolute top-[19.264%] left-1/2 h-[65.18%] w-[91.165%] -translate-x-1/2 object-contain"
         />
       </div>
@@ -67,6 +71,7 @@ export default function ProductCard({
           alt={alt}
           width={width}
           height={height}
+          sizes={sizes}
           className="absolute top-7 left-1/2 h-55 w-72.5 -translate-x-1/2 object-contain max-lg:top-4 max-lg:h-45 max-lg:w-52.5"
         />
       </div>

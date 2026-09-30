@@ -48,6 +48,7 @@ export default function HeroFruitMarqueeCard({
               alt={fruit.imageAlt}
               width={fruit.imageWidth}
               height={fruit.imageHeight}
+              sizes="221px"
               className="absolute top-[18.15px] left-[calc(50%-110.37px+2.63px)] h-[147.16px] w-[220.73px] object-contain"
             />
           </div>

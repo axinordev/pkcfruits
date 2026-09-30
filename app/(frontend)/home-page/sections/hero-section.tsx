@@ -53,9 +53,19 @@ export default function HeroSection({
         <motion.div
           aria-hidden
           style={{ scale: imageScale }}
-          className="absolute inset-0 origin-top bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-[position:left_33%]"
-        />
-        <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
+          className="absolute inset-0 z-0 origin-top"
+        >
+          <Image
+            src="/hero-bg.png"
+            alt=""
+            fill
+            preload
+            sizes="100vw"
+            quality={60}
+            className="object-cover object-[left_33%]"
+          />
+        </motion.div>
+        <div className="absolute inset-0 z-[1] bg-black/50" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 z-20">
           <Navbar variant="overlay" />
         </div>
