@@ -47,6 +47,19 @@ export default function HeroSection({
   } = useHeroSection();
   const lenis = useLenis();
 
+  function scrollToAbout() {
+    const section = sectionRef.current;
+    if (!section) return;
+    const distance = section.offsetHeight - window.innerHeight;
+    const top = window.scrollY + section.getBoundingClientRect().top;
+    const target = top + distance * 0.82;
+    if (lenis) {
+      lenis.scrollTo(target);
+      return;
+    }
+    window.scrollTo({ top: target, behavior: "smooth" });
+  }
+
   return (
     <section ref={sectionRef} className="relative h-[200vh]">
       <div className="sticky top-0 h-screen overflow-hidden text-white">
@@ -75,7 +88,7 @@ export default function HeroSection({
             scale: heroScale,
             pointerEvents: heroPointerEvents,
           }}
-          className="absolute inset-0 z-10 flex items-center justify-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:px-0 lg:pt-0 lg:pb-0"
         >
           <Image
             src="/hero-customer-badge.png"
@@ -84,8 +97,7 @@ export default function HeroSection({
             height={406}
             className="pointer-events-none absolute top-142.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:hidden"
           />
-          <HeroFruitMarqueeCard fruits={fruits} />
-          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 max-lg:mb-28 max-lg:gap-3 max-lg:px-5">
+          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-3 lg:gap-4 lg:px-6">
             <Image
               src="/hero-customer-badge.png"
               alt="500K+ Happy Customers"
@@ -98,10 +110,10 @@ export default function HeroSection({
             >
               {eyeLabel}
             </p>
-            <h1 className="-mt-6 text-center text-[75.57px] leading-[107.96px] font-bold tracking-normal max-lg:-mt-2 max-lg:!text-[34px] max-lg:!leading-[42px]">
+            <h1 className="-mt-2 text-center text-[28px] leading-[42px] font-bold tracking-normal lg:-mt-6 lg:text-[75.57px] lg:leading-[107.96px]">
               {title}
             </h1>
-            <p className="font-riposte text-center text-[23.75px] leading-[42.11px] font-light tracking-normal max-lg:!text-[15px] max-lg:!leading-6">
+            <p className="font-riposte text-center text-[15px] leading-6 font-light tracking-normal lg:text-[23.75px] lg:leading-[42.11px]">
               {description}
             </p>
 
@@ -109,6 +121,22 @@ export default function HeroSection({
               {button} <ArrowRight />
             </Button>
           </div>
+          <HeroFruitMarqueeCard fruits={fruits} />
+          <button
+            type="button"
+            onClick={scrollToAbout}
+            className="z-20 flex flex-col items-center gap-3 whitespace-nowrap text-white group lg:hidden"
+          >
+            <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
+              Scroll down
+            </span>
+            <span className="inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white">
+              <ArrowDown
+                className="size-6 group-hover:animate-bounce"
+                aria-hidden
+              />
+            </span>
+          </button>
         </motion.div>
         <motion.button
           type="button"
@@ -116,24 +144,13 @@ export default function HeroSection({
             opacity: heroOpacity,
             pointerEvents: heroPointerEvents,
           }}
-          onClick={() => {
-            const section = sectionRef.current;
-            if (!section) return;
-            const distance = section.offsetHeight - window.innerHeight;
-            const top = window.scrollY + section.getBoundingClientRect().top;
-            const target = top + distance * 0.82;
-            if (lenis) {
-              lenis.scrollTo(target);
-              return;
-            }
-            window.scrollTo({ top: target, behavior: "smooth" });
-          }}
-          className="absolute bottom-8 left-1/2 z-20 flex flex-col -translate-x-1/2 items-center gap-3 whitespace-nowrap text-white group"
+          onClick={scrollToAbout}
+          className="absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-3 whitespace-nowrap text-white group lg:flex"
         >
           <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
             Scroll down
           </span>
-          <span className="inline-flex size-12 items-center justify-center rounded-full border border-white cursor-pointer">
+          <span className="inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white">
             <ArrowDown
               className="size-6 group-hover:animate-bounce"
               aria-hidden

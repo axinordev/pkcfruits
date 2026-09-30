@@ -17,8 +17,9 @@ export default function HeroFruitMarqueeCard({
   if (!fruit) return null;
 
   return (
-    <div className="absolute right-12 bottom-9 h-73 w-92.5 overflow-hidden rounded-[20px] max-lg:!right-3 max-lg:!bottom-4 max-lg:origin-bottom-right max-lg:scale-[0.52]">
-      <AnimatePresence mode="wait">
+    <div className="relative h-[152px] w-[193px] shrink-0 lg:absolute lg:right-12 lg:bottom-9 lg:h-73 lg:w-92.5">
+      <div className="absolute top-1/2 left-1/2 h-73 w-92.5 origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.52] lg:top-0 lg:left-0 lg:h-full lg:w-full lg:translate-x-0 lg:translate-y-0 lg:scale-100">
+        <AnimatePresence mode="wait">
         <motion.article
           key={fruit.name}
           initial={reduceMotion ? false : { opacity: 0, x: -48 }}
@@ -53,7 +54,8 @@ export default function HeroFruitMarqueeCard({
             />
           </div>
         </motion.article>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

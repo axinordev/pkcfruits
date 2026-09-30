@@ -74,7 +74,7 @@ export default function ProductCountryFilters({
   return (
     <div className={cn("flex flex-col gap-2.5", className)}>
       {rows.map((row) => (
-        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-2.5">
+        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-2.5 lg:gap-6">
           {row.map((item) => {
             const selected = item.id === countryId;
             return (
@@ -85,7 +85,7 @@ export default function ProductCountryFilters({
                 onClick={() => onSelect(item.id)}
                 className={cn(
                   riposte,
-                  "flex h-[38px] min-w-[79px] items-center justify-center gap-2.5 rounded-[30px] border px-2.5 text-[16px] leading-none whitespace-nowrap uppercase opacity-100",
+                  "flex h-[38px] min-w-[79px] items-center justify-center gap-2.5 rounded-[30px] border px-2.5 text-sm lg:text-[16px] leading-none whitespace-nowrap uppercase opacity-100",
                   selected
                     ? "border-[rgba(226,26,96,0.2)] bg-blush text-ink"
                     : "border-[#21222180] text-[#21222180]",
