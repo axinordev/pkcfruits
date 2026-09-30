@@ -66,7 +66,6 @@ export default function MapSection({
             {description}
           </p>
         </div>
-
       </div>
 
       <div className="relative mt-16 w-full max-lg:mt-10">

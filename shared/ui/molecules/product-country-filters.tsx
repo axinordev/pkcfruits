@@ -74,10 +74,7 @@ export default function ProductCountryFilters({
   return (
     <div className={cn("flex flex-col gap-2.5", className)}>
       {rows.map((row) => (
-        <div
-          key={row[0]?.id}
-          className="flex flex-wrap justify-center gap-2.5"
-        >
+        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-2.5">
           {row.map((item) => {
             const selected = item.id === countryId;
             return (
