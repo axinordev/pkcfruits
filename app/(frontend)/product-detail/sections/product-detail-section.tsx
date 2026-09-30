@@ -45,7 +45,7 @@ export default function ProductDetailSection({
   return (
     <section className="overflow-x-clip bg-canvas text-ink">
       <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col px-20 pt-10 pb-4 max-lg:px-5 max-lg:pt-8">
-        <div>
+        <div className="flex flex-col gap-2">
           <Link
             href="/product"
             className="font-riposte inline-flex items-center gap-2.5 text-[16px] leading-6 font-light text-[#253326]"
@@ -54,7 +54,7 @@ export default function ProductDetailSection({
             Back
           </Link>
 
-          <Badge className="mt-8">{product.badge}</Badge>
+          <Badge className="mt-8 w-fit">{product.badge}</Badge>
           <Heading as="h1" className="mt-5 uppercase">
             {product.name}
           </Heading>

@@ -2,7 +2,7 @@ import { getSiteContact, type SocialPlatform } from "@/lib/content";
 import { footerContent } from "@/shared/constants/site";
 import Badge from "@/shared/ui/atoms/badge";
 import Button from "@/shared/ui/atoms/button";
-import { ArrowRight, ArrowUp, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUp } from "lucide-react";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -111,11 +111,7 @@ export default async function Footer() {
 
               <ul className="flex max-w-[420px] flex-col gap-3.5 lg:pt-0.5">
                 <li className="flex items-start gap-3.5">
-                  <MapPin
-                    className="mt-1 size-[18px] shrink-0 text-brand-primary"
-                    strokeWidth={2}
-                    aria-hidden
-                  />
+                  <MapPinIcon />
                   <p
                     className={`${riposte} text-lg leading-7 whitespace-pre-line text-white/80`}
                   >
@@ -127,11 +123,7 @@ export default async function Footer() {
                     href={`mailto:${contact.email}`}
                     className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}
                   >
-                    <Mail
-                      className="size-[18px] shrink-0 text-brand-primary"
-                      strokeWidth={2}
-                      aria-hidden
-                    />
+                    <MailIcon />
                     {contact.email}
                   </a>
                 </li>
@@ -140,11 +132,7 @@ export default async function Footer() {
                     href={phoneHref}
                     className={`${riposte} flex items-center gap-3.5 text-lg leading-7 text-white/80 hover:text-white`}
                   >
-                    <Phone
-                      className="size-[18px] shrink-0 text-brand-primary"
-                      strokeWidth={2}
-                      aria-hidden
-                    />
+                    <PhoneIcon />
                     {contact.phone}
                   </a>
                 </li>
@@ -180,9 +168,49 @@ export default async function Footer() {
   );
 }
 
+function MapPinIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="mt-1 size-6 shrink-0 fill-current text-brand-primary"
+      aria-hidden
+    >
+      <path
+        fillRule="evenodd"
+        d="M12 2a8 8 0 0 0-8 8c0 5.4 6.6 10.8 7.45 11.48a.9.9 0 0 0 1.1 0C13.4 20.8 20 15.4 20 10a8 8 0 0 0-8-8Zm0 10.75a2.75 2.75 0 1 1 0-5.5 2.75 2.75 0 0 1 0 5.5Z"
+      />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="size-6 shrink-0 fill-current text-brand-primary"
+      aria-hidden
+    >
+      <path d="M2.2 7.4 12 13.3l9.8-5.9V17a2 2 0 0 1-2 2H4.2a2 2 0 0 1-2-2V7.4Z" />
+      <path d="M2.2 7a2 2 0 0 1 2-2h15.6a2 2 0 0 1 2 2L12 12.9 2.2 7Z" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="size-6 shrink-0 fill-current text-brand-primary"
+      aria-hidden
+    >
+      <path d="M7.2 2.8h2.1c.6 0 1.1.4 1.2 1l.5 2.7c.1.6-.2 1.2-.7 1.5l-1.6.9a11.6 11.6 0 0 0 6.4 6.4l.9-1.6c.3-.5.9-.8 1.5-.7l2.7.5c.6.1 1 .6 1 1.2v2.1c0 .8-.6 1.4-1.4 1.4A16.6 16.6 0 0 1 5.8 4.2c0-.8.6-1.4 1.4-1.4Z" />
+    </svg>
+  );
+}
+
 function FacebookIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
+    <svg viewBox="0 0 24 24" className="fill-current" aria-hidden>
       <path d="M14.5 8.5H13a1 1 0 0 0-1 1V11h2.4l-.4 2.5H12V19H9.5v-5.5H7.5V11h2V9.2A3.2 3.2 0 0 1 12.8 6H14.5v2.5Z" />
     </svg>
   );
@@ -192,7 +220,7 @@ function InstagramIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="size-3.5 fill-none stroke-current"
+      className="fill-none stroke-current"
       aria-hidden
     >
       <rect x="4" y="4" width="16" height="16" rx="4" strokeWidth="1.8" />
@@ -204,7 +232,7 @@ function InstagramIcon() {
 
 function YouTubeIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
+    <svg viewBox="0 0 24 24" className="fill-current" aria-hidden>
       <path d="M20.2 8.4a2.2 2.2 0 0 0-1.6-1.6C17.2 6.5 12 6.5 12 6.5s-5.2 0-6.6.3a2.2 2.2 0 0 0-1.6 1.6C3.5 9.8 3.5 12 3.5 12s0 2.2.3 3.6a2.2 2.2 0 0 0 1.6 1.6c1.4.3 6.6.3 6.6.3s5.2 0 6.6-.3a2.2 2.2 0 0 0 1.6-1.6c.3-1.4.3-3.6.3-3.6s0-2.2-.3-3.6ZM10.4 14.8V9.2L15.2 12l-4.8 2.8Z" />
     </svg>
   );

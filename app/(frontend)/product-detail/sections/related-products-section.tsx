@@ -11,20 +11,21 @@ export default function RelatedProductsSection({
   if (products.length === 0) return null;
 
   return (
-    <section className="overflow-x-clip bg-canvas text-ink">
+    <section className="bg-canvas text-ink">
       <div className="mx-auto w-full max-w-360 px-20 pt-10 pb-16 max-lg:px-5 max-lg:pb-12">
         <div className="flex items-center justify-between gap-6">
           <Badge>Relatable Products</Badge>
           <ArrowLink href="/product">View All</ArrowLink>
         </div>
-        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5">
           {products.map(({ slug, ...product }) => (
-            <ProductCard
-              key={slug}
-              {...product}
-              href={`/product/${slug}`}
-              variant="grid"
-            />
+            <div key={slug} className="w-92.5 shrink-0 max-lg:w-70">
+              <ProductCard
+                {...product}
+                href={`/product/${slug}`}
+                variant="grid"
+              />
+            </div>
           ))}
         </div>
       </div>
