@@ -58,7 +58,7 @@ export default async function Footer() {
           </Button>
 
           <div className="mt-14 w-full max-w-[1360px] rounded-3xl bg-[rgba(238,242,243,0.1)] px-6 py-8 backdrop-blur-[14px] lg:mt-16 lg:px-10 lg:pt-9 lg:pb-6">
-            <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.15fr)_auto_minmax(280px,1fr)] lg:gap-x-16">
+            <div className="flex flex-col items-start gap-4 lg:flex-row lg:justify-between">
               <div className="flex flex-col items-start">
                 <Link href="/" className="inline-flex">
                   <Image
@@ -109,7 +109,7 @@ export default async function Footer() {
                 </ul>
               </nav>
 
-              <ul className="flex max-w-[420px] flex-col gap-3.5 lg:pt-0.5">
+              <ul className="flex  flex-col gap-3.5 lg:pt-0.5 lg:pr-20">
                 <li className="flex items-start gap-3.5">
                   <MapPinIcon />
                   <p
