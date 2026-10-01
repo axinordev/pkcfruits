@@ -20,7 +20,7 @@ export default function AboutSection({
       </p>
       <Button href="/about" variant="primary">
         {button}
-        <ArrowRight />
+        <ArrowRight className="size-6 shrink-0 opacity-100" aria-hidden />
       </Button>
     </div>
   );

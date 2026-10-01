@@ -3,8 +3,7 @@
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
 import Button from "@/shared/ui/atoms/button";
-import Navbar from "@/shared/ui/molecules/navbar";
-import { motion } from "framer-motion";
+  import { motion, useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -37,8 +36,6 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const {
     sectionRef,
-    clusterRef,
-    cardRef,
     imageScale,
     heroOpacity,
     heroScale,
@@ -46,11 +43,8 @@ export default function HeroSection({
     aboutScale,
     heroPointerEvents,
     aboutPointerEvents,
-    cardY,
-    buttonOpacity,
-    scrollCuePointerEvents,
-    aboutScrollRef,
   } = useHeroSection();
+  const reduceMotion = useReducedMotion();
   const lenis = useLenis();
 
   function scrollToAbout() {
@@ -58,7 +52,7 @@ export default function HeroSection({
     if (!section) return;
     const distance = section.offsetHeight - window.innerHeight;
     const top = window.scrollY + section.getBoundingClientRect().top;
-    const target = top + distance * aboutScrollRef.current;
+    const target = top + distance * 0.82;
     if (lenis) {
       lenis.scrollTo(target);
       return;
@@ -67,30 +61,34 @@ export default function HeroSection({
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh] lg:h-[250vh]">
+    <section ref={sectionRef} data-site-hero className="relative h-[200vh]">
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
           style={{ scale: imageScale }}
           className="absolute inset-0 z-0 origin-top"
         >
-          <Image
-            src="/hero-bg.png"
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            quality={60}
-            className="object-cover object-[left_33%]"
-          />
+          <motion.div
+            initial={reduceMotion ? false : { scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 origin-center"
+          >
+            <Image
+              src="/hero-bg.png"
+              alt=""
+              fill
+              preload
+              sizes="100vw"
+              quality={60}
+              className="object-cover object-[left_33%]"
+            />
+          </motion.div>
         </motion.div>
         <div
           className="absolute inset-0 z-[1] bg-black/50"
           aria-hidden="true"
         />
-        <div className="absolute inset-x-0 top-0 z-20">
-          <Navbar variant="overlay" />
-        </div>
         <motion.div
           style={{
             opacity: heroOpacity,
@@ -127,51 +125,38 @@ export default function HeroSection({
             </p>
 
             <Button href="/product">
-              {button} <ArrowRight />
+              {button}{" "}
+              <ArrowRight className="size-6 shrink-0 opacity-100" aria-hidden />
             </Button>
           </div>
-          <motion.div
-            ref={clusterRef}
-            style={{ y: cardY }}
-            className="z-20 flex flex-col items-center gap-5 lg:absolute lg:inset-x-0 lg:bottom-9 lg:items-end lg:gap-0 lg:px-12"
+          <HeroFruitMarqueeCard fruits={fruits} />
+          <button
+            type="button"
+            onClick={scrollToAbout}
+            className="group z-20 flex flex-col items-center gap-3 whitespace-nowrap text-white lg:hidden"
           >
-            <div ref={cardRef}>
-              <HeroFruitMarqueeCard fruits={fruits} />
-            </div>
-            <button
-              type="button"
-              onClick={scrollToAbout}
-              className="group flex flex-col items-center gap-3 whitespace-nowrap text-white lg:hidden"
-            >
-              <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
-                Scroll down
-              </span>
-              <span className="inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white">
-                <ArrowDown
-                  className="size-6 group-hover:animate-bounce"
-                  aria-hidden
-                />
-              </span>
-            </button>
-          </motion.div>
+            <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
+              Scroll down
+            </span>
+            <span className="inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white">
+              <ArrowDown className="size-6 opacity-100" aria-hidden />
+            </span>
+          </button>
         </motion.div>
         <motion.button
           type="button"
           style={{
-            opacity: buttonOpacity,
-            pointerEvents: scrollCuePointerEvents,
+            opacity: heroOpacity,
+            pointerEvents: heroPointerEvents,
           }}
           onClick={scrollToAbout}
-          className="absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-3 whitespace-nowrap text-white group lg:flex"
+          className="group absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-3 whitespace-nowrap text-white lg:flex"
         >
           <span className="font-riposte text-[14px] leading-5 font-light tracking-normal">
             Scroll down
           </span>
           <span className="inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white">
-            <ArrowDown
-              className="size-6 group-hover:animate-bounce"
-              aria-hidden
-            />
+            <ArrowDown className="size-6 opacity-100" aria-hidden />
           </span>
         </motion.button>
         <motion.div

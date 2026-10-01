@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 
 const variants = {
   primary:
-    "inline-flex h-[56.14px] w-[235.36px] items-center justify-center gap-[10.8px] rounded-[33.47px] bg-brand-primary p-[10.8px] text-white",
+    "inline-flex h-[56.14px] w-[235.36px] items-center justify-center gap-[10.8px] overflow-visible rounded-[33.47px] bg-brand-primary p-[10.8px] text-white [&_svg]:shrink-0 [&_svg]:opacity-100",
 } as const;
 
 type Variant = keyof typeof variants;

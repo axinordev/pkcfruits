@@ -17,12 +17,12 @@ export default function HeroFruitMarqueeCard({
   if (!fruit) return null;
 
   return (
-    <div className="relative h-[152px] w-[193px] shrink-0 lg:h-73 lg:w-92.5">
+    <div className="relative h-[152px] w-[193px] shrink-0 lg:absolute lg:right-12 lg:bottom-9 lg:h-73 lg:w-92.5">
       <div className="absolute top-1/2 left-1/2 h-73 w-92.5 origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.52] lg:top-0 lg:left-0 lg:h-full lg:w-full lg:translate-x-0 lg:translate-y-0 lg:scale-100">
         <AnimatePresence mode="wait">
           <motion.article
             key={fruit.name}
-            initial={reduceMotion ? false : { opacity: 0, x: -48 }}
+            initial={false}
             animate={{ opacity: 1, x: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 48 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}

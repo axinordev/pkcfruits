@@ -1,12 +1,12 @@
 "use client";
 
 import { navContent } from "@/shared/constants/site";
+import { useNavbar } from "@/shared/hooks/use-navbar";
 import { cn } from "cn";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 type NavbarProps = {
   variant?: "overlay" | "solid";
@@ -18,13 +18,15 @@ function isCurrent(pathname: string, href: string) {
 }
 
 export default function Navbar({ variant = "solid" }: NavbarProps) {
-  const pathname = usePathname();
-  const overlay = variant === "overlay";
-  const [menuPath, setMenuPath] = useState<string | null>(null);
-  const open = menuPath === pathname;
+  const { pathname, open, overlay, concealed, toggleMenu } = useNavbar(variant);
 
   return (
-    <nav className="relative z-40">
+    <nav
+      aria-hidden={concealed}
+      inert={concealed}
+      style={{ transform: concealed ? "translateY(-100%)" : "translateY(0)" }}
+      className="fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out motion-reduce:transition-none"
+    >
       <div
         className={cn(
           "flex items-center justify-between gap-4 px-5 py-3 lg:px-10 lg:py-4 xl:px-16",
@@ -91,7 +93,7 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
               aria-expanded={open}
               aria-controls="site-menu"
               aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setMenuPath(open ? null : pathname)}
+              onClick={toggleMenu}
             >
               <span className="relative grid size-5 place-items-center">
                 <Menu
@@ -162,6 +164,18 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
-  return <Navbar />;
+
+  return (
+    <>
+      {pathname === "/" ? null : (
+        <div
+          aria-hidden
+          className="border-b border-transparent px-5 py-3 lg:px-10 lg:py-4 xl:px-16"
+        >
+          <div className="h-10 lg:h-13" />
+        </div>
+      )}
+      <Navbar variant={pathname === "/" ? "overlay" : "solid"} />
+    </>
+  );
 }
