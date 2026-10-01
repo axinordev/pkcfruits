@@ -4,7 +4,7 @@ import { getSeoMetadata } from "@/shared/seo";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateMetadata() {
   const page = await getGalleryPage();

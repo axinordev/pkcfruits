@@ -6,7 +6,7 @@ import { getProduct } from "@/lib/content";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;

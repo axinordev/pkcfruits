@@ -27,7 +27,7 @@ export default function RecentNewsSection({
 }) {
   return (
     <section id="news" className="bg-canvas text-ink">
-      <div className="mx-auto flex w-full max-w-360 flex-col px-20 pt-22.5 pb-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12">
+      <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-14 lg:pt-22.5 lg:pb-28">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <Badge>{badge}</Badge>

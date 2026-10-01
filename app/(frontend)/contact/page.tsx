@@ -2,7 +2,7 @@ import { ContactSection } from "@/app/contact/sections";
 import { getContactPage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateMetadata() {
   const page = await getContactPage();

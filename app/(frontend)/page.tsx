@@ -8,7 +8,7 @@ import {
 import { getHomePage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateMetadata() {
   const home = await getHomePage();

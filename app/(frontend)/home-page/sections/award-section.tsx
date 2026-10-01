@@ -64,7 +64,7 @@ export default function AwardSection({
 
   return (
     <section id="awards" className="bg-canvas text-ink">
-      <div className="mx-auto flex w-full max-w-360 flex-col px-5 pt-10 pb-12 min-[1280px]:px-0 min-[1280px]:pt-16 min-[1280px]:pb-12.75">
+      <div className="mx-auto flex w-full max-w-360 flex-col px-5 pt-16 pb-12 min-[1280px]:px-0 min-[1280px]:pt-42 min-[1280px]:pb-12">
         <h2 className="text-center text-[32px] leading-12.5 font-bold tracking-normal max-lg:text-[28px] max-lg:leading-9 min-[1280px]:hidden">
           {title}
         </h2>

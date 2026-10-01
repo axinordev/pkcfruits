@@ -43,7 +43,7 @@ export default function ProductSection({
 
   return (
     <section id="products" className="bg-canvas text-ink">
-      <div className="mx-auto flex w-full max-w-360 flex-col px-20 pt-10 pb-12 max-lg:px-5 max-lg:pt-8 max-lg:pb-10">
+      <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12 lg:pt-20 lg:pb-26">
         <div className="flex justify-center">
           <Badge>{catalog.badge}</Badge>
         </div>
