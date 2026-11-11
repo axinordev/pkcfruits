@@ -201,7 +201,7 @@ export interface Product {
   id: string;
   name: string;
   /**
-   * Used in the product address, for example kiwi.
+   * Made from the product name. Used in the page address.
    */
   slug?: string | null;
   image: string | Media;
@@ -235,6 +235,9 @@ export interface Product {
 export interface News {
   id: string;
   title: string;
+  /**
+   * Made from the title. Used in the page address.
+   */
   slug?: string | null;
   date: string;
   image: string | Media;
@@ -266,6 +269,9 @@ export interface Gallery {
    */
   alt: string;
   order: number;
+  /**
+   * Made automatically. You cannot edit this.
+   */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -282,6 +288,9 @@ export interface Award {
   summary?: string | null;
   image: string | Media;
   order: number;
+  /**
+   * Made automatically. You cannot edit this.
+   */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;

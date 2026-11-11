@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 
-import { contentAccess, section, slugify } from "@/lib/cms/access";
+import { autoSlugField, contentAccess, section } from "@/lib/cms/access";
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -15,23 +15,11 @@ export const Products: CollectionConfig = {
   access: contentAccess,
   fields: [
     { name: "name", type: "text", required: true },
-    {
-      name: "slug",
-      type: "text",
-      unique: true,
-      index: true,
-      label: "Link",
-      admin: { description: "Used in the product address, for example kiwi." },
-      hooks: {
-        beforeValidate: [
-          ({ value, siblingData }) => {
-            if (typeof value === "string" && value.trim())
-              return slugify(value);
-            return slugify(String(siblingData?.name || "product"));
-          },
-        ],
-      },
-    },
+    autoSlugField({
+      from: "name",
+      fallback: "product",
+      description: "Made from the product name. Used in the page address.",
+    }),
     {
       name: "image",
       type: "upload",
