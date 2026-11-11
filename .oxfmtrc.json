@@ -12,7 +12,7 @@
     "build",
     "next-env.d.ts",
     "payload-types.ts",
-    "app/(payload)/admin/importMap.js",
+    "app/(payload)/axinor/administrate/importMap.js",
     "bun.lock"
   ]
 }

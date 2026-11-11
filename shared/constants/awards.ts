@@ -26,11 +26,11 @@ export const awards = [
   {
     id: "secretary",
     title:
-      "Mr Navas Has Been Selected as a Secrectary of the “Federation of Business Organiszations North Zone” Kerala",
+      "Mr Navas has been selected as Secretary of the Federation of Business Organisations North Zone, Kerala",
     summary: "",
     image: "/awards/navas-portrait.jpg",
     imageAlt: "Portrait of Mr. Navas",
-    imageClass: "object-center",
+    imageClass: "object-top",
     width: 778,
     height: 664,
     overlay: false,

@@ -28,14 +28,30 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  routes: {
+    admin: "/axinor/administrate",
+  },
   admin: {
     theme: "light",
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      // Replaces the default Payload favicon in the admin tab.
+      icons: [
+        {
+          type: "image/jpeg",
+          rel: "icon",
+          url: "/axinor.jpeg",
+        },
+      ],
+    },
     components: {
       beforeDashboard: ["@/components/admin/SeedDashboardButton#default"],
+      graphics: {
+        Logo: "@/components/admin/Logo#default",
+      },
     },
   },
   collections: [Users, Media, Products, News, Gallery, Awards, Enquiries],

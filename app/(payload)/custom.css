@@ -1,0 +1,5 @@
+/* Hide the admin dashboard breadcrumb (Home / Collection / ...). */
+.app-header__step-nav,
+.step-nav {
+  display: none !important;
+}

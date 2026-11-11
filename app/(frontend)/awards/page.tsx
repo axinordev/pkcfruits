@@ -34,29 +34,29 @@ export default async function AwardsPage() {
               key={card.id}
               className="flex flex-col rounded-[20px] bg-white p-3 shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
             >
-              <div className="relative aspect-[5/4] overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                 {card.image ? (
                   <Image
                     src={card.image}
                     alt={card.imageAlt}
                     fill
                     sizes="(min-width: 1280px) 400px, 100vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 ) : null}
               </div>
               <div className="px-2 pt-4 pb-3">
                 {card.summary ? (
                   <>
-                    <h2 className="text-[16px] leading-6 font-semibold text-ink">
+                    <h2 className="text-[16px] leading-6 font-semibold text-ink text-pretty">
                       {card.title}
                     </h2>
-                    <p className="relative mt-1 max-h-11 overflow-hidden text-[14px] leading-[22px] text-[#3d3d3d]">
+                    <p className="relative mt-1 text-[14px] leading-[22px] text-[#3d3d3d] text-pretty">
                       {card.summary}
                     </p>
                   </>
                 ) : (
-                  <p className="relative max-h-[4.5rem] overflow-hidden text-[16px] leading-6 font-semibold text-ink">
+                  <p className="relative text-[16px] leading-6 font-semibold text-ink text-pretty">
                     {card.title}
                   </p>
                 )}

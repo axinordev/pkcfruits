@@ -97,6 +97,14 @@ export default function AwardSection({
             const award = awards[index];
             if (!award || !award.image) return null;
 
+            // Long titles need a bit more caption room and a head-first crop.
+            const longCaption = award.title.length > 80;
+            const imageFlex = longCaption ? "flex-[440]" : slot.image;
+            const captionFlex = longCaption
+              ? "flex-[80] px-3 py-2 leading-5"
+              : slot.caption;
+            const photoPosition = longCaption ? "object-top" : slot.photo;
+
             return (
               <article
                 key={award.id}
@@ -107,19 +115,19 @@ export default function AwardSection({
                 className={`absolute flex flex-col ${slot.card}`}
               >
                 <div
-                  className={`relative min-h-0 overflow-hidden rounded-2xl ${slot.image}`}
+                  className={`relative min-h-0 overflow-hidden rounded-2xl ${imageFlex}`}
                 >
                   <Image
                     src={award.image}
                     alt={award.imageAlt}
                     fill
                     sizes="590px"
-                    className={`object-cover ${slot.photo}`}
+                    className={`object-cover ${photoPosition}`}
                   />
                 </div>
                 <div className="flex-10 shrink-0" />
                 <p
-                  className={`${captionClass} min-h-0 px-3 text-[clamp(13px,1.15vw,18px)] ${slot.caption}`}
+                  className={`${captionClass} min-h-0 px-3 text-[clamp(12px,1.05vw,16px)] ${captionFlex}`}
                 >
                   {award.title}
                 </p>

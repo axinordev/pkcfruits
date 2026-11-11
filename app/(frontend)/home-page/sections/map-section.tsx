@@ -4,7 +4,7 @@ import { useCountUps } from "@/app/home-page/hooks/use-count-up";
 import Heading from "@/shared/ui/atoms/heading";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const manrope = Manrope({ subsets: ["latin"], weight: "800" });
 
@@ -35,6 +35,16 @@ export default function MapSection({
 }: MapSectionProps) {
   const targets = useMemo(() => stats.map((stat) => stat.value), [stats]);
   const { rootRef, values } = useCountUps(targets);
+  // Mobile has no hover, so tap a pin to show its country name.
+  const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!activeMarkerId) return;
+
+    const hideActiveMarker = () => setActiveMarkerId(null);
+    document.addEventListener("pointerdown", hideActiveMarker);
+    return () => document.removeEventListener("pointerdown", hideActiveMarker);
+  }, [activeMarkerId]);
 
   return (
     <section
@@ -78,40 +88,57 @@ export default function MapSection({
           className="h-auto w-full"
         />
         <ul className="absolute inset-0">
-          {markers.map((marker, index) => (
-            <li
-              key={marker.id}
-              style={{ left: marker.left, top: marker.top }}
-              className="group absolute z-0 -translate-x-1/2 -translate-y-1/2 p-2 hover:z-20"
-            >
-              <span className="relative block size-6 max-lg:size-5">
-                <span
-                  aria-hidden
-                  className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
-                  style={{ animationDelay: `${index * 0.18}s` }}
-                />
-                <span
-                  aria-hidden
-                  className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
-                  style={{ animationDelay: `${0.9 + index * 0.18}s` }}
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-1 rounded-full bg-brand-primary max-lg:inset-0.75"
-                />
-                <span
-                  role="tooltip"
-                  className={`font-riposte pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-[13px] leading-none font-medium whitespace-nowrap text-brand-primary opacity-0 transition-opacity duration-150 group-hover:opacity-100 ${
-                    Number.parseFloat(marker.left) > 75
-                      ? "right-full mr-2"
-                      : "left-full ml-2"
-                  }`}
+          {markers.map((marker, index) => {
+            const isActive = activeMarkerId === marker.id;
+
+            return (
+              <li
+                key={marker.id}
+                style={{ left: marker.left, top: marker.top }}
+                className={`group absolute -translate-x-1/2 -translate-y-1/2 p-2 hover:z-20 ${
+                  isActive ? "z-20" : "z-0"
+                }`}
+              >
+                <button
+                  type="button"
+                  aria-label={marker.name}
+                  aria-expanded={isActive}
+                  className="relative block size-6 max-lg:size-5"
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onClick={() => {
+                    setActiveMarkerId(isActive ? null : marker.id);
+                  }}
                 >
-                  {marker.name}
-                </span>
-              </span>
-            </li>
-          ))}
+                  <span
+                    aria-hidden
+                    className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
+                    style={{ animationDelay: `${index * 0.18}s` }}
+                  />
+                  <span
+                    aria-hidden
+                    className="map-pin-ring absolute inset-0 rounded-full border border-brand-primary"
+                    style={{ animationDelay: `${0.9 + index * 0.18}s` }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-1 rounded-full bg-brand-primary max-lg:inset-0.75"
+                  />
+                  <span
+                    role="tooltip"
+                    className={`font-riposte pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-[13px] leading-none font-medium whitespace-nowrap text-brand-primary transition-opacity duration-150 group-hover:opacity-100 ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    } ${
+                      Number.parseFloat(marker.left) > 75
+                        ? "right-full mr-2"
+                        : "left-full ml-2"
+                    }`}
+                  >
+                    {marker.name}
+                  </span>
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
