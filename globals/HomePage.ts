@@ -19,6 +19,7 @@ export const HomePage: GlobalConfig = {
   label: "Home Page",
   admin: {
     group: "Pages",
+    hideAPIURL: true,
     description:
       "Headings for each part of the home page, plus the products, awards, and news to show.",
   },

@@ -10,6 +10,7 @@ export const News: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "date"],
     description: "News and events. Choose these on the home page.",
+    hideAPIURL: true,
   },
   access: contentAccess,
   fields: [

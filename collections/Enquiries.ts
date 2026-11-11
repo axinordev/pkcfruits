@@ -10,6 +10,7 @@ export const Enquiries: CollectionConfig = {
     useAsTitle: "fullName",
     defaultColumns: ["fullName", "email", "mobile", "createdAt"],
     description: "Messages sent from the contact form.",
+    hideAPIURL: true,
   },
   access: {
     read: editorsOnly,

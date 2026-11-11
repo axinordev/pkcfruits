@@ -9,6 +9,7 @@ export const Media: CollectionConfig = {
     group: "Content",
     useAsTitle: "alt",
     description: "Photos stored on Cloudinary.",
+    hideAPIURL: true,
   },
   access: contentAccess,
   upload: {

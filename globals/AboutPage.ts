@@ -5,7 +5,7 @@ import { contentAccess, section } from "@/lib/cms/access";
 export const AboutPage: GlobalConfig = {
   slug: "about-page",
   label: "About Page",
-  admin: { group: "Pages" },
+  admin: { group: "Pages", hideAPIURL: true },
   access: contentAccess,
   fields: [
     section("SEO", [

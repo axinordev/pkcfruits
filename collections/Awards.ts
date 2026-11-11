@@ -10,6 +10,7 @@ export const Awards: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "order"],
     description: "Awards. Choose these on the home page.",
+    hideAPIURL: true,
   },
   access: contentAccess,
   defaultSort: "order",

@@ -10,6 +10,7 @@ export const Products: CollectionConfig = {
     useAsTitle: "name",
     defaultColumns: ["name", "origin", "updatedAt"],
     description: "A fruit. Choose these on the home page.",
+    hideAPIURL: true,
   },
   access: contentAccess,
   fields: [

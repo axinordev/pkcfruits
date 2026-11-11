@@ -6,7 +6,7 @@ function pageSettings(slug: string, label: string): GlobalConfig {
   return {
     slug,
     label,
-    admin: { group: "Pages" },
+    admin: { group: "Pages", hideAPIURL: true },
     access: contentAccess,
     fields: [
       section("SEO", [
@@ -34,7 +34,7 @@ export const NewsPage = pageSettings("news-page", "News Page");
 export const ContactPage: GlobalConfig = {
   slug: "contact-page",
   label: "Contact Page",
-  admin: { group: "Pages" },
+  admin: { group: "Pages", hideAPIURL: true },
   access: contentAccess,
   fields: [
     section("SEO", [

@@ -15,6 +15,7 @@ export const Gallery: CollectionConfig = {
     group: "Content",
     useAsTitle: "alt",
     defaultColumns: ["alt", "kind", "order"],
+    hideAPIURL: true,
     description:
       "Photos and YouTube videos on the gallery page. The site shows them on separate tabs.",
   },
