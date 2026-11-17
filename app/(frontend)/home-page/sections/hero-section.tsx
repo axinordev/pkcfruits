@@ -87,7 +87,7 @@ export default function HeroSection({
           />
         </motion.div>
         <div
-          className="absolute inset-0 z-[1] bg-black/50"
+          className="absolute inset-0 z-[1] bg-black/30"
           aria-hidden="true"
         />
         <motion.div
