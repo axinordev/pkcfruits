@@ -30,11 +30,6 @@ export function useHeroSection() {
     };
   }, [scrollYProgress]);
 
-  const imageScale = useTransform(
-    scrollYProgress,
-    [0, 0.7],
-    [1, reduceMotion ? 1 : 1.28],
-  );
   const heroOpacity = useTransform(scrollYProgress, [0.08, 0.42], [1, 0]);
   const heroScale = useTransform(
     scrollYProgress,
@@ -56,7 +51,7 @@ export function useHeroSection() {
 
   return {
     sectionRef,
-    imageScale,
+    scrollYProgress,
     heroOpacity,
     heroScale,
     aboutOpacity,
