@@ -1,7 +1,10 @@
 "use client";
 
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
-import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
+import {
+  ABOUT_FOCUS,
+  useHeroSection,
+} from "@/app/home-page/hooks/use-hero-section";
 import { useScrollFrames } from "@/app/home-page/hooks/use-scroll-frames";
 import Button from "@/shared/ui/atoms/button";
 import { motion, useReducedMotion } from "framer-motion";
@@ -40,8 +43,10 @@ export default function HeroSection({
     scrollYProgress,
     heroOpacity,
     heroScale,
+    heroFilter,
     aboutOpacity,
     aboutScale,
+    aboutFilter,
     heroPointerEvents,
     aboutPointerEvents,
   } = useHeroSection();
@@ -54,7 +59,7 @@ export default function HeroSection({
     if (!section) return;
     const distance = section.offsetHeight - window.innerHeight;
     const top = window.scrollY + section.getBoundingClientRect().top;
-    const target = top + distance * 0.82;
+    const target = top + distance * ABOUT_FOCUS;
     if (lenis) {
       lenis.scrollTo(target);
       return;
@@ -63,7 +68,7 @@ export default function HeroSection({
   }
 
   return (
-    <section ref={sectionRef} data-site-hero className="relative h-[200vh]">
+    <section ref={sectionRef} data-site-hero className="relative h-[300vh]">
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
@@ -89,9 +94,10 @@ export default function HeroSection({
           style={{
             opacity: heroOpacity,
             scale: heroScale,
+            filter: heroFilter,
             pointerEvents: heroPointerEvents,
           }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:px-0 lg:pt-0 lg:pb-0"
+          className="will-change-[transform,filter,opacity] absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:px-0 lg:pt-0 lg:pb-0"
         >
           <Image
             src="/hero-customer-badge.png"
@@ -159,9 +165,10 @@ export default function HeroSection({
           style={{
             opacity: aboutOpacity,
             scale: aboutScale,
+            filter: aboutFilter,
             pointerEvents: aboutPointerEvents,
           }}
-          className="absolute inset-0 z-10 flex items-center justify-center"
+          className="will-change-[transform,filter,opacity] absolute inset-0 z-10 flex items-center justify-center"
         >
           <AboutSection {...about} />
         </motion.div>
