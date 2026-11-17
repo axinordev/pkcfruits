@@ -4,8 +4,10 @@ import { useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const HERO_EXIT = [0.03, 0.3];
-const ABOUT_ENTER = [0.32, 0.56];
-const ABOUT_EXIT = [0.72, 0.97];
+// The second text is on screen between these two scroll points, and reads at
+// its natural size at ABOUT_FOCUS.
+const ABOUT_SPAN = [0.32, 0.97];
+export const ABOUT_FOCUS = 0.72;
 const EXIT_ZOOM = 2.1;
 const EXIT_BLUR = 14;
 // The second text starts this small and grows as you scroll.
@@ -15,16 +17,35 @@ const SHARP_ZOOM = 0.5;
 
 const at = ([from, to]: number[], t: number) => from + (to - from) * t;
 const HERO_FADE = [at(HERO_EXIT, SHARP_ZOOM), HERO_EXIT[1]];
-const ABOUT_FADE = [
-  ABOUT_ENTER[0],
-  at(ABOUT_ENTER, 0.35),
-  at(ABOUT_EXIT, SHARP_ZOOM),
-  ABOUT_EXIT[1],
-];
-const ABOUT_ZOOM = [...ABOUT_ENTER, ...ABOUT_EXIT];
 
-/** Where the about text sits fully in focus, as a fraction of the scroll. */
-export const ABOUT_FOCUS = (ABOUT_ENTER[1] + ABOUT_EXIT[0]) / 2;
+/**
+ * Size of the second text along the scroll: one unbroken zoom from
+ * ABOUT_START_SCALE to EXIT_ZOOM that never stops. It is fastest at both ends
+ * and eases (without pausing) around ABOUT_FOCUS, where the text is readable.
+ * In log-size terms this is the cubic c·x + k·x³ through both end points.
+ */
+const aboutZoom = (() => {
+  const x0 = ABOUT_SPAN[0] - ABOUT_FOCUS;
+  const x1 = ABOUT_SPAN[1] - ABOUT_FOCUS;
+  const u0 = Math.log(ABOUT_START_SCALE);
+  const u1 = Math.log(EXIT_ZOOM);
+  const det = x0 * x1 ** 3 - x1 * x0 ** 3;
+  const c = (u0 * x1 ** 3 - u1 * x0 ** 3) / det;
+  const k = (x0 * u1 - x1 * u0) / det;
+  return (progress: number) => {
+    const x =
+      Math.min(Math.max(progress, ABOUT_SPAN[0]), ABOUT_SPAN[1]) - ABOUT_FOCUS;
+    return Math.exp(c * x + k * x ** 3);
+  };
+})();
+
+// Fade and blur follow the text's size, so they stay in step with the zoom.
+const ABOUT_SIZES = [
+  ABOUT_START_SCALE,
+  ABOUT_START_SCALE * 1.7,
+  at([1, EXIT_ZOOM], SHARP_ZOOM),
+  EXIT_ZOOM,
+];
 
 const toBlur = (value: number) => `blur(${value.toFixed(2)}px)`;
 
@@ -68,23 +89,21 @@ export function useHeroSection() {
     toBlur,
   );
 
-  const aboutScale = useTransform(scrollYProgress, ABOUT_ZOOM, [
-    reduceMotion ? 1 : ABOUT_START_SCALE,
-    reduceMotion ? 1 : 0.94,
-    1,
-    zoom,
-  ]);
-  const aboutOpacity = useTransform(scrollYProgress, ABOUT_FADE, [0, 1, 1, 0]);
+  const aboutSize = useTransform(scrollYProgress, aboutZoom);
+  const aboutScale = useTransform(aboutSize, (size) =>
+    reduceMotion ? 1 : size,
+  );
+  const aboutOpacity = useTransform(aboutSize, ABOUT_SIZES, [0, 1, 1, 0]);
   const aboutFilter = useTransform(
-    useTransform(scrollYProgress, ABOUT_FADE, [blur * 0.4, 0, 0, blur]),
+    useTransform(aboutSize, ABOUT_SIZES, [blur * 0.4, 0, 0, blur]),
     toBlur,
   );
 
   const heroPointerEvents = useTransform(scrollYProgress, (value) =>
     value < at(HERO_FADE, 0.5) ? "auto" : "none",
   );
-  const aboutPointerEvents = useTransform(scrollYProgress, (value) =>
-    value > ABOUT_FADE[1] && value < at(ABOUT_FADE.slice(2), 0.5)
+  const aboutPointerEvents = useTransform(aboutSize, (size) =>
+    size > ABOUT_SIZES[1] && size < at(ABOUT_SIZES.slice(2), 0.5)
       ? "auto"
       : "none",
   );
