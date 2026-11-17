@@ -2,8 +2,9 @@
 
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import { useHeroSection } from "@/app/home-page/hooks/use-hero-section";
+import { useScrollFrames } from "@/app/home-page/hooks/use-scroll-frames";
 import Button from "@/shared/ui/atoms/button";
-  import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -36,7 +37,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const {
     sectionRef,
-    imageScale,
+    scrollYProgress,
     heroOpacity,
     heroScale,
     aboutOpacity,
@@ -45,6 +46,7 @@ export default function HeroSection({
     aboutPointerEvents,
   } = useHeroSection();
   const reduceMotion = useReducedMotion();
+  const canvasRef = useScrollFrames(scrollYProgress, !reduceMotion);
   const lenis = useLenis();
 
   function scrollToAbout() {
@@ -65,25 +67,19 @@ export default function HeroSection({
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
-          style={{ scale: imageScale }}
-          className="absolute inset-0 z-0 origin-top"
+          initial={reduceMotion ? false : { scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 z-0 origin-center"
         >
-          <motion.div
-            initial={reduceMotion ? false : { scale: 1.08 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 origin-center"
-          >
-            <Image
-              src="/hero-bg.png"
-              alt=""
-              fill
-              preload
-              sizes="100vw"
-              quality={60}
-              className="object-cover object-[left_33%]"
-            />
-          </motion.div>
+          {/* First frame as a CSS background so the hero is never blank
+              before the canvas paints (and for reduced motion). */}
+          <canvas
+            ref={canvasRef}
+            width={1280}
+            height={720}
+            className="pointer-events-none size-full bg-[url(/hero-frames/lg/001.webp)] bg-cover bg-center object-cover max-md:bg-[url(/hero-frames/sm/001.webp)]"
+          />
         </motion.div>
         <div
           className="absolute inset-0 z-[1] bg-black/50"
