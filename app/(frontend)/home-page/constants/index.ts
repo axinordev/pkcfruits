@@ -89,6 +89,14 @@ export const awardSectionPhotos = {
   },
 } as const satisfies Record<AwardId, AwardPhoto>;
 
+export const gallerySectionContent = {
+  badge: "Gallery",
+  title: "A Glimpse Into Our",
+  highlight: "World of Freshness",
+  description:
+    "Explore the journey behind PKC Fruits through moments of freshness, our people, vibrant fruit collections, sourcing activities, and the milestones that reflect our passion for quality and commitment to bringing the best fruits closer to you.",
+};
+
 export const mapSectionContent = {
   title: "From Around the World",
   description:

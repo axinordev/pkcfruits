@@ -14,7 +14,7 @@ export const Gallery: CollectionConfig = {
   admin: {
     group: "Content",
     useAsTitle: "alt",
-    defaultColumns: ["alt", "kind", "order"],
+    defaultColumns: ["alt", "kind", "showInHomeCarousel", "order"],
     hideAPIURL: true,
     description:
       "Photos and YouTube videos on the gallery page. The site shows them on separate tabs.",
@@ -52,6 +52,17 @@ export const Gallery: CollectionConfig = {
       validate: (value: unknown, { siblingData }: { siblingData: unknown }) => {
         if (itemKind(siblingData) === "video") return true;
         return value ? true : "Add a photo.";
+      },
+    },
+    {
+      name: "showInHomeCarousel",
+      type: "checkbox",
+      defaultValue: true,
+      label: "Show in the home page carousel",
+      admin: {
+        condition: (data) => itemKind(data) !== "video",
+        description:
+          "Ticked photos turn in the gallery carousel on the home page. Untick to keep this photo on the gallery page only.",
       },
     },
     {
