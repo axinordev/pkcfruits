@@ -2,12 +2,25 @@
 
 import { useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { CLIP_CALM_END, CLIP_END } from "./use-scroll-frames";
 
-const HERO_EXIT = [0.03, 0.3];
+// How far the page scrolls while the hero is pinned, in viewport heights. The
+// texts are placed on this scroll in vh below; the scroll left after them
+// plays the pomegranate breaking, so raising this slows the break down. At
+// about a screen of scroll a second, the clip plays near its real speed.
+export const HERO_SCROLL_VH = 525;
+const vh = (value: number) => value / HERO_SCROLL_VH;
+// The clip frame the hero unpins on: the burst has cleared, and only a few
+// seeds are still falling. They finish while the hero scrolls away (the next
+// screen of scroll), so no pinned scroll goes by with nothing moving.
+const CLIP_PINNED_END = 144;
+const HERO_GONE = 1 + vh(100);
+
+const HERO_EXIT = [vh(6), vh(60)];
 // The second text is on screen between these two scroll points, and reads at
 // its natural size at ABOUT_FOCUS.
-const ABOUT_SPAN = [0.32, 0.97];
-export const ABOUT_FOCUS = 0.72;
+const ABOUT_SPAN = [vh(64), vh(194)];
+export const ABOUT_FOCUS = vh(144);
 const EXIT_ZOOM = 2.1;
 const EXIT_BLUR = 14;
 // The second text starts this small and grows as you scroll.
@@ -47,7 +60,9 @@ const ABOUT_SIZES = [
   EXIT_ZOOM,
 ];
 
-const toBlur = (value: number) => `blur(${value.toFixed(2)}px)`;
+// "none" rather than blur(0px), so sharp text isn't drawn through a filter.
+const toBlur = (value: number) =>
+  value < 0.05 ? "none" : `blur(${value.toFixed(2)}px)`;
 
 export function useHeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -59,10 +74,11 @@ export function useHeroSection() {
       const section = sectionRef.current;
       if (!section) return;
 
+      // 0 → 1 while pinned, then on to HERO_GONE as the hero scrolls away.
       const distance = section.offsetHeight - window.innerHeight;
       const traveled = Math.min(
         Math.max(-section.getBoundingClientRect().top, 0),
-        Math.max(distance, 0),
+        Math.max(distance + window.innerHeight, 0),
       );
       scrollYProgress.set(distance > 0 ? traveled / distance : 0);
     };
@@ -99,6 +115,15 @@ export function useHeroSection() {
     toBlur,
   );
 
+  // Where the clip is, in its own frames. It plays its calm opening, up to
+  // the last frame before the pomegranate cracks, while the texts are on
+  // screen; the break plays only once both texts are gone.
+  const clipFrame = useTransform(
+    scrollYProgress,
+    [0, ABOUT_SPAN[1], 1, HERO_GONE],
+    [0, CLIP_CALM_END, CLIP_PINNED_END, CLIP_END],
+  );
+
   const heroPointerEvents = useTransform(scrollYProgress, (value) =>
     value < at(HERO_FADE, 0.5) ? "auto" : "none",
   );
@@ -110,7 +135,7 @@ export function useHeroSection() {
 
   return {
     sectionRef,
-    scrollYProgress,
+    clipFrame,
     heroOpacity,
     heroScale,
     heroFilter,
