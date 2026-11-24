@@ -11,6 +11,7 @@ import { Gallery } from "./collections/Gallery";
 import { Media } from "./collections/Media";
 import { News } from "./collections/News";
 import { Products } from "./collections/Products";
+import { Reviews } from "./collections/Reviews";
 import { Users } from "./collections/Users";
 import { AboutPage } from "./globals/AboutPage";
 import { HomePage } from "./globals/HomePage";
@@ -54,7 +55,16 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Products, News, Gallery, Awards, Enquiries],
+  collections: [
+    Users,
+    Media,
+    Products,
+    News,
+    Gallery,
+    Reviews,
+    Awards,
+    Enquiries,
+  ],
   globals: [
     HomePage,
     AboutPage,

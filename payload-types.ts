@@ -72,6 +72,7 @@ export interface Config {
     products: Product;
     news: News;
     gallery: Gallery;
+    reviews: Review;
     awards: Award;
     enquiries: Enquiry;
     'payload-kv': PayloadKv;
@@ -86,6 +87,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     awards: AwardsSelect<false> | AwardsSelect<true>;
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -281,6 +283,24 @@ export interface Gallery {
   createdAt: string;
 }
 /**
+ * Customer reviews on the home page. They drop onto the pile in this order as visitors scroll.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  name: string;
+  /**
+   * Leave out the quote marks; the site adds them. Long reviews are cut to four lines on the card.
+   */
+  review: string;
+  showOnHome?: boolean | null;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Awards. Choose these on the home page.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -357,6 +377,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'gallery';
         value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: string | Review;
       } | null)
     | ({
         relationTo: 'awards';
@@ -514,6 +538,18 @@ export interface GallerySelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  name?: T;
+  review?: T;
+  showOnHome?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "awards_select".
  */
 export interface AwardsSelect<T extends boolean = true> {
@@ -633,9 +669,23 @@ export interface HomePage {
     highlight?: string | null;
     description: string;
   };
+  /**
+   * The reviews themselves are under Content → Reviews. Ticked reviews drop onto the pile in Reviews order.
+   */
+  reviewsSection: {
+    badge: string;
+    /**
+     * Wrap words in *asterisks* to show them in pink italics. Press Enter to start a new line.
+     */
+    title: string;
+  };
   newsSection: {
     badge: string;
+    /**
+     * Wrap words in *asterisks* to show them in pink italics.
+     */
     title: string;
+    description?: string | null;
     button: string;
     news?: (string | News)[] | null;
   };
@@ -829,11 +879,18 @@ export interface HomePageSelect<T extends boolean = true> {
         highlight?: T;
         description?: T;
       };
+  reviewsSection?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+      };
   newsSection?:
     | T
     | {
         badge?: T;
         title?: T;
+        description?: T;
         button?: T;
         news?: T;
       };

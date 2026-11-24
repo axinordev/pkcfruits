@@ -1,3 +1,4 @@
+import AccentTitle from "@/app/home-page/components/accent-title";
 import ArrowLink from "@/shared/ui/atoms/arrow-link";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
@@ -17,23 +18,35 @@ type Story = {
 export default function RecentNewsSection({
   badge,
   title,
+  description,
   button,
   stories,
 }: {
   badge: string;
   title: string;
+  description: string;
   button: string;
   stories: Story[];
 }) {
   return (
-    <section id="news" className="bg-canvas text-ink">
+    <section id="news" className="text-ink">
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-14 lg:pt-22.5 lg:pb-28">
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        {/* View All sits level with the title; on phones it follows the description. */}
+        <div className="grid items-end gap-x-6 sm:grid-cols-[1fr_auto]">
           <div>
             <Badge>{badge}</Badge>
-            <Heading className="mt-7.5 max-lg:mt-4">{title}</Heading>
+            <Heading className="mt-7.5 max-lg:mt-4">
+              <AccentTitle text={title} />
+            </Heading>
           </div>
-          <ArrowLink href="/news">{button}</ArrowLink>
+          <div className="max-sm:order-last max-sm:mt-6">
+            <ArrowLink href="/news">{button}</ArrowLink>
+          </div>
+          {description && (
+            <p className="font-riposte mt-4 max-w-136 text-[16px] leading-6.5 font-light text-ink/70">
+              {description}
+            </p>
+          )}
         </div>
 
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
