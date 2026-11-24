@@ -8,13 +8,13 @@ export const Reviews: CollectionConfig = {
   admin: {
     group: "Content",
     useAsTitle: "name",
-    defaultColumns: ["name", "showOnHome", "order"],
+    defaultColumns: ["name", "showOnHome", "createdAt"],
     hideAPIURL: true,
     description:
-      "Customer reviews on the home page. They drop onto the pile in this order as visitors scroll.",
+      "Customer reviews. The home page shows the 4 newest ticked reviews, newest first.",
   },
   access: contentAccess,
-  defaultSort: "order",
+  defaultSort: "-createdAt",
   fields: [
     { name: "name", type: "text", required: true, label: "Name" },
     {
@@ -32,13 +32,6 @@ export const Reviews: CollectionConfig = {
       type: "checkbox",
       defaultValue: true,
       label: "Show on the home page",
-    },
-    {
-      name: "order",
-      type: "number",
-      required: true,
-      defaultValue: 0,
-      label: "Order",
     },
   ],
 };

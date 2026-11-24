@@ -283,7 +283,7 @@ export interface Gallery {
   createdAt: string;
 }
 /**
- * Customer reviews on the home page. They drop onto the pile in this order as visitors scroll.
+ * Customer reviews. The home page shows the 4 newest ticked reviews, newest first.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
@@ -296,7 +296,6 @@ export interface Review {
    */
   review: string;
   showOnHome?: boolean | null;
-  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -544,7 +543,6 @@ export interface ReviewsSelect<T extends boolean = true> {
   name?: T;
   review?: T;
   showOnHome?: T;
-  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -670,7 +668,7 @@ export interface HomePage {
     description: string;
   };
   /**
-   * The reviews themselves are under Content → Reviews. Ticked reviews drop onto the pile in Reviews order.
+   * The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first.
    */
   reviewsSection: {
     badge: string;

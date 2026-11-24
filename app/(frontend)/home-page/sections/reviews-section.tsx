@@ -3,7 +3,7 @@
 import AccentTitle from "@/app/home-page/components/accent-title";
 import {
   REVIEW_SCROLL_PER_CARD_VH,
-  pileCardStyle,
+  pileCardTransform,
   pileTransform,
   useReviewPile,
 } from "@/app/home-page/hooks/use-review-pile";
@@ -21,9 +21,9 @@ type ReviewsSectionProps = {
 };
 
 /**
- * Customer reviews on a pile of tilted cards. The section pins while the page
- * scrolls, and each bit of scroll drops the next review onto the pile; once
- * every review has landed, the section unpins.
+ * The newest customer reviews (up to four) on tilted cards. They arrive as a
+ * list with gaps; the section pins while the page scrolls and the scroll
+ * draws the gaps closed until the cards overlap in a pile, then it unpins.
  */
 export default function ReviewsSection({
   badge,
@@ -73,13 +73,13 @@ export default function ReviewsSection({
           >
             <ul
               ref={pileRef}
-              style={{ transform: pileTransform(1) }}
+              style={{ transform: pileTransform(reviews.length) }}
               className="absolute top-1/2 left-1/2 w-[min(32rem,calc(100vw-4rem))] origin-top"
             >
               {reviews.map((review, index) => (
                 <li
                   key={review.id}
-                  style={pileCardStyle(index, 1)}
+                  style={{ transform: pileCardTransform(index, 0) }}
                   className="absolute inset-x-0 top-0 will-change-transform"
                 >
                   <figure className="relative rounded-2xl bg-white px-7.5 pt-7 pb-6 shadow-[0_12px_32px_rgba(33,34,33,0.08)] max-lg:px-5 max-lg:pt-6 max-lg:pb-5">

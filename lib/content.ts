@@ -176,12 +176,13 @@ export const getHomePage = cache(async () => {
       depth: 1,
       sort: "order",
     }),
+    // The 4 newest ticked reviews, newest first.
     payload.find({
       collection: "reviews",
       where: { showOnHome: { not_equals: false } },
-      limit: 30,
+      limit: 4,
       depth: 0,
-      sort: "order",
+      sort: "-createdAt",
     }),
   ]);
   const gallery = home.gallerySection;
