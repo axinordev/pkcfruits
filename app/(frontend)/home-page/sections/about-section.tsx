@@ -12,13 +12,15 @@ export default function AboutSection({
   button: string;
 }) {
   return (
-    <div className="mx-auto flex max-w-[900px] flex-col items-center px-6 text-center text-white max-lg:px-5">
+    // box-content keeps the 895px measure from the design for the text itself,
+    // with the side padding added outside it.
+    <div className="mx-auto box-content flex max-w-[895px] flex-col items-center px-6 text-center text-white max-lg:px-5">
       <h2
-        className={`${playfair.className} text-[28px] leading-tight font-semibold tracking-normal uppercase lg:text-[40px]`}
+        className={`${playfair.className} text-hero-heading font-semibold tracking-normal uppercase`}
       >
         {title}
       </h2>
-      <p className="font-riposte mt-3 text-center text-[15px] leading-7 font-light tracking-normal text-white/85 lg:mt-4 lg:text-[19px] lg:leading-8">
+      <p className="font-riposte mt-3 text-center text-hero-body font-light tracking-normal text-white/80 lg:mt-4">
         {description}
       </p>
       <Button

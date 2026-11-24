@@ -8,7 +8,20 @@
   --color-ink: #212221;
   --color-blush: #fed7e4;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-riposte: "Riposte", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Fluid type for the hero's "PKC FRUITS" text. Each size runs from the
+     mobile design at a 375px screen to the desktop design at 1440px, and
+     stops at those sizes on screens outside that range. */
+  --text-hero-heading: clamp(1.75rem, 1.486rem + 1.127vw, 2.5rem);
+  --text-hero-heading--line-height: 1.25;
+  --text-hero-body: clamp(0.9375rem, 0.8275rem + 0.4695vw, 1.25rem);
+  --text-hero-body--line-height: clamp(1.75rem, 1.662rem + 0.3756vw, 2rem);
+}
+
+/* Inline, so font-riposte reads the variable next/font sets on <html>. */
+@theme inline {
+  --font-riposte:
+    var(--font-riposte-face), "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @keyframes map-pin-pulse {
