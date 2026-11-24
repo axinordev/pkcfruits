@@ -193,7 +193,7 @@ export const HomePage: GlobalConfig = {
         label: false,
         admin: {
           description:
-            "The reviews themselves are under Content → Reviews. Ticked reviews drop onto the pile in Reviews order.",
+            "The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first.",
         },
         fields: [
           {
