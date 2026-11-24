@@ -8,7 +8,6 @@ import { contactPageContent } from "@/app/contact/constants";
 import { galleryPageContent, galleryRows } from "@/app/gallery/constants";
 import {
   aboutSectionContent,
-  awardSectionContent,
   gallerySectionContent,
   heroSectionContent,
   mapSectionContent,
@@ -236,15 +235,6 @@ export async function seedSite(payload: Payload) {
   const selectedProducts = ["orange", "apple", "kiwi", "cherry", "apricot"]
     .map((slug) => productIds.get(slug))
     .filter(Boolean);
-  const selectedAwards = awards.map((award) => award.id);
-  const awardDocs = await payload.find({
-    collection: "awards",
-    limit: 20,
-    depth: 0,
-  });
-  const awardIds = selectedAwards
-    .map((slug) => awardDocs.docs.find((doc) => doc.slug === slug)?.id)
-    .filter(Boolean);
 
   await payload.updateGlobal({
     slug: "home-page",
@@ -288,9 +278,6 @@ export async function seedSite(payload: Payload) {
       gallerySection: home.gallerySection?.title
         ? home.gallerySection
         : gallerySectionContent,
-      awardsSection: relationIds(home.awardsSection?.awards).length
-        ? home.awardsSection
-        : { title: awardSectionContent.title, awards: awardIds },
       newsSection: relationIds(home.newsSection?.news).length
         ? home.newsSection
         : {

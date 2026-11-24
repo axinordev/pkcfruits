@@ -578,7 +578,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Headings for each part of the home page, plus the products, awards, and news to show.
+ * Headings for each part of the home page, plus the products and news to show.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page".
@@ -632,10 +632,6 @@ export interface HomePage {
      */
     highlight?: string | null;
     description: string;
-  };
-  awardsSection: {
-    title: string;
-    awards?: (string | Award)[] | null;
   };
   newsSection: {
     badge: string;
@@ -832,12 +828,6 @@ export interface HomePageSelect<T extends boolean = true> {
         title?: T;
         highlight?: T;
         description?: T;
-      };
-  awardsSection?:
-    | T
-    | {
-        title?: T;
-        awards?: T;
       };
   newsSection?:
     | T
