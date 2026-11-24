@@ -43,7 +43,7 @@ export default function ProductSection({
   return (
     <section
       id="products"
-      className="bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink"
+      className="@container bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink"
     >
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12 lg:pt-20 lg:pb-26">
         <div className="flex justify-center">
@@ -66,9 +66,12 @@ export default function ProductSection({
               className="mt-13.25 [&_div]:justify-start"
             />
 
+            {/* The row spans the section's full width (cqw leaves out the
+                scrollbar) so cards run to the screen edges; the padding lines
+                the first and last card up with the content. */}
             <div
               ref={scrollerRef}
-              className="mt-12 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5"
+              className="mt-12 ml-[calc(50%-50cqw)] flex w-[100cqw] gap-5 overflow-x-auto scroll-smooth px-[max(5rem,calc(50cqw-40rem))] pb-1 scrollbar-none max-lg:px-5"
             >
               {products.map(({ slug, ...product }) => (
                 <ProductCard
