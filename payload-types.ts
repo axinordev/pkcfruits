@@ -261,6 +261,10 @@ export interface Gallery {
   kind: 'photo' | 'video';
   image?: (string | null) | Media;
   /**
+   * Ticked photos turn in the gallery carousel on the home page. Untick to keep this photo on the gallery page only.
+   */
+  showInHomeCarousel?: boolean | null;
+  /**
    * Paste a YouTube link, such as https://www.youtube.com/watch?v=...
    */
   youtubeUrl?: string | null;
@@ -500,6 +504,7 @@ export interface NewsSelect<T extends boolean = true> {
 export interface GallerySelect<T extends boolean = true> {
   kind?: T;
   image?: T;
+  showInHomeCarousel?: T;
   youtubeUrl?: T;
   alt?: T;
   order?: T;
@@ -615,6 +620,18 @@ export interface HomePage {
           id?: string | null;
         }[]
       | null;
+  };
+  /**
+   * The carousel shows Gallery photos that have “Show in the home page carousel” ticked, in Gallery order.
+   */
+  gallerySection: {
+    badge: string;
+    title: string;
+    /**
+     * Shown under the title in pink italics.
+     */
+    highlight?: string | null;
+    description: string;
   };
   awardsSection: {
     title: string;
@@ -807,6 +824,14 @@ export interface HomePageSelect<T extends boolean = true> {
               label?: T;
               id?: T;
             };
+      };
+  gallerySection?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+        highlight?: T;
+        description?: T;
       };
   awardsSection?:
     | T

@@ -1,5 +1,6 @@
 import type { GlobalConfig } from "payload";
 
+import { gallerySectionContent } from "@/app/home-page/constants";
 import { contentAccess, section } from "@/lib/cms/access";
 
 const statFields = [
@@ -136,6 +137,47 @@ export const HomePage: GlobalConfig = {
             type: "array",
             label: "Numbers",
             fields: statFields,
+          },
+        ],
+      },
+    ]),
+    section("Gallery", [
+      {
+        name: "gallerySection",
+        type: "group",
+        label: false,
+        admin: {
+          description:
+            "The carousel shows Gallery photos that have “Show in the home page carousel” ticked, in Gallery order.",
+        },
+        fields: [
+          {
+            name: "badge",
+            type: "text",
+            required: true,
+            label: "Eye label",
+            defaultValue: gallerySectionContent.badge,
+          },
+          {
+            name: "title",
+            type: "text",
+            required: true,
+            label: "Title",
+            defaultValue: gallerySectionContent.title,
+          },
+          {
+            name: "highlight",
+            type: "text",
+            label: "Highlighted line",
+            defaultValue: gallerySectionContent.highlight,
+            admin: { description: "Shown under the title in pink italics." },
+          },
+          {
+            name: "description",
+            type: "textarea",
+            required: true,
+            label: "Description",
+            defaultValue: gallerySectionContent.description,
           },
         ],
       },

@@ -9,6 +9,7 @@ import { galleryPageContent, galleryRows } from "@/app/gallery/constants";
 import {
   aboutSectionContent,
   awardSectionContent,
+  gallerySectionContent,
   heroSectionContent,
   mapSectionContent,
   newsSectionContent,
@@ -284,6 +285,9 @@ export async function seedSite(payload: Payload) {
               label,
             })),
           },
+      gallerySection: home.gallerySection?.title
+        ? home.gallerySection
+        : gallerySectionContent,
       awardsSection: relationIds(home.awardsSection?.awards).length
         ? home.awardsSection
         : { title: awardSectionContent.title, awards: awardIds },

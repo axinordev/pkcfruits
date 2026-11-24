@@ -4,3 +4,4 @@ export { default as ProductSection } from "./product-section";
 export { default as RecentNewsSection } from "./recent-news-section";
 export { default as AwardSection } from "./award-section";
 export { default as MapSection } from "./map-section";
+export { default as GallerySection } from "./gallery-section";

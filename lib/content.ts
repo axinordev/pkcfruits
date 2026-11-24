@@ -4,9 +4,19 @@ import { cache } from "react";
 
 import { slugify } from "@/lib/cms/access";
 import { youtubeEmbed } from "@/lib/youtube";
-import type { Award, ContactPage, Media, News, Product } from "@/payload-types";
+import type {
+  Award,
+  ContactPage,
+  Gallery,
+  Media,
+  News,
+  Product,
+} from "@/payload-types";
 import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
-import { aboutSectionContent } from "@/app/home-page/constants";
+import {
+  aboutSectionContent,
+  gallerySectionContent,
+} from "@/app/home-page/constants";
 import { footerContent } from "@/shared/constants/site";
 
 export const getCMS = cache(async () => getPayload({ config }));
@@ -138,9 +148,34 @@ export function productCards(products: Product[]) {
   });
 }
 
+function galleryPhotos(items: Gallery[]) {
+  return items.flatMap((item) => {
+    if (item.kind === "video") return [];
+    const image = cmsImage(item.image, item.alt);
+    return image ? [{ ...image, alt: item.alt || image.alt }] : [];
+  });
+}
+
 export const getHomePage = cache(async () => {
   const payload = await getCMS();
-  const home = await payload.findGlobal({ slug: "home-page", depth: 2 });
+  const [home, carousel] = await Promise.all([
+    payload.findGlobal({ slug: "home-page", depth: 2 }),
+    // Photos are in the carousel unless unticked, so items saved before the
+    // option existed (no value yet) are included too.
+    payload.find({
+      collection: "gallery",
+      where: {
+        and: [
+          { kind: { not_equals: "video" } },
+          { showInHomeCarousel: { not_equals: false } },
+        ],
+      },
+      limit: 40,
+      depth: 1,
+      sort: "order",
+    }),
+  ]);
+  const gallery = home.gallerySection;
   const products = (home.productsSection?.products ?? []).flatMap((item) => {
     const product = populated(item);
     return product ? [product] : [];
@@ -185,6 +220,15 @@ export const getHomePage = cache(async () => {
         suffix: stat.suffix,
         label: stat.label,
       })),
+    },
+    gallery: {
+      badge: gallery?.badge || gallerySectionContent.badge,
+      title: gallery?.title || gallerySectionContent.title,
+      highlight: gallery?.title
+        ? (gallery.highlight ?? "")
+        : gallerySectionContent.highlight,
+      description: gallery?.description || gallerySectionContent.description,
+      photos: galleryPhotos(carousel.docs),
     },
     awards: { title: home.awardsSection?.title ?? "", items: awards },
     news: {
@@ -311,11 +355,7 @@ export const getGalleryPage = cache(async () => {
       sort: "order",
     }),
   ]);
-  const photos = result.docs.flatMap((item) => {
-    if (item.kind === "video") return [];
-    const image = cmsImage(item.image, item.alt);
-    return image ? [{ ...image, alt: item.alt || image.alt }] : [];
-  });
+  const photos = galleryPhotos(result.docs);
   const videos = result.docs.flatMap((item) => {
     if (item.kind !== "video") return [];
     const embed = youtubeEmbed(item.youtubeUrl);
