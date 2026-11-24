@@ -4,7 +4,9 @@ import {
   MapSection,
   ProductSection,
   RecentNewsSection,
+  ReviewsSection,
 } from "./home-page/sections";
+import FixedBackdrop from "./home-page/components/fixed-backdrop";
 import { getHomePage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 
@@ -36,8 +38,15 @@ export default async function Home() {
       />
       <ProductSection catalog={home.catalog} />
       <MapSection {...home.world} />
-      <GallerySection {...home.gallery} />
-      <RecentNewsSection {...home.news} />
+      <FixedBackdrop>
+        <GallerySection {...home.gallery} />
+        <ReviewsSection
+          badge={home.reviews.badge}
+          title={home.reviews.title}
+          reviews={home.reviews.items}
+        />
+        <RecentNewsSection {...home.news} />
+      </FixedBackdrop>
     </main>
   );
 }

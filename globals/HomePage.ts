@@ -1,6 +1,10 @@
 import type { GlobalConfig } from "payload";
 
-import { gallerySectionContent } from "@/app/home-page/constants";
+import {
+  gallerySectionContent,
+  newsSectionContent,
+  reviewsSectionContent,
+} from "@/app/home-page/constants";
 import { contentAccess, section } from "@/lib/cms/access";
 
 const statFields = [
@@ -182,6 +186,38 @@ export const HomePage: GlobalConfig = {
         ],
       },
     ]),
+    section("Reviews", [
+      {
+        name: "reviewsSection",
+        type: "group",
+        label: false,
+        admin: {
+          description:
+            "The reviews themselves are under Content → Reviews. Ticked reviews drop onto the pile in Reviews order.",
+        },
+        fields: [
+          {
+            name: "badge",
+            type: "text",
+            required: true,
+            label: "Eye label",
+            defaultValue: reviewsSectionContent.badge,
+          },
+          {
+            name: "title",
+            type: "textarea",
+            required: true,
+            label: "Title",
+            defaultValue: reviewsSectionContent.title,
+            admin: {
+              rows: 2,
+              description:
+                "Wrap words in *asterisks* to show them in pink italics. Press Enter to start a new line.",
+            },
+          },
+        ],
+      },
+    ]),
     section("News", [
       {
         name: "newsSection",
@@ -189,7 +225,22 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "badge", type: "text", required: true, label: "Eye label" },
-          { name: "title", type: "text", required: true, label: "Title" },
+          {
+            name: "title",
+            type: "text",
+            required: true,
+            label: "Title",
+            admin: {
+              description:
+                "Wrap words in *asterisks* to show them in pink italics.",
+            },
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+            defaultValue: newsSectionContent.description,
+          },
           {
             name: "button",
             type: "text",

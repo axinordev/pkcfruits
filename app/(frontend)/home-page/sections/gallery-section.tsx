@@ -49,13 +49,13 @@ export default function GallerySection({
         } as CSSProperties
       }
       className={cn(
-        "bg-white text-ink",
+        "text-ink",
         pinned && "h-[calc(100vh+var(--gallery-scroll))] motion-reduce:h-auto",
       )}
     >
       <div
         className={cn(
-          "flex flex-col overflow-hidden bg-white bg-[url(/bg.webp)] bg-cover bg-center bg-no-repeat pt-24 pb-12 max-lg:pt-20 max-lg:pb-10",
+          "flex flex-col overflow-hidden pt-24 pb-12 max-lg:pt-20 max-lg:pb-10",
           pinned &&
             "sticky top-0 h-screen motion-reduce:static motion-reduce:h-auto",
         )}

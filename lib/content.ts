@@ -16,6 +16,8 @@ import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
 import {
   aboutSectionContent,
   gallerySectionContent,
+  newsSectionContent,
+  reviewsSectionContent,
 } from "@/app/home-page/constants";
 import { footerContent } from "@/shared/constants/site";
 
@@ -158,7 +160,7 @@ function galleryPhotos(items: Gallery[]) {
 
 export const getHomePage = cache(async () => {
   const payload = await getCMS();
-  const [home, carousel] = await Promise.all([
+  const [home, carousel, reviews] = await Promise.all([
     payload.findGlobal({ slug: "home-page", depth: 2 }),
     // Photos are in the carousel unless unticked, so items saved before the
     // option existed (no value yet) are included too.
@@ -174,8 +176,16 @@ export const getHomePage = cache(async () => {
       depth: 1,
       sort: "order",
     }),
+    payload.find({
+      collection: "reviews",
+      where: { showOnHome: { not_equals: false } },
+      limit: 30,
+      depth: 0,
+      sort: "order",
+    }),
   ]);
   const gallery = home.gallerySection;
+  const newsTitle = home.newsSection?.title ?? "";
   const products = (home.productsSection?.products ?? []).flatMap((item) => {
     const product = populated(item);
     return product ? [product] : [];
@@ -226,9 +236,25 @@ export const getHomePage = cache(async () => {
       description: gallery?.description || gallerySectionContent.description,
       photos: galleryPhotos(carousel.docs),
     },
+    reviews: {
+      badge: home.reviewsSection?.badge || reviewsSectionContent.badge,
+      title: home.reviewsSection?.title || reviewsSectionContent.title,
+      items: reviews.docs.map((review) => ({
+        id: review.id,
+        name: review.name,
+        review: review.review,
+      })),
+    },
     news: {
       badge: home.newsSection?.badge ?? "",
-      title: home.newsSection?.title ?? "",
+      // The stock title predates the pink italic marking, so it gets the
+      // marked version; any other title is shown as saved.
+      title:
+        newsTitle === newsSectionContent.title
+          ? newsSectionContent.homeTitle
+          : newsTitle,
+      description:
+        home.newsSection?.description || newsSectionContent.description,
       button: home.newsSection?.button ?? "",
       stories,
     },

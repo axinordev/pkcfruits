@@ -56,7 +56,16 @@ export const aboutSectionContent = {
 export const newsSectionContent = {
   badge: "News and Events",
   title: "Recent News and Events",
+  // The home page title, with the pink italic word marked.
+  homeTitle: "Recent News and *Events*",
+  description:
+    "Stay up to date with the latest happenings, company milestones, events, and updates from PKC Fruits.",
   viewAll: { label: "View All", href: "/news" },
+};
+
+export const reviewsSectionContent = {
+  badge: "Reviews",
+  title: "Experiences *That Speak*\nfor Themselves",
 };
 
 export const gallerySectionContent = {

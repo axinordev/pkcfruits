@@ -12,6 +12,7 @@ import {
   heroSectionContent,
   mapSectionContent,
   newsSectionContent,
+  reviewsSectionContent,
 } from "@/app/home-page/constants";
 import articlesFile from "@/app/news/articles.json";
 import detailsFile from "@/app/product-detail/details.json";
@@ -275,6 +276,9 @@ export async function seedSite(payload: Payload) {
               label,
             })),
           },
+      reviewsSection: home.reviewsSection?.title
+        ? home.reviewsSection
+        : reviewsSectionContent,
       gallerySection: home.gallerySection?.title
         ? home.gallerySection
         : gallerySectionContent,
@@ -282,7 +286,8 @@ export async function seedSite(payload: Payload) {
         ? home.newsSection
         : {
             badge: newsSectionContent.badge,
-            title: newsSectionContent.title,
+            title: newsSectionContent.homeTitle,
+            description: newsSectionContent.description,
             button: newsSectionContent.viewAll.label,
             news: [...newsIds.values()],
           },
