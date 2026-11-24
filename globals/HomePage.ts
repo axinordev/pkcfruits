@@ -22,7 +22,7 @@ export const HomePage: GlobalConfig = {
     group: "Pages",
     hideAPIURL: true,
     description:
-      "Headings for each part of the home page, plus the products, awards, and news to show.",
+      "Headings for each part of the home page, plus the products and news to show.",
   },
   access: contentAccess,
   fields: [
@@ -178,23 +178,6 @@ export const HomePage: GlobalConfig = {
             required: true,
             label: "Description",
             defaultValue: gallerySectionContent.description,
-          },
-        ],
-      },
-    ]),
-    section("Awards", [
-      {
-        name: "awardsSection",
-        type: "group",
-        label: false,
-        fields: [
-          { name: "title", type: "text", required: true, label: "Title" },
-          {
-            name: "awards",
-            type: "relationship",
-            relationTo: "awards",
-            hasMany: true,
-            label: "Awards to show",
           },
         ],
       },

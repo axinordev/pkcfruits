@@ -1,5 +1,4 @@
 import {
-  AwardSection,
   GallerySection,
   HeroSection,
   MapSection,
@@ -38,7 +37,6 @@ export default async function Home() {
       <ProductSection catalog={home.catalog} />
       <MapSection {...home.world} />
       <GallerySection {...home.gallery} />
-      <AwardSection title={home.awards.title} awards={home.awards.items} />
       <RecentNewsSection {...home.news} />
     </main>
   );

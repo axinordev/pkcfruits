@@ -1,5 +1,3 @@
-import type { Award, AwardId } from "@/shared/constants/awards";
-
 export const heroSectionContent = {
   eyebrow: "PKC Fruits",
   title: "Ripe. Real. Ready for you.",
@@ -61,34 +59,6 @@ export const newsSectionContent = {
   viewAll: { label: "View All", href: "/news" },
 };
 
-export const awardSectionContent = {
-  title: "Our Awards",
-  viewAll: { href: "/awards", label: "View all awards" },
-};
-
-type AwardPhoto = Pick<Award, "image" | "imageAlt" | "width" | "height">;
-
-export const awardSectionPhotos = {
-  secretary: {
-    image: "/awards/youth-award.jpg",
-    imageAlt: "Mr. Navas with officials at an award ceremony",
-    width: 960,
-    height: 720,
-  },
-  youth: {
-    image: "/awards/fruit-logistica.jpg",
-    imageAlt: "Mr. Navas shaking hands at a fruit trade show",
-    width: 2048,
-    height: 957,
-  },
-  logistica: {
-    image: "/awards/navas-portrait.jpg",
-    imageAlt: "Portrait of Mr. Navas",
-    width: 778,
-    height: 664,
-  },
-} as const satisfies Record<AwardId, AwardPhoto>;
-
 export const gallerySectionContent = {
   badge: "Gallery",
   title: "A Glimpse Into Our",
@@ -120,57 +90,3 @@ export const mapSectionContent = {
     { id: "australia", left: "86%", top: "69%" },
   ],
 };
-
-export const awardCollageSlots: {
-  id: AwardId;
-  src: string;
-  alt: string;
-  card: string;
-  image: string;
-  caption: string;
-  photo: string;
-  fromLeft: number;
-  fromTop: number;
-  toLeft: number;
-  toTop: number;
-}[] = [
-  {
-    id: "secretary",
-    src: awardSectionPhotos.secretary.image,
-    alt: awardSectionPhotos.secretary.imageAlt,
-    card: "h-[43.433%] w-[40.972%]",
-    image: "flex-[282]",
-    caption: "flex-[85] px-8 leading-7.25",
-    photo: "object-[center_42%]",
-    fromLeft: 29.514,
-    fromTop: 28.284,
-    toLeft: 5.556,
-    toTop: 0,
-  },
-  {
-    id: "youth",
-    src: awardSectionPhotos.youth.image,
-    alt: awardSectionPhotos.youth.imageAlt,
-    card: "h-[62.673%] w-[30.833%]",
-    image: "flex-[481]",
-    caption: "flex-[53] leading-5.5",
-    photo: "object-center",
-    fromLeft: 34.584,
-    fromTop: 18.664,
-    toLeft: 63.611,
-    toTop: 18.203,
-  },
-  {
-    id: "logistica",
-    src: awardSectionPhotos.logistica.image,
-    alt: awardSectionPhotos.logistica.imageAlt,
-    card: "h-[45.507%] w-[27.014%]",
-    image: "flex-[332]",
-    caption: "flex-[53] leading-5.5",
-    photo: "object-center",
-    fromLeft: 36.493,
-    fromTop: 27.247,
-    toLeft: 8.403,
-    toTop: 54.493,
-  },
-];

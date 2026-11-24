@@ -180,10 +180,6 @@ export const getHomePage = cache(async () => {
     const product = populated(item);
     return product ? [product] : [];
   });
-  const awards = (home.awardsSection?.awards ?? []).flatMap((item) => {
-    const award = populated<Award>(item);
-    return award ? [awardView(award)] : [];
-  });
   const stories = (home.newsSection?.news ?? []).flatMap((item) => {
     const story = populated<News>(item);
     return story ? [newsCard(story)] : [];
@@ -230,7 +226,6 @@ export const getHomePage = cache(async () => {
       description: gallery?.description || gallerySectionContent.description,
       photos: galleryPhotos(carousel.docs),
     },
-    awards: { title: home.awardsSection?.title ?? "", items: awards },
     news: {
       badge: home.newsSection?.badge ?? "",
       title: home.newsSection?.title ?? "",
