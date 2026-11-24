@@ -19,7 +19,7 @@ export default function ProductBrowser({
   if (!category || !country) return null;
 
   return (
-    <main className="min-h-full bg-canvas text-ink">
+    <main className="min-h-full bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink">
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 py-12 max-lg:px-5 max-lg:py-8">
         <div className="flex items-end justify-between gap-8 max-lg:flex-col max-lg:items-start">
           <div>
