@@ -24,7 +24,6 @@ export default function ProductSection({
     useProductScroller(
       category && country ? `${category.id}-${country.id}` : "",
     );
-  if (!category || !country) return null;
 
   const controls = [
     {
@@ -42,52 +41,63 @@ export default function ProductSection({
   ];
 
   return (
-    <section id="products" className="bg-canvas text-ink">
+    <section
+      id="products"
+      className="bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink"
+    >
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12 lg:pt-20 lg:pb-26">
         <div className="flex justify-center">
           <Badge>{catalog.badge}</Badge>
         </div>
         <Heading className="mt-5 text-center">{catalog.title}</Heading>
 
-        <ProductCategoryToggle
-          categories={catalog.categories}
-          categoryId={category.id}
-          onSelect={selectCategory}
-          className="mx-auto mt-10"
-        />
-        <ProductCountryFilters
-          countries={category.countries}
-          countryId={country.id}
-          onSelect={setCountryId}
-          className="mt-13.25 [&_div]:justify-start"
-        />
+        {category && country && (
+          <>
+            <ProductCategoryToggle
+              categories={catalog.categories}
+              categoryId={category.id}
+              onSelect={selectCategory}
+              className="mx-auto mt-10"
+            />
+            <ProductCountryFilters
+              countries={category.countries}
+              countryId={country.id}
+              onSelect={setCountryId}
+              className="mt-13.25 [&_div]:justify-start"
+            />
 
-        <div
-          ref={scrollerRef}
-          className="mt-12 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5"
-        >
-          {products.map(({ slug, ...product }) => (
-            <ProductCard key={slug} {...product} href={`/product/${slug}`} />
-          ))}
-        </div>
+            <div
+              ref={scrollerRef}
+              className="mt-12 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5"
+            >
+              {products.map(({ slug, ...product }) => (
+                <ProductCard
+                  key={slug}
+                  {...product}
+                  href={`/product/${slug}`}
+                />
+              ))}
+            </div>
 
-        <div className="mt-19 flex items-center justify-between gap-6 max-lg:mt-10">
-          <div className="flex items-center gap-3.75">
-            {controls.map((control) => (
-              <button
-                key={control.label}
-                type="button"
-                aria-label={control.label}
-                disabled={control.disabled}
-                onClick={() => scrollByCard(control.direction)}
-                className="flex size-12 items-center justify-center rounded-full border border-brand-primary text-brand-primary disabled:opacity-30"
-              >
-                <control.icon className="size-5.5" strokeWidth={2} />
-              </button>
-            ))}
-          </div>
-          <ArrowLink href="/product">{catalog.button}</ArrowLink>
-        </div>
+            <div className="mt-19 flex items-center justify-between gap-6 max-lg:mt-10">
+              <div className="flex items-center gap-3.75">
+                {controls.map((control) => (
+                  <button
+                    key={control.label}
+                    type="button"
+                    aria-label={control.label}
+                    disabled={control.disabled}
+                    onClick={() => scrollByCard(control.direction)}
+                    className="flex size-12 items-center justify-center rounded-full border border-brand-primary text-brand-primary disabled:opacity-30"
+                  >
+                    <control.icon className="size-5.5" strokeWidth={2} />
+                  </button>
+                ))}
+              </div>
+              <ArrowLink href="/product">{catalog.button}</ArrowLink>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
