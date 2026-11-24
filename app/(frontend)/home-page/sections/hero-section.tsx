@@ -3,6 +3,7 @@
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import {
   ABOUT_FOCUS,
+  HERO_SCROLL_VH,
   useHeroSection,
 } from "@/app/home-page/hooks/use-hero-section";
 import { useScrollFrames } from "@/app/home-page/hooks/use-scroll-frames";
@@ -10,16 +11,20 @@ import Button from "@/shared/ui/atoms/button";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import Image from "next/image";
-import { Mozilla_Headline } from "next/font/google";
+import HeroCustomerBadge from "../components/hero-customer-badge";
 import HeroFruitMarqueeCard from "../components/hero-fruit-marquee-card";
+import { playfair } from "../fonts";
 import AboutSection from "./about-section";
 
-const mozillaHeadline = Mozilla_Headline({
-  subsets: ["latin"],
-  weight: "600",
-  adjustFontFallback: false,
-});
+/**
+ * Splits off the title's last sentence, which is set in italic serif:
+ * "Ripe. Real. Ready for you." → ["Ripe. Real. ", "Ready for you."].
+ * A single-sentence title has no accent.
+ */
+function splitTitle(title: string): [string, string] {
+  const match = title.match(/^(.*[.!?]\s+)(\S.*)$/);
+  return match ? [match[1], match[2]] : [title, ""];
+}
 
 type HeroSectionProps = {
   eyeLabel: string;
@@ -40,7 +45,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const {
     sectionRef,
-    scrollYProgress,
+    clipFrame,
     heroOpacity,
     heroScale,
     heroFilter,
@@ -51,8 +56,9 @@ export default function HeroSection({
     aboutPointerEvents,
   } = useHeroSection();
   const reduceMotion = useReducedMotion();
-  const canvasRef = useScrollFrames(scrollYProgress, !reduceMotion);
+  const canvasRef = useScrollFrames(clipFrame, !reduceMotion);
   const lenis = useLenis();
+  const [titleLead, titleAccent] = splitTitle(title);
 
   function scrollToAbout() {
     const section = sectionRef.current;
@@ -68,27 +74,42 @@ export default function HeroSection({
   }
 
   return (
-    <section ref={sectionRef} data-site-hero className="relative h-[300vh]">
+    <section
+      ref={sectionRef}
+      data-site-hero
+      className="relative"
+      // One screen for the pinned view plus the distance it scrolls.
+      style={{ height: `${HERO_SCROLL_VH + 100}vh` }}
+    >
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
           initial={reduceMotion ? false : { scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 z-0 origin-center"
+          // The first frame as a background, so the hero is never blank
+          // before the canvas first paints (and stays put for reduced motion).
+          className="absolute inset-0 z-0 origin-center bg-[url(/hero-frames/lg/001.webp)] bg-cover bg-center max-md:portrait:bg-[url(/hero-frames/sm/001.webp)]"
         >
-          {/* First frame as a CSS background so the hero is never blank
-              before the canvas paints (and for reduced motion). */}
+          {/* Hidden until its first paint; the player then reveals it. */}
           <canvas
             ref={canvasRef}
-            width={1280}
-            height={720}
-            className="pointer-events-none size-full bg-[url(/hero-frames/lg/001.webp)] bg-cover bg-center object-cover max-md:bg-[url(/hero-frames/sm/001.webp)]"
+            className="pointer-events-none size-full object-cover opacity-0"
           />
         </motion.div>
-        <div
-          className="absolute inset-0 z-[1] bg-black/30"
-          aria-hidden="true"
+        {/* A light wash over the whole clip, and shade behind each text that
+            comes and goes with it, so the video stays bright where no text
+            needs the contrast. */}
+        <div className="absolute inset-0 z-[1] bg-black/10" aria-hidden />
+        <motion.div
+          aria-hidden
+          style={{ opacity: heroOpacity }}
+          className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_90%_50%_at_center,rgb(0_0_0/0.4),transparent)] lg:bg-linear-to-r lg:from-black/50 lg:via-black/20 lg:via-40% lg:to-transparent lg:to-65%"
+        />
+        <motion.div
+          aria-hidden
+          style={{ opacity: aboutOpacity }}
+          className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_65%_45%_at_center,rgb(0_0_0/0.45),transparent)]"
         />
         <motion.div
           style={{
@@ -97,36 +118,29 @@ export default function HeroSection({
             filter: heroFilter,
             pointerEvents: heroPointerEvents,
           }}
-          className="will-change-[transform,filter,opacity] absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:px-0 lg:pt-0 lg:pb-0"
+          className="will-change-[transform,filter,opacity] absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-5 pt-20 pb-6 lg:items-start lg:px-10 lg:pt-0 lg:pb-0 xl:px-16"
         >
-          <Image
-            src="/hero-customer-badge.png"
-            alt="500K+ Happy Customers"
-            width={567}
-            height={406}
-            className="pointer-events-none absolute top-142.5 left-[32.88px] h-[220.19px] w-[306.55px] border-[1.08px] opacity-100 max-lg:hidden"
-          />
-          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-3 lg:gap-4 lg:px-6">
-            <Image
-              src="/hero-customer-badge.png"
-              alt="500K+ Happy Customers"
-              width={567}
-              height={406}
-              className="pointer-events-none h-auto w-[132px] lg:hidden"
-            />
+          <HeroCustomerBadge className="absolute bottom-9 left-8 max-lg:hidden xl:left-14" />
+          <div className="relative z-10 flex max-w-5xl flex-col items-center gap-3 lg:max-w-[620px] lg:items-start lg:gap-0">
+            <HeroCustomerBadge className="lg:hidden" />
             <p
-              className={`${mozillaHeadline.className} text-[18px] leading-8 font-semibold tracking-[0.08em]`}
+              className={`${playfair.className} text-[14px] leading-6 tracking-[0.08em] uppercase lg:text-[18px] lg:leading-8`}
             >
               {eyeLabel}
             </p>
-            <h1 className="-mt-2 text-center text-[28px] leading-[42px] font-bold tracking-normal lg:-mt-6 lg:text-[75.57px] lg:leading-[107.96px]">
-              {title}
+            <h1 className="-mt-1 text-center text-[28px] leading-[42px] font-bold tracking-tight lg:mt-1 lg:text-left lg:text-[72px] lg:leading-[92px]">
+              {titleLead}
+              {titleAccent && (
+                <em className={`${playfair.className} font-normal`}>
+                  {titleAccent}
+                </em>
+              )}
             </h1>
-            <p className="font-riposte text-center text-[15px] leading-6 font-light tracking-normal lg:text-[23.75px] lg:leading-[42.11px]">
+            <p className="font-riposte text-center text-[15px] leading-6 font-light tracking-normal lg:mt-8 lg:max-w-[540px] lg:text-left lg:text-[20px] lg:leading-8">
               {description}
             </p>
 
-            <Button href="/product">
+            <Button href="/product" className="lg:mt-8">
               {button}{" "}
               <ArrowRight className="size-6 shrink-0 opacity-100" aria-hidden />
             </Button>
