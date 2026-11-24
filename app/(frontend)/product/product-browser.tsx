@@ -16,7 +16,6 @@ export default function ProductBrowser({
 }) {
   const { category, country, products, selectCategory, setCountryId } =
     useProductCatalog(catalog);
-  if (!category || !country) return null;
 
   return (
     <main className="min-h-full bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink">
@@ -28,30 +27,36 @@ export default function ProductBrowser({
               {catalog.title}
             </Heading>
           </div>
-          <ProductCategoryToggle
-            categories={catalog.categories}
-            categoryId={category.id}
-            onSelect={selectCategory}
-          />
-        </div>
-
-        <ProductCountryFilters
-          countries={category.countries}
-          countryId={country.id}
-          onSelect={setCountryId}
-          className="mt-10"
-        />
-
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {products.map(({ slug, ...product }) => (
-            <ProductCard
-              key={`${country.id}-${slug}`}
-              {...product}
-              href={`/product/${slug}`}
-              variant="grid"
+          {category && (
+            <ProductCategoryToggle
+              categories={catalog.categories}
+              categoryId={category.id}
+              onSelect={selectCategory}
             />
-          ))}
+          )}
         </div>
+
+        {category && country && (
+          <>
+            <ProductCountryFilters
+              countries={category.countries}
+              countryId={country.id}
+              onSelect={setCountryId}
+              className="mt-10"
+            />
+
+            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {products.map(({ slug, ...product }) => (
+                <ProductCard
+                  key={`${country.id}-${slug}`}
+                  {...product}
+                  href={`/product/${slug}`}
+                  variant="grid"
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </main>
   );
