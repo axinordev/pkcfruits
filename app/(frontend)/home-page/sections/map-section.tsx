@@ -1,6 +1,7 @@
 "use client";
 
 import { useCountUps } from "@/app/home-page/hooks/use-count-up";
+import { playfair } from "@/app/home-page/fonts";
 import Heading from "@/shared/ui/atoms/heading";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
@@ -22,6 +23,15 @@ const markers = [
   { id: "australia", name: "Australia", left: "88.6%", top: "80.8%" },
 ];
 
+/**
+ * Splits off the title's last two words, which are set in italic pink serif:
+ * "From Around the World" → ["From Around ", "the World"].
+ */
+function splitTitle(title: string): [string, string] {
+  const match = title.match(/^(.*\s)(\S+\s+\S+)$/);
+  return match ? [match[1], match[2]] : [title, ""];
+}
+
 type MapSectionProps = {
   title: string;
   description: string;
@@ -35,6 +45,7 @@ export default function MapSection({
 }: MapSectionProps) {
   const targets = useMemo(() => stats.map((stat) => stat.value), [stats]);
   const { rootRef, values } = useCountUps(targets);
+  const [titleLead, titleAccent] = splitTitle(title);
   // Mobile has no hover, so tap a pin to show its country name.
   const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
 
@@ -49,7 +60,7 @@ export default function MapSection({
   return (
     <section
       id="world"
-      className="overflow-x-clip bg-[#253326] pb-19 text-[#FFFFF0] max-lg:pb-12"
+      className="overflow-x-clip bg-linear-to-b from-white to-[#FEEDF3] pb-19 text-ink max-lg:pb-12"
     >
       <div className="mx-auto w-full max-w-360 px-20 pt-27 max-lg:px-5 max-lg:pt-14">
         <ul ref={rootRef} className="grid grid-cols-3 gap-4 text-center">
@@ -61,18 +72,27 @@ export default function MapSection({
                 {values[index]}
                 {stat.suffix}
               </p>
-              <p className="font-riposte text-[16px] leading-6.5 font-light text-[#FFFFF0]/80 capitalize">
+              <p className="font-riposte text-[16px] leading-6.5 font-light text-ink/80 capitalize">
                 {stat.label}
               </p>
             </li>
           ))}
         </ul>
 
-        <div className="mt-20 border-t border-white/30 max-lg:mt-8" />
+        <div className="mt-20 border-t border-ink/15 max-lg:mt-8" />
 
         <div className="mt-12.5 flex items-start justify-between gap-8 max-lg:mt-8 max-lg:flex-col max-lg:gap-3">
-          <Heading className="text-[#FAF6F0]">{title}</Heading>
-          <p className="font-riposte max-w-109.75 pt-2 text-[18px] leading-7 font-light text-[#EEF4F1]/80 max-lg:pt-0">
+          <Heading>
+            {titleLead}
+            {titleAccent && (
+              <em
+                className={`${playfair.className} font-normal text-brand-primary`}
+              >
+                {titleAccent}
+              </em>
+            )}
+          </Heading>
+          <p className="font-riposte max-w-109.75 pt-2 text-[18px] leading-7 font-light text-ink/70 max-lg:pt-0">
             {description}
           </p>
         </div>
@@ -125,7 +145,7 @@ export default function MapSection({
                   />
                   <span
                     role="tooltip"
-                    className={`font-riposte pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-[13px] leading-none font-medium whitespace-nowrap text-brand-primary transition-opacity duration-150 group-hover:opacity-100 ${
+                    className={`font-riposte pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-[13px] shadow-md leading-none font-medium whitespace-nowrap text-brand-primary transition-opacity duration-150 group-hover:opacity-100 ${
                       isActive ? "opacity-100" : "opacity-0"
                     } ${
                       Number.parseFloat(marker.left) > 75
