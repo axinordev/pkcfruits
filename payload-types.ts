@@ -636,6 +636,9 @@ export interface HomePage {
   };
   productsSection: {
     badge: string;
+    /**
+     * Wrap words in *asterisks* to show them in pink italics.
+     */
     title: string;
     button: string;
     products?: (string | Product)[] | null;
@@ -734,6 +737,9 @@ export interface ProductsPage {
   seoTitle: string;
   seoDescription: string;
   badge: string;
+  /**
+   * Wrap words in *asterisks* to show them in pink italics.
+   */
   title: string;
   updatedAt?: string | null;
   createdAt?: string | null;

@@ -105,7 +105,16 @@ export const HomePage: GlobalConfig = {
         label: false,
         fields: [
           { name: "badge", type: "text", required: true, label: "Eye label" },
-          { name: "title", type: "text", required: true, label: "Title" },
+          {
+            name: "title",
+            type: "text",
+            required: true,
+            label: "Title",
+            admin: {
+              description:
+                "Wrap words in *asterisks* to show them in pink italics.",
+            },
+          },
           {
             name: "button",
             type: "text",

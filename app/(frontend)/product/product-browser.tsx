@@ -1,5 +1,6 @@
 "use client";
 
+import AccentTitle from "@/app/home-page/components/accent-title";
 import { useProductCatalog } from "@/shared/hooks/use-product-catalog";
 import type { ProductCatalog } from "@/shared/product-catalog";
 import Badge from "@/shared/ui/atoms/badge";
@@ -25,7 +26,7 @@ export default function ProductBrowser({
           <div>
             <Badge>{catalog.badge}</Badge>
             <Heading as="h1" className="mt-4">
-              {catalog.title}
+              <AccentTitle text={catalog.title} />
             </Heading>
           </div>
           <ProductCategoryToggle
@@ -39,10 +40,10 @@ export default function ProductBrowser({
           countries={category.countries}
           countryId={country.id}
           onSelect={setCountryId}
-          className="mt-10"
+          className="mt-10 lg:mt-21"
         />
 
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-15.5 lg:gap-6.25 xl:grid-cols-3">
           {products.map(({ slug, ...product }) => (
             <ProductCard
               key={`${country.id}-${slug}`}

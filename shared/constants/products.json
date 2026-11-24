@@ -1,6 +1,7 @@
 {
   "badge": "Products",
   "title": "Our Quality Fresh Products",
+  "accentTitle": "Our Quality *Fresh Products*",
   "explore": {
     "label": "Explore All",
     "href": "/product"
