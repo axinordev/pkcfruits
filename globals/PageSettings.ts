@@ -42,7 +42,6 @@ export const ProductsPage = pageSettings(
   "Products Page",
   "Wrap words in *asterisks* to show them in pink italics.",
 );
-export const AwardsPage = pageSettings("awards-page", "Awards Page");
 export const GalleryPage = pageSettings("gallery-page", "Gallery Page");
 export const NewsPage = pageSettings("news-page", "News Page");
 

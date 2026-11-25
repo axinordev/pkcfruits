@@ -3,7 +3,6 @@ import path from "path";
 import type { Payload } from "payload";
 
 import { aboutPageContent } from "@/app/about/constants";
-import { awardsPageContent } from "@/app/awards/constants";
 import { contactPageContent } from "@/app/contact/constants";
 import { galleryPageContent, galleryRows } from "@/app/gallery/constants";
 import {
@@ -16,7 +15,6 @@ import {
 } from "@/app/home-page/constants";
 import articlesFile from "@/app/news/articles.json";
 import detailsFile from "@/app/product-detail/details.json";
-import { awards } from "@/shared/constants/awards";
 import catalog from "@/shared/constants/products.json";
 import { footerContent } from "@/shared/constants/site";
 
@@ -88,7 +86,7 @@ export async function seedSite(payload: Payload) {
     return created.id;
   }
 
-  async function ensure<T extends "products" | "news" | "gallery" | "awards">(
+  async function ensure<T extends "products" | "news" | "gallery">(
     collection: T,
     slug: string,
     data: Record<string, unknown>,
@@ -221,17 +219,6 @@ export async function seedSite(payload: Payload) {
     }
   }
 
-  for (const [index, award] of awards.entries()) {
-    const saved = await ensure("awards", award.id, {
-      slug: award.id,
-      title: award.title,
-      summary: award.summary,
-      order: index,
-      image: await photo(award.image, award.imageAlt),
-    });
-    if (saved.created) created += 1;
-  }
-
   const home = await payload.findGlobal({ slug: "home-page", depth: 0 });
   const selectedProducts = ["orange", "apple", "kiwi", "cherry", "apricot"]
     .map((slug) => productIds.get(slug))
@@ -337,12 +324,6 @@ export async function seedSite(payload: Payload) {
     badge: catalog.badge,
     title: catalog.accentTitle,
   });
-  await seedPage(payload, "awards-page", {
-    seoTitle: awardsPageContent.metadata.title,
-    seoDescription: awardsPageContent.metadata.description,
-    badge: awardsPageContent.badge,
-    title: awardsPageContent.title.join("\n"),
-  });
   await seedPage(payload, "gallery-page", {
     seoTitle: galleryPageContent.metadata.title,
     seoDescription: galleryPageContent.metadata.description,
@@ -411,7 +392,7 @@ export async function seedSite(payload: Payload) {
 
 async function seedPage(
   payload: Payload,
-  slug: "products-page" | "awards-page" | "gallery-page" | "news-page",
+  slug: "products-page" | "gallery-page" | "news-page",
   data: {
     seoTitle: string;
     seoDescription: string;

@@ -37,8 +37,8 @@ export default function SeedDashboardButton() {
       }}
     >
       <p style={{ margin: "0 0 12px" }}>
-        Load the default pages, products, news, gallery, and awards. Anything
-        already saved is left as it is.
+        Load the default pages, products, news, and gallery. Anything already
+        saved is left as it is.
       </p>
       <button type="button" disabled={pending} onClick={seed}>
         {pending ? "Seeding…" : "Seed default content"}
