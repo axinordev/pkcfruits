@@ -324,7 +324,11 @@ export const getAboutPage = cache(async () => {
     },
     founders: {
       badge: page.foundersBadge ?? "",
-      title: page.foundersTitle ?? "",
+      // Like the intro title, the stock title gets its marked version.
+      title:
+        page.foundersTitle === aboutPageContent.founders.title
+          ? aboutPageContent.founders.accentTitle
+          : (page.foundersTitle ?? ""),
       members: (page.founders ?? []).flatMap((member) => {
         const image = cmsImage(member.photo, member.name);
         return image ? [{ name: member.name, role: member.role, image }] : [];

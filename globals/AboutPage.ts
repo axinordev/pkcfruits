@@ -64,7 +64,16 @@ export const AboutPage: GlobalConfig = {
         required: true,
         label: "Eye label",
       },
-      { name: "foundersTitle", type: "text", required: true, label: "Title" },
+      {
+        name: "foundersTitle",
+        type: "text",
+        required: true,
+        label: "Title",
+        admin: {
+          description:
+            "Wrap words in *asterisks* to show them in pink italics.",
+        },
+      },
       {
         name: "founders",
         type: "array",

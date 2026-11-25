@@ -722,6 +722,9 @@ export interface AboutPage {
       }[]
     | null;
   foundersBadge: string;
+  /**
+   * Wrap words in *asterisks* to show them in pink italics.
+   */
   foundersTitle: string;
   founders?:
     | {

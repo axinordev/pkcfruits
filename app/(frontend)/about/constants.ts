@@ -39,6 +39,7 @@ export const aboutPageContent = {
   founders: {
     badge: "Founders",
     title: "Our Founding Team",
+    accentTitle: "Our Founding *Team*",
     members: [
       {
         name: "Mr. Navas PK",
