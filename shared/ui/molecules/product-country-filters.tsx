@@ -1,5 +1,9 @@
+"use client";
+
+import { useBalancedRows } from "@/shared/hooks/use-balanced-rows";
 import type { ProductCountry } from "@/shared/product-catalog";
 import { cn } from "cn";
+import { Fragment } from "react";
 
 const riposte = "font-riposte font-light";
 
@@ -65,34 +69,45 @@ export default function ProductCountryFilters({
   onSelect,
   className,
 }: ProductCountryFiltersProps) {
+  const [listRef, breaks] = useBalancedRows<HTMLDivElement>(
+    countries.map((item) => item.id).join(),
+  );
+
   return (
-    // The pills wrap like words in a line of text, so text-balance evens the
-    // lines out and never leaves one pill alone on the last line. The
-    // negative margins take back the spacing after the last pill on each side.
+    // Every row of pills runs the full width: the pills grow to share what is
+    // left of their row. The rows are balanced, so the last one never has a
+    // single pill stretched across it. Rows are spaced with margins rather
+    // than a row gap, so the zero-height row breaks add no extra space; the
+    // negative bottom margin takes back the last row's.
     <div
+      ref={listRef}
       className={cn(
-        "-mr-2.5 -mb-2.5 text-balance lg:-mr-5 lg:-mb-5.5",
+        "-mb-2.5 flex flex-wrap gap-x-2.5 lg:-mb-5.5 lg:gap-x-5",
         className,
       )}
     >
-      {countries.map((item) => {
+      {countries.map((item, index) => {
         const selected = item.id === countryId;
         return (
-          <button
-            key={item.id}
-            type="button"
-            aria-pressed={selected}
-            onClick={() => onSelect(item.id)}
-            className={cn(
-              riposte,
-              "mr-2.5 mb-2.5 inline-flex h-[38px] items-center justify-center rounded-[30px] border px-2.5 align-top text-[13.3px] leading-none whitespace-nowrap uppercase max-lg:min-w-[79px] lg:mr-5 lg:mb-5.5 lg:px-5.75",
-              selected
-                ? "border-brand-primary bg-brand-primary text-white"
-                : "border-[#21222180] text-[#21222180]",
+          <Fragment key={item.id}>
+            {breaks.includes(index) && (
+              <span data-row-break aria-hidden className="basis-full" />
             )}
-          >
-            {item.label}
-          </button>
+            <button
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onSelect(item.id)}
+              className={cn(
+                riposte,
+                "mb-2.5 flex h-[38px] grow items-center justify-center rounded-[30px] border px-2.5 text-[13.3px] leading-none whitespace-nowrap uppercase max-lg:min-w-[79px] lg:mb-5.5 lg:px-5.75",
+                selected
+                  ? "border-brand-primary bg-brand-primary text-white"
+                  : "border-[#21222180] text-[#21222180]",
+              )}
+            >
+              {item.label}
+            </button>
+          </Fragment>
         );
       })}
     </div>
