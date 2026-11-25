@@ -19,6 +19,7 @@ import {
   newsSectionContent,
   reviewsSectionContent,
 } from "@/app/home-page/constants";
+import productsContent from "@/shared/constants/products.json";
 import { footerContent } from "@/shared/constants/site";
 
 export const getCMS = cache(async () => getPayload({ config }));
@@ -140,7 +141,14 @@ export function buildCatalog(
     ];
   });
 
-  return { ...headings, categories, fruits };
+  // The stock title predates the pink italic marking, so it gets the marked
+  // version; any other title is shown as saved.
+  const title =
+    headings.title === productsContent.title
+      ? productsContent.accentTitle
+      : headings.title;
+
+  return { ...headings, title, categories, fruits };
 }
 
 export function productCards(products: Product[]) {

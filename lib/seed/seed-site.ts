@@ -261,7 +261,7 @@ export async function seedSite(payload: Payload) {
         ? home.productsSection
         : {
             badge: catalog.badge,
-            title: catalog.title,
+            title: catalog.accentTitle,
             button: catalog.explore.label,
             products: selectedProducts,
           },
@@ -335,7 +335,7 @@ export async function seedSite(payload: Payload) {
     seoTitle: "Products | PKC Fruits",
     seoDescription: catalog.title,
     badge: catalog.badge,
-    title: catalog.title,
+    title: catalog.accentTitle,
   });
   await seedPage(payload, "awards-page", {
     seoTitle: awardsPageContent.metadata.title,

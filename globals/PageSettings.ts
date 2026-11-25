@@ -2,7 +2,12 @@ import type { GlobalConfig } from "payload";
 
 import { contentAccess, section } from "@/lib/cms/access";
 
-function pageSettings(slug: string, label: string): GlobalConfig {
+function pageSettings(
+  slug: string,
+  label: string,
+  // Help shown under the Title field.
+  titleHint?: string,
+): GlobalConfig {
   return {
     slug,
     label,
@@ -20,13 +25,23 @@ function pageSettings(slug: string, label: string): GlobalConfig {
       ]),
       section("Heading", [
         { name: "badge", type: "text", required: true, label: "Eye label" },
-        { name: "title", type: "textarea", required: true, label: "Title" },
+        {
+          name: "title",
+          type: "textarea",
+          required: true,
+          label: "Title",
+          admin: { description: titleHint },
+        },
       ]),
     ],
   };
 }
 
-export const ProductsPage = pageSettings("products-page", "Products Page");
+export const ProductsPage = pageSettings(
+  "products-page",
+  "Products Page",
+  "Wrap words in *asterisks* to show them in pink italics.",
+);
 export const AwardsPage = pageSettings("awards-page", "Awards Page");
 export const GalleryPage = pageSettings("gallery-page", "Gallery Page");
 export const NewsPage = pageSettings("news-page", "News Page");

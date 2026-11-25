@@ -25,7 +25,7 @@ export function ProductCategoryToggle({
       role="tablist"
       aria-label={label}
       className={cn(
-        "flex h-12 w-89 shrink-0 items-stretch rounded-[34px] border border-brand-primary max-lg:w-full max-lg:max-w-89",
+        "flex h-12 w-66.5 shrink-0 items-stretch rounded-[34px] border border-brand-primary max-lg:w-full max-lg:max-w-89",
         className,
       )}
     >
@@ -40,7 +40,7 @@ export function ProductCategoryToggle({
             onClick={() => onSelect(item.id)}
             className={cn(
               riposte,
-              "h-full flex-1 rounded-[34px] text-[18px] leading-7",
+              "h-full flex-1 rounded-[34px] text-[15px] leading-7",
               selected ? "bg-brand-primary text-white" : "text-ink",
             )}
           >
@@ -65,38 +65,36 @@ export default function ProductCountryFilters({
   onSelect,
   className,
 }: ProductCountryFiltersProps) {
-  const midpoint = Math.ceil(countries.length / 2);
-  const rows =
-    countries.length > 1
-      ? [countries.slice(0, midpoint), countries.slice(midpoint)]
-      : [countries];
-
   return (
-    <div className={cn("flex flex-col gap-2.5", className)}>
-      {rows.map((row) => (
-        <div key={row[0]?.id} className="flex flex-wrap justify-center gap-2.5 lg:gap-6">
-          {row.map((item) => {
-            const selected = item.id === countryId;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => onSelect(item.id)}
-                className={cn(
-                  riposte,
-                  "flex h-[38px] min-w-[79px] items-center justify-center gap-2.5 rounded-[30px] border px-2.5 text-sm lg:text-[16px] leading-none whitespace-nowrap uppercase opacity-100",
-                  selected
-                    ? "border-[rgba(226,26,96,0.2)] bg-blush text-ink"
-                    : "border-[#21222180] text-[#21222180]",
-                )}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-        </div>
-      ))}
+    // The pills wrap like words in a line of text, so text-balance evens the
+    // lines out and never leaves one pill alone on the last line. The
+    // negative margins take back the spacing after the last pill on each side.
+    <div
+      className={cn(
+        "-mr-2.5 -mb-2.5 text-balance lg:-mr-5 lg:-mb-5.5",
+        className,
+      )}
+    >
+      {countries.map((item) => {
+        const selected = item.id === countryId;
+        return (
+          <button
+            key={item.id}
+            type="button"
+            aria-pressed={selected}
+            onClick={() => onSelect(item.id)}
+            className={cn(
+              riposte,
+              "mr-2.5 mb-2.5 inline-flex h-[38px] items-center justify-center rounded-[30px] border px-2.5 align-top text-[13.3px] leading-none whitespace-nowrap uppercase max-lg:min-w-[79px] lg:mr-5 lg:mb-5.5 lg:px-5.75",
+              selected
+                ? "border-brand-primary bg-brand-primary text-white"
+                : "border-[#21222180] text-[#21222180]",
+            )}
+          >
+            {item.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

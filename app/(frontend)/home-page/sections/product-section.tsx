@@ -1,5 +1,6 @@
 "use client";
 
+import AccentTitle from "@/app/home-page/components/accent-title";
 import { useProductScroller } from "@/app/home-page/hooks/use-product-scroller";
 import { useProductCatalog } from "@/shared/hooks/use-product-catalog";
 import ArrowLink from "@/shared/ui/atoms/arrow-link";
@@ -49,7 +50,9 @@ export default function ProductSection({
         <div className="flex justify-center">
           <Badge>{catalog.badge}</Badge>
         </div>
-        <Heading className="mt-5 text-center">{catalog.title}</Heading>
+        <Heading className="mt-5 text-center">
+          <AccentTitle text={catalog.title} />
+        </Heading>
 
         {category && country && (
           <>
@@ -63,7 +66,7 @@ export default function ProductSection({
               countries={category.countries}
               countryId={country.id}
               onSelect={setCountryId}
-              className="mt-13.25 [&_div]:justify-start"
+              className="mt-13.25"
             />
 
             {/* The row spans the section's full width (cqw leaves out the
