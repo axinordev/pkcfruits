@@ -47,26 +47,29 @@ export default function ProductSection({
       className="@container bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink"
     >
       <div className="mx-auto flex w-full max-w-360 flex-col px-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12 lg:pt-20 lg:pb-26">
-        <div className="flex justify-center">
-          <Badge>{catalog.badge}</Badge>
-        </div>
-        <Heading className="mt-5 text-center">
-          <AccentTitle text={catalog.title} />
-        </Heading>
-
-        {category && country && (
-          <>
+        <div className="flex items-end justify-between gap-8 max-lg:flex-col max-lg:items-start">
+          <div>
+            <Badge>{catalog.badge}</Badge>
+            <Heading className="mt-4">
+              <AccentTitle text={catalog.title} />
+            </Heading>
+          </div>
+          {category && (
             <ProductCategoryToggle
               categories={catalog.categories}
               categoryId={category.id}
               onSelect={selectCategory}
-              className="mx-auto mt-10"
             />
+          )}
+        </div>
+
+        {category && country && (
+          <>
             <ProductCountryFilters
               countries={category.countries}
               countryId={country.id}
               onSelect={setCountryId}
-              className="mt-13.25"
+              className="mt-10 lg:mt-21"
             />
 
             {/* The row spans the section's full width (cqw leaves out the
@@ -74,14 +77,17 @@ export default function ProductSection({
                 the first and last card up with the content. */}
             <div
               ref={scrollerRef}
-              className="mt-12 ml-[calc(50%-50cqw)] flex w-[100cqw] gap-5 overflow-x-auto scroll-smooth px-[max(5rem,calc(50cqw-40rem))] pb-1 scrollbar-none max-lg:px-5"
+              className="mt-10 ml-[calc(50%-50cqw)] flex w-[100cqw] gap-5 overflow-x-auto scroll-smooth px-[max(5rem,calc(50cqw-40rem))] pb-1 scrollbar-none max-lg:px-5 lg:mt-15.5"
             >
               {products.map(({ slug, ...product }) => (
-                <ProductCard
-                  key={slug}
-                  {...product}
-                  href={`/product/${slug}`}
-                />
+                <div key={slug} className="w-92.5 shrink-0 max-lg:w-70">
+                  <ProductCard
+                    {...product}
+                    href={`/product/${slug}`}
+                    // The photo fills about 82% of the card's width.
+                    sizes="(max-width: 1023px) 230px, 304px"
+                  />
+                </div>
               ))}
             </div>
 
