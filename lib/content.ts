@@ -19,6 +19,7 @@ import {
   newsSectionContent,
   reviewsSectionContent,
 } from "@/app/home-page/constants";
+import { aboutPageContent } from "@/app/about/constants";
 import productsContent from "@/shared/constants/products.json";
 import { footerContent } from "@/shared/constants/site";
 
@@ -302,7 +303,12 @@ export const getAboutPage = cache(async () => {
     seo: { title: page.seoTitle ?? "", description: page.seoDescription ?? "" },
     intro: {
       badge: page.introBadge ?? "",
-      title: page.introTitle ?? "",
+      // The stock title predates the pink italic marking, so it gets the
+      // marked version; any other title is shown as saved.
+      title:
+        page.introTitle === aboutPageContent.intro.title
+          ? aboutPageContent.intro.accentTitle
+          : (page.introTitle ?? ""),
       paragraphs: paragraphs(page.introBody),
       image: cmsImage(page.introImage, page.introBadge),
     },

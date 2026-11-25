@@ -1,0 +1,10 @@
+import { DM_Sans, Newsreader } from "next/font/google";
+
+// The About intro's title face, and the serif for its pink italic words.
+export const dmSans = DM_Sans({ subsets: ["latin"], weight: "600" });
+
+export const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: "700",
+  style: "italic",
+});

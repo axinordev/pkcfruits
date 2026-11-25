@@ -35,18 +35,23 @@ function titleParts(title: string): Part[] {
  * A title from the CMS: words wrapped in *asterisks* are set in pink italics,
  * and a new line in the text starts a new line.
  * "Experiences *That Speak*\nfor Themselves"
+ *
+ * The pink words are Playfair unless `accentClassName` gives another face.
  */
-export default function AccentTitle({ text }: { text: string }) {
+export default function AccentTitle({
+  text,
+  accentClassName = `${playfair.className} font-semibold`,
+}: {
+  text: string;
+  accentClassName?: string;
+}) {
   return titleParts(text).map((part) => {
     if (part.kind === "break") return <br key={part.key} />;
     if (part.kind === "text") {
       return <Fragment key={part.key}>{part.text}</Fragment>;
     }
     return (
-      <em
-        key={part.key}
-        className={`${playfair.className} font-semibold text-brand-primary`}
-      >
+      <em key={part.key} className={`${accentClassName} text-brand-primary`}>
         {part.text}
       </em>
     );

@@ -19,7 +19,16 @@ export const AboutPage: GlobalConfig = {
     ]),
     section("Intro", [
       { name: "introBadge", type: "text", required: true, label: "Eye label" },
-      { name: "introTitle", type: "textarea", required: true, label: "Title" },
+      {
+        name: "introTitle",
+        type: "textarea",
+        required: true,
+        label: "Title",
+        admin: {
+          description:
+            "Wrap words in *asterisks* to show them in pink italics.",
+        },
+      },
       { name: "introBody", type: "textarea", required: true, label: "Text" },
       {
         name: "introImage",
