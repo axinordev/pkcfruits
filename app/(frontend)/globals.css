@@ -9,6 +9,9 @@
   --color-blush: #fed7e4;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+  /* 1800px: wide enough for a fourth column of product cards. */
+  --breakpoint-3xl: 112.5rem;
+
   /* Fluid type for the hero's "PKC FRUITS" text. Each size runs from the
      mobile design at a 375px screen to the desktop design at 1440px, and
      stops at those sizes on screens outside that range. */

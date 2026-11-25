@@ -2,6 +2,7 @@
 
 import { navContent } from "@/shared/constants/site";
 import { useNavbar } from "@/shared/hooks/use-navbar";
+import { siteGutter } from "@/shared/ui/gutter";
 import { cn } from "cn";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -29,7 +30,8 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
     >
       <div
         className={cn(
-          "flex items-center justify-between gap-4 px-5 py-3 lg:px-10 lg:py-4 xl:px-16",
+          "flex items-center justify-between gap-4 py-3 lg:py-4",
+          siteGutter,
           overlay
             ? "bg-white/10 text-white/10 backdrop-blur-sm"
             : "border-b border-[#E6E6E6] bg-canvas text-[#3d3d3d]",
@@ -170,7 +172,7 @@ export function SiteHeader() {
       {pathname === "/" ? null : (
         <div
           aria-hidden
-          className="border-b border-transparent px-5 py-3 lg:px-10 lg:py-4 xl:px-16"
+          className={cn("border-b border-transparent py-3 lg:py-4", siteGutter)}
         >
           <div className="h-10 lg:h-13" />
         </div>
