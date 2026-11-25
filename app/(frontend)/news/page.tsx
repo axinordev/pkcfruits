@@ -1,6 +1,5 @@
 import FixedBackdrop from "@/app/home-page/components/fixed-backdrop";
-import { ReviewsSection } from "@/app/home-page/sections";
-import { getNewsList, getReviews } from "@/lib/content";
+import { getNewsList } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
@@ -16,18 +15,13 @@ export async function generateMetadata() {
 }
 
 export default async function NewsPage() {
-  const [page, reviews] = await Promise.all([getNewsList(), getReviews()]);
+  const page = await getNewsList();
 
   return (
     <main className="text-ink">
-      {/* Like the home page: the silk background stays still while the
-          reviews and the news scroll over it. */}
+      {/* Like the home page: the silk background stays still while the news
+          scrolls over it. */}
       <FixedBackdrop>
-        <ReviewsSection
-          badge={reviews.badge}
-          title={reviews.title}
-          reviews={reviews.items}
-        />
         <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col items-center px-20 pt-16 pb-20 max-lg:px-5 max-lg:pt-10 max-lg:pb-12">
           <Badge>{page.badge}</Badge>
           <Heading as="h1" className="mt-6 w-full min-w-0 text-center">

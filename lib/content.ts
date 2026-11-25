@@ -405,21 +405,6 @@ export const getNewsList = cache(async () => {
   return { ...page, stories: result.docs.map(newsCard) };
 });
 
-// The home page's reviews section (its heading and reviews), for the other
-// pages that show it too.
-export const getReviews = cache(async () => {
-  const payload = await getCMS();
-  const [home, reviews] = await Promise.all([
-    payload.findGlobal({
-      slug: "home-page",
-      depth: 0,
-      select: { reviewsSection: true },
-    }),
-    findReviews(payload),
-  ]);
-  return reviewsContent(home.reviewsSection, reviews.docs);
-});
-
 export const getNewsArticle = cache(async (slug: string) => {
   const payload = await getCMS();
   const result = await payload.find({
