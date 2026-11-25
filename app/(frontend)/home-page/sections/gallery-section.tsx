@@ -14,7 +14,7 @@ import Heading from "@/shared/ui/atoms/heading";
 import { cn } from "cn";
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { playfair } from "../fonts";
+import { newsreader } from "@/app/fonts/newsreader";
 
 type GallerySectionProps = {
   badge: string;
@@ -72,7 +72,7 @@ export default function GallerySection({
             {title}
             {highlight && (
               <em
-                className={`${playfair.className} block font-semibold text-brand-primary`}
+                className={`${newsreader.className} block font-semibold text-brand-primary`}
               >
                 {highlight}
               </em>

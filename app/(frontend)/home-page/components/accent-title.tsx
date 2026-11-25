@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { playfair } from "../fonts";
+import { newsreader } from "@/app/fonts/newsreader";
 
 type Part =
   | { key: string; kind: "text" | "accent"; text: string }
@@ -36,11 +36,12 @@ function titleParts(title: string): Part[] {
  * and a new line in the text starts a new line.
  * "Experiences *That Speak*\nfor Themselves"
  *
- * The pink words are Playfair unless `accentClassName` gives another face.
+ * The pink words are Newsreader semibold unless `accentClassName` says
+ * otherwise.
  */
 export default function AccentTitle({
   text,
-  accentClassName = `${playfair.className} font-semibold`,
+  accentClassName = `${newsreader.className} font-semibold`,
 }: {
   text: string;
   accentClassName?: string;

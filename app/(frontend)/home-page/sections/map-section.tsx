@@ -1,7 +1,7 @@
 "use client";
 
 import { useCountUps } from "@/app/home-page/hooks/use-count-up";
-import { playfair } from "@/app/home-page/fonts";
+import { newsreader } from "@/app/fonts/newsreader";
 import Heading from "@/shared/ui/atoms/heading";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
@@ -86,7 +86,7 @@ export default function MapSection({
             {titleLead}
             {titleAccent && (
               <em
-                className={`${playfair.className} font-normal text-brand-primary`}
+                className={`${newsreader.className} font-normal text-brand-primary`}
               >
                 {titleAccent}
               </em>

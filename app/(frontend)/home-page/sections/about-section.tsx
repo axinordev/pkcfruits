@@ -1,6 +1,6 @@
 import Button from "@/shared/ui/atoms/button";
 import { ArrowRight } from "lucide-react";
-import { playfair } from "../fonts";
+import { newsreader } from "@/app/fonts/newsreader";
 
 export default function AboutSection({
   title,
@@ -16,7 +16,7 @@ export default function AboutSection({
     // with the side padding added outside it.
     <div className="mx-auto box-content flex max-w-[895px] flex-col items-center px-6 text-center text-white max-lg:px-5">
       <h2
-        className={`${playfair.className} text-hero-heading font-semibold tracking-normal uppercase`}
+        className={`${newsreader.className} text-hero-heading font-semibold tracking-normal uppercase`}
       >
         {title}
       </h2>
