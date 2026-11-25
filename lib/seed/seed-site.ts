@@ -302,7 +302,7 @@ export async function seedSite(payload: Payload) {
         seoTitle: aboutPageContent.metadata.title,
         seoDescription: aboutPageContent.metadata.description,
         introBadge: aboutPageContent.intro.badge,
-        introTitle: aboutPageContent.intro.title,
+        introTitle: aboutPageContent.intro.accentTitle,
         introBody: text(aboutPageContent.intro.paragraphs),
         introImage: await photo(
           aboutPageContent.intro.image.src,

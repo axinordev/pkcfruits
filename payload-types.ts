@@ -702,6 +702,9 @@ export interface AboutPage {
   seoTitle: string;
   seoDescription: string;
   introBadge: string;
+  /**
+   * Wrap words in *asterisks* to show them in pink italics.
+   */
   introTitle: string;
   introBody: string;
   introImage?: (string | null) | Media;
