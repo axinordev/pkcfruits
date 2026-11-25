@@ -1,5 +1,6 @@
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
+import { siteGutter } from "@/shared/ui/gutter";
 import Image from "next/image";
 
 type IntroSectionProps = {
@@ -14,7 +15,12 @@ type IntroSectionProps = {
 export default function IntroSection({ intro }: IntroSectionProps) {
   return (
     <section className="bg-canvas text-ink">
-      <div className="mx-auto w-full max-w-360 px-20 pt-20 pb-15 max-lg:px-5 max-lg:pt-12 max-lg:pb-12">
+      {/* Full width with the navbar's side padding: the text lines up with
+          the logo and the photo, which takes the rest of the row, with the
+          Contact button. */}
+      <div
+        className={`w-full pt-20 pb-15 max-lg:pt-12 max-lg:pb-12 ${siteGutter}`}
+      >
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,473px)_minmax(0,1fr)] lg:gap-x-6.25">
           <div className="flex h-full flex-col items-start">
             <Badge>{intro.badge}</Badge>
@@ -41,7 +47,7 @@ export default function IntroSection({ intro }: IntroSectionProps) {
                   alt={intro.image.alt}
                   fill
                   priority
-                  sizes="(min-width: 1024px) 780px, 100vw"
+                  sizes="(min-width: 1024px) 67vw, 100vw"
                   className="object-cover"
                 />
               ) : null}

@@ -2,6 +2,7 @@ import { getSiteContact, type SocialPlatform } from "@/lib/content";
 import { footerContent } from "@/shared/constants/site";
 import Badge from "@/shared/ui/atoms/badge";
 import Button from "@/shared/ui/atoms/button";
+import { siteGutter } from "@/shared/ui/gutter";
 import { ArrowRight, ArrowUp } from "lucide-react";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
@@ -37,7 +38,11 @@ export default async function Footer() {
       />
       <div aria-hidden className="absolute inset-0 bg-black/65" />
       <div className="relative border-b border-white/10">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 py-16 lg:px-10 lg:pt-16 lg:pb-12">
+        {/* Full width with the navbar's side padding, so the card below
+            lines up with the logo and the Contact button on every screen. */}
+        <div
+          className={`flex w-full flex-col items-center py-16 lg:pt-16 lg:pb-12 ${siteGutter}`}
+        >
           <Badge className="h-[30px] rounded-full px-3 text-sm">
             {footerContent.badge}
           </Badge>
@@ -57,7 +62,7 @@ export default async function Footer() {
             <ArrowRight className="size-4" strokeWidth={2} />
           </Button>
 
-          <div className="mt-14 w-full max-w-[1360px] rounded-3xl bg-[rgba(238,242,243,0.1)] px-6 py-8 backdrop-blur-[14px] lg:mt-16 lg:px-10 lg:pt-9 lg:pb-6">
+          <div className="mt-14 w-full rounded-3xl bg-[rgba(238,242,243,0.1)] px-6 py-8 backdrop-blur-[14px] lg:mt-16 lg:px-10 lg:pt-9 lg:pb-6">
             <div className="flex flex-col items-start gap-4 lg:flex-row lg:justify-between">
               <div className="flex flex-col items-start">
                 <Link href="/" className="inline-flex">

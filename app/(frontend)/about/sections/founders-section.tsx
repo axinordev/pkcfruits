@@ -1,5 +1,6 @@
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
+import { siteGutter } from "@/shared/ui/gutter";
 import Image from "next/image";
 
 type FoundersSectionProps = {
@@ -17,13 +18,18 @@ type FoundersSectionProps = {
 export default function FoundersSection({ founders }: FoundersSectionProps) {
   return (
     <section className="bg-canvas text-ink">
-      <div className="mx-auto flex w-full max-w-360 flex-col items-center px-20 pt-30 pb-30 max-lg:px-5 max-lg:py-14">
+      <div
+        className={`flex w-full flex-col items-center pt-30 pb-30 max-lg:py-14 ${siteGutter}`}
+      >
         <Badge>{founders.badge}</Badge>
         <Heading className="mt-5 text-center max-lg:mt-4">
           {founders.title}
         </Heading>
 
-        <div className="mt-12.5 grid w-full grid-cols-1 gap-5 md:grid-cols-2 max-lg:mt-8">
+        {/* Up to 1440px the cards reach the navbar's logo and Contact
+            button. Wider screens keep them at that size (82rem across),
+            centred, so the portraits never grow taller than the screen. */}
+        <div className="mt-12.5 grid w-full max-w-328 grid-cols-1 gap-5 md:grid-cols-2 max-lg:mt-8">
           {founders.members.map((member) => (
             <article
               key={member.name}

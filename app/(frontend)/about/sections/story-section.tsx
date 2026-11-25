@@ -2,6 +2,7 @@
 
 import { useStorySection } from "@/app/about/hook";
 import { useCountUps } from "@/app/home-page/hooks/use-count-up";
+import { siteGutter } from "@/shared/ui/gutter";
 import { motion } from "framer-motion";
 import { Manrope } from "next/font/google";
 import Image from "next/image";
@@ -55,10 +56,13 @@ export default function StorySection({ story, stats }: StorySectionProps) {
       ) : null}
       {/* <div aria-hidden className="absolute inset-0 bg-black/60" /> */}
 
-      {/* The photo window on the left and the story beside it, starting near
-          the top. The text column keeps the design's 456px and the space
+      {/* Full width with the navbar's side padding: the photo window starts
+          in line with the logo and the story ends in line with the Contact
+          button. The text column keeps the design's 456px and the space
           left of it gives way first on smaller screens. */}
-      <div className="relative z-10 mx-auto grid w-full min-w-0 max-w-360 grid-cols-1 items-start gap-10 py-12 max-lg:px-5 lg:grid-cols-[minmax(20rem,1fr)_minmax(0,28.5rem)] lg:pt-[13.4%] lg:pr-[8.54%] lg:pb-[5.75%] lg:pl-[10.4%]">
+      <div
+        className={`relative z-10 grid w-full min-w-0 grid-cols-1 items-start gap-10 py-12 lg:grid-cols-[minmax(20rem,1fr)_minmax(0,28.5rem)] lg:pt-[13.4%] lg:pb-[5.75%] ${siteGutter}`}
+      >
         <motion.div
           ref={frameRef}
           style={{ x: frameX, y: frameY }}
@@ -102,7 +106,9 @@ export default function StorySection({ story, stats }: StorySectionProps) {
       </div>
 
       {/* The numbers sit under a hairline that runs the full width. */}
-      <div className="relative z-10 border-t border-white/10 px-5 py-10 lg:pt-27 lg:pb-26">
+      <div
+        className={`relative z-10 border-t border-white/10 py-10 lg:pt-27 lg:pb-26 ${siteGutter}`}
+      >
         <ul
           ref={rootRef}
           className="mx-auto grid w-full max-w-227.5 grid-cols-3 text-center text-[#FAF6F0]"
