@@ -5,6 +5,7 @@ import { useProductCatalog } from "@/shared/hooks/use-product-catalog";
 import type { ProductCatalog } from "@/shared/product-catalog";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
+import { siteGutter } from "@/shared/ui/gutter";
 import ProductCard from "@/shared/ui/molecules/product-card";
 import ProductCountryFilters, {
   ProductCategoryToggle,
@@ -21,7 +22,9 @@ export default function ProductBrowser({
 
   return (
     <main className="min-h-full bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink">
-      <div className="mx-auto flex w-full max-w-360 flex-col px-20 py-12 max-lg:px-5 max-lg:py-8">
+      {/* Full width with the navbar's side padding, like the home page's
+          products section. */}
+      <div className={`flex w-full flex-col py-12 max-lg:py-8 ${siteGutter}`}>
         <div className="flex items-end justify-between gap-8 max-lg:flex-col max-lg:items-start">
           <div>
             <Badge>{catalog.badge}</Badge>
@@ -43,7 +46,7 @@ export default function ProductBrowser({
           className="mt-10 lg:mt-21"
         />
 
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-15.5 lg:gap-6.25 xl:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-15.5 lg:gap-6.25 xl:grid-cols-3 3xl:grid-cols-4">
           {products.map(({ slug, ...product }) => (
             <ProductCard
               key={`${country.id}-${slug}`}
