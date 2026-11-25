@@ -1,5 +1,5 @@
 import config from "@payload-config";
-import { getPayload } from "payload";
+import { getPayload, type Payload } from "payload";
 import { cache } from "react";
 
 import { slugify } from "@/lib/cms/access";
@@ -7,9 +7,11 @@ import { youtubeEmbed } from "@/lib/youtube";
 import type {
   ContactPage,
   Gallery,
+  HomePage,
   Media,
   News,
   Product,
+  Review,
 } from "@/payload-types";
 import type { CatalogProduct, ProductCatalog } from "@/shared/product-catalog";
 import {
@@ -166,6 +168,32 @@ function galleryPhotos(items: Gallery[]) {
   });
 }
 
+// The 4 newest ticked reviews, newest first.
+function findReviews(payload: Payload) {
+  return payload.find({
+    collection: "reviews",
+    where: { showOnHome: { not_equals: false } },
+    limit: 4,
+    depth: 0,
+    sort: "-createdAt",
+  });
+}
+
+function reviewsContent(
+  section: HomePage["reviewsSection"] | undefined,
+  reviews: Review[],
+) {
+  return {
+    badge: section?.badge || reviewsSectionContent.badge,
+    title: section?.title || reviewsSectionContent.title,
+    items: reviews.map((review) => ({
+      id: review.id,
+      name: review.name,
+      review: review.review,
+    })),
+  };
+}
+
 export const getHomePage = cache(async () => {
   const payload = await getCMS();
   const [home, carousel, reviews] = await Promise.all([
@@ -184,14 +212,7 @@ export const getHomePage = cache(async () => {
       depth: 1,
       sort: "order",
     }),
-    // The 4 newest ticked reviews, newest first.
-    payload.find({
-      collection: "reviews",
-      where: { showOnHome: { not_equals: false } },
-      limit: 4,
-      depth: 0,
-      sort: "-createdAt",
-    }),
+    findReviews(payload),
   ]);
   const gallery = home.gallerySection;
   const newsTitle = home.newsSection?.title ?? "";
@@ -245,15 +266,7 @@ export const getHomePage = cache(async () => {
       description: gallery?.description || gallerySectionContent.description,
       photos: galleryPhotos(carousel.docs),
     },
-    reviews: {
-      badge: home.reviewsSection?.badge || reviewsSectionContent.badge,
-      title: home.reviewsSection?.title || reviewsSectionContent.title,
-      items: reviews.docs.map((review) => ({
-        id: review.id,
-        name: review.name,
-        review: review.review,
-      })),
-    },
+    reviews: reviewsContent(home.reviewsSection, reviews.docs),
     news: {
       badge: home.newsSection?.badge ?? "",
       // The stock title predates the pink italic marking, so it gets the
@@ -390,6 +403,21 @@ export const getNewsList = cache(async () => {
     payload.find({ collection: "news", limit: 100, depth: 1, sort: "-date" }),
   ]);
   return { ...page, stories: result.docs.map(newsCard) };
+});
+
+// The home page's reviews section (its heading and reviews), for the other
+// pages that show it too.
+export const getReviews = cache(async () => {
+  const payload = await getCMS();
+  const [home, reviews] = await Promise.all([
+    payload.findGlobal({
+      slug: "home-page",
+      depth: 0,
+      select: { reviewsSection: true },
+    }),
+    findReviews(payload),
+  ]);
+  return reviewsContent(home.reviewsSection, reviews.docs);
 });
 
 export const getNewsArticle = cache(async (slug: string) => {
