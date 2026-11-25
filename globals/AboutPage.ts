@@ -27,16 +27,6 @@ export const AboutPage: GlobalConfig = {
         relationTo: "media",
         label: "Photo",
       },
-      {
-        name: "stats",
-        type: "array",
-        label: "Numbers",
-        fields: [
-          { name: "value", type: "number", required: true, label: "Number" },
-          { name: "suffix", type: "text", required: true, label: "Suffix" },
-          { name: "label", type: "text", required: true, label: "Label" },
-        ],
-      },
     ]),
     section("Story", [
       {
@@ -46,6 +36,17 @@ export const AboutPage: GlobalConfig = {
         label: "Photo",
       },
       { name: "storyBody", type: "textarea", required: true, label: "Text" },
+      {
+        name: "stats",
+        type: "array",
+        label: "Numbers",
+        admin: { description: "Shown in a row under the story." },
+        fields: [
+          { name: "value", type: "number", required: true, label: "Number" },
+          { name: "suffix", type: "text", required: true, label: "Suffix" },
+          { name: "label", type: "text", required: true, label: "Label" },
+        ],
+      },
     ]),
     section("Founders", [
       {

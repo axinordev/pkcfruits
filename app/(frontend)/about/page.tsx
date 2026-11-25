@@ -18,8 +18,8 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <IntroSection intro={page.intro} stats={page.stats} />
-      <StorySection story={page.story} />
+      <IntroSection intro={page.intro} />
+      <StorySection story={page.story} stats={page.stats} />
       <FoundersSection founders={page.founders} />
     </main>
   );

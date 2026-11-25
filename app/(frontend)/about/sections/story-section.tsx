@@ -1,14 +1,20 @@
 "use client";
 
 import { useStorySection } from "@/app/about/hook";
+import { useCountUps } from "@/app/home-page/hooks/use-count-up";
 import { motion } from "framer-motion";
+import { Manrope } from "next/font/google";
 import Image from "next/image";
+import { useMemo } from "react";
 
-export default function StorySection({
-  story,
-}: {
+const manrope = Manrope({ subsets: ["latin"], weight: "800" });
+
+type StorySectionProps = {
   story: { image: { src: string; alt: string } | null; paragraphs: string[] };
-}) {
+  stats: { id: string; value: number; suffix: string; label: string }[];
+};
+
+export default function StorySection({ story, stats }: StorySectionProps) {
   const {
     sectionRef,
     frameRef,
@@ -21,6 +27,8 @@ export default function StorySection({
     onPointerMove,
     onPointerLeave,
   } = useStorySection();
+  const targets = useMemo(() => stats.map((stat) => stat.value), [stats]);
+  const { rootRef, values } = useCountUps(targets);
 
   return (
     <section
@@ -47,11 +55,14 @@ export default function StorySection({
       ) : null}
       {/* <div aria-hidden className="absolute inset-0 bg-black/60" /> */}
 
-      <div className="relative z-10 mx-auto grid w-full min-w-0 max-w-360 grid-cols-1 items-start gap-10 py-12 max-lg:px-5 lg:grid-cols-[minmax(0,340fr)_minmax(0,244fr)] lg:gap-x-[16%] lg:pt-[15.7%] lg:pr-[6.04%] lg:pb-[10.2%] lg:pl-[7.85%]">
+      {/* The photo window on the left and the story beside it, starting near
+          the top. The text column keeps the design's 456px and the space
+          left of it gives way first on smaller screens. */}
+      <div className="relative z-10 mx-auto grid w-full min-w-0 max-w-360 grid-cols-1 items-start gap-10 py-12 max-lg:px-5 lg:grid-cols-[minmax(20rem,1fr)_minmax(0,28.5rem)] lg:pt-[13.4%] lg:pr-[8.54%] lg:pb-[5.75%] lg:pl-[10.4%]">
         <motion.div
           ref={frameRef}
           style={{ x: frameX, y: frameY }}
-          className="relative aspect-534/442 w-full max-w-80 min-w-0 overflow-hidden rounded-md shadow-[0_8px_28px_rgba(0,0,0,0.14)] lg:h-66.25 lg:w-80"
+          className="relative aspect-534/442 w-full max-w-80 min-w-0 overflow-hidden rounded-md shadow-[0_8px_28px_rgba(0,0,0,0.14)] lg:mt-15 lg:h-66.25 lg:w-80"
         >
           {story.image && cutout.sectionWidth > 0 ? (
             <motion.div
@@ -78,16 +89,38 @@ export default function StorySection({
           ) : null}
         </motion.div>
 
-        <div className="relative z-10 flex w-full min-w-0 max-w-[calc(100vw-2.5rem)] flex-col gap-6 lg:max-w-114 lg:pt-[42%]">
+        <div className="relative z-10 flex w-full min-w-0 max-w-[calc(100vw-2.5rem)] flex-col gap-2.5 lg:max-w-none">
           {story.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
-              className="font-riposte wrap-break-word text-[18px] leading-8 font-light"
+              className="font-riposte wrap-break-word text-[18px] leading-[1.75] font-light"
             >
               {paragraph}
             </p>
           ))}
         </div>
+      </div>
+
+      {/* The numbers sit under a hairline that runs the full width. */}
+      <div className="relative z-10 border-t border-white/10 px-5 py-10 lg:pt-27 lg:pb-26">
+        <ul
+          ref={rootRef}
+          className="mx-auto grid w-full max-w-227.5 grid-cols-3 text-center text-[#FAF6F0]"
+        >
+          {stats.map((stat, index) => (
+            <li key={stat.id} className="min-w-0 px-1">
+              <p
+                className={`${manrope.className} text-[28px] leading-10 font-extrabold tracking-normal lg:text-[40px] lg:leading-15`}
+              >
+                {values[index]}
+                {stat.suffix}
+              </p>
+              <p className="font-riposte mt-1 text-balance text-[13px] leading-5 font-light text-[#FAF6F0]/80 capitalize lg:text-[16px] lg:leading-6.5">
+                {stat.label}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -705,6 +705,11 @@ export interface AboutPage {
   introTitle: string;
   introBody: string;
   introImage?: (string | null) | Media;
+  storyImage?: (string | null) | Media;
+  storyBody: string;
+  /**
+   * Shown in a row under the story.
+   */
   stats?:
     | {
         value: number;
@@ -713,8 +718,6 @@ export interface AboutPage {
         id?: string | null;
       }[]
     | null;
-  storyImage?: (string | null) | Media;
-  storyBody: string;
   foundersBadge: string;
   foundersTitle: string;
   founders?:
@@ -913,6 +916,8 @@ export interface AboutPageSelect<T extends boolean = true> {
   introTitle?: T;
   introBody?: T;
   introImage?: T;
+  storyImage?: T;
+  storyBody?: T;
   stats?:
     | T
     | {
@@ -921,8 +926,6 @@ export interface AboutPageSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
-  storyImage?: T;
-  storyBody?: T;
   foundersBadge?: T;
   foundersTitle?: T;
   founders?:
