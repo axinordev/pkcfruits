@@ -3,7 +3,9 @@
 import type { MarqueeFruit } from "@/app/home-page/hooks/use-hero-fruit-marquee";
 import {
   ABOUT_FOCUS,
+  HERO_COVER_VH,
   HERO_SCROLL_VH,
+  heroPinDistance,
   useHeroSection,
 } from "@/app/home-page/hooks/use-hero-section";
 import { useScrollFrames } from "@/app/home-page/hooks/use-scroll-frames";
@@ -63,7 +65,7 @@ export default function HeroSection({
   function scrollToAbout() {
     const section = sectionRef.current;
     if (!section) return;
-    const distance = section.offsetHeight - window.innerHeight;
+    const distance = heroPinDistance(section);
     const top = window.scrollY + section.getBoundingClientRect().top;
     const target = top + distance * ABOUT_FOCUS;
     if (lenis) {
@@ -76,11 +78,19 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      data-site-hero
       className="relative"
-      // One screen for the pinned view plus the distance it scrolls.
-      style={{ height: `${HERO_SCROLL_VH + 100}vh` }}
+      // One screen for the pinned view, plus the distance it scrolls, plus the
+      // screen the products take to slide up over it.
+      style={{ height: `${HERO_SCROLL_VH + 100 + HERO_COVER_VH}vh` }}
     >
+      {/* Where the hero ends for the navbar: the products' top edge, since
+          they cover the section's last screen. */}
+      <div
+        data-site-hero
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0"
+        style={{ bottom: `${HERO_COVER_VH}vh` }}
+      />
       <div className="sticky top-0 h-screen overflow-hidden text-white">
         <motion.div
           aria-hidden
