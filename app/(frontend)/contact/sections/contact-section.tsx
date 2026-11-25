@@ -24,7 +24,7 @@ export default function ContactSection({ page }: { page: ContactPageView }) {
   const { badge, title, image, address, email, phone, mapEmbed } = page;
 
   return (
-    <section className="bg-canvas text-ink">
+    <section className="text-ink">
       <div className="mx-auto w-full max-w-360 px-5 pt-12 pb-16 lg:px-20 lg:pt-20 lg:pb-24">
         <Badge>{badge}</Badge>
         <Heading as="h1" className="mt-5">

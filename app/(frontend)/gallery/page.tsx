@@ -15,7 +15,7 @@ export default async function GalleryPage() {
   const page = await getGalleryPage();
 
   return (
-    <main className="bg-canvas text-ink">
+    <main className="bg-white text-ink">
       <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col items-center px-20 pt-20 pb-20 max-lg:px-5 max-lg:pt-12 max-lg:pb-12">
         <Badge>{page.badge}</Badge>
         <Heading as="h1" className="mt-7.5 text-center">
