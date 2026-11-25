@@ -11,7 +11,7 @@ export const Reviews: CollectionConfig = {
     defaultColumns: ["name", "showOnHome", "createdAt"],
     hideAPIURL: true,
     description:
-      "Customer reviews. The home page and the top of the news page show the 4 newest ticked reviews, newest first.",
+      "Customer reviews. The home page shows the 4 newest ticked reviews, newest first.",
   },
   access: contentAccess,
   defaultSort: "-createdAt",
@@ -31,7 +31,7 @@ export const Reviews: CollectionConfig = {
       name: "showOnHome",
       type: "checkbox",
       defaultValue: true,
-      label: "Show on the home and news pages",
+      label: "Show on the home page",
     },
   ],
 };

@@ -202,7 +202,7 @@ export const HomePage: GlobalConfig = {
         label: false,
         admin: {
           description:
-            "The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first. This section also shows at the top of the news page.",
+            "The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first.",
         },
         fields: [
           {

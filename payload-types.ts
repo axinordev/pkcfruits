@@ -279,7 +279,7 @@ export interface Gallery {
   createdAt: string;
 }
 /**
- * Customer reviews. The home page and the top of the news page show the 4 newest ticked reviews, newest first.
+ * Customer reviews. The home page shows the 4 newest ticked reviews, newest first.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
@@ -631,7 +631,7 @@ export interface HomePage {
     description: string;
   };
   /**
-   * The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first. This section also shows at the top of the news page.
+   * The reviews themselves are under Content → Reviews. The 4 newest ticked reviews are shown, newest first.
    */
   reviewsSection: {
     badge: string;
