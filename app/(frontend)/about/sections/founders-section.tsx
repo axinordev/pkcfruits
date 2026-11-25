@@ -1,4 +1,5 @@
-import { dmSans, newsreader } from "@/app/about/fonts";
+import { dmSans } from "@/app/about/fonts";
+import { newsreader } from "@/app/fonts/newsreader";
 import AccentTitle from "@/app/home-page/components/accent-title";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";

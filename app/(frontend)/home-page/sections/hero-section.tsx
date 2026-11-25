@@ -15,7 +15,7 @@ import { useLenis } from "lenis/react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import HeroCustomerBadge from "../components/hero-customer-badge";
 import HeroFruitMarqueeCard from "../components/hero-fruit-marquee-card";
-import { playfair } from "../fonts";
+import { newsreader, newsreaderText } from "@/app/fonts/newsreader";
 import AboutSection from "./about-section";
 
 /**
@@ -134,14 +134,14 @@ export default function HeroSection({
           <div className="relative z-10 flex max-w-5xl flex-col items-center gap-3 lg:max-w-[620px] lg:items-start lg:gap-0">
             <HeroCustomerBadge className="lg:hidden" />
             <p
-              className={`${playfair.className} text-[14px] leading-6 tracking-[0.08em] uppercase lg:text-[18px] lg:leading-8`}
+              className={`${newsreaderText.className} text-[14px] leading-6 tracking-[0.08em] uppercase lg:text-[18px] lg:leading-8`}
             >
               {eyeLabel}
             </p>
             <h1 className="-mt-1 text-center text-[28px] leading-[42px] font-bold tracking-tight lg:mt-1 lg:text-left lg:text-[72px] lg:leading-[92px]">
               {titleLead}
               {titleAccent && (
-                <em className={`${playfair.className} font-normal`}>
+                <em className={`${newsreader.className} font-normal`}>
                   {titleAccent}
                 </em>
               )}
