@@ -49,7 +49,6 @@ export default function ProductBrowser({
               key={`${country.id}-${slug}`}
               {...product}
               href={`/product/${slug}`}
-              variant="grid"
             />
           ))}
         </div>

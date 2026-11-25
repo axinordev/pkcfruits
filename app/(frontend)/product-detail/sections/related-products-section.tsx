@@ -20,11 +20,7 @@ export default function RelatedProductsSection({
         <div className="mt-8 -mr-20 flex gap-5 overflow-x-auto scroll-smooth pr-20 pb-1 scrollbar-none max-lg:-mr-5 max-lg:pr-5">
           {products.map(({ slug, ...product }) => (
             <div key={slug} className="w-92.5 shrink-0 max-lg:w-70">
-              <ProductCard
-                {...product}
-                href={`/product/${slug}`}
-                variant="grid"
-              />
+              <ProductCard {...product} href={`/product/${slug}`} />
             </div>
           ))}
         </div>
