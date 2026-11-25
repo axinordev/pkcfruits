@@ -19,17 +19,15 @@ export default async function NewsPage() {
   const [page, reviews] = await Promise.all([getNewsList(), getReviews()]);
 
   return (
-    <main className="bg-canvas text-ink">
-      {/* The home page's reviews, on the same silk background. */}
+    <main className="text-ink">
+      {/* Like the home page: the silk background stays still while the
+          reviews and the news scroll over it. */}
       <FixedBackdrop>
         <ReviewsSection
           badge={reviews.badge}
           title={reviews.title}
           reviews={reviews.items}
         />
-      </FixedBackdrop>
-      {/* Positioned, so it covers the backdrop as the backdrop scrolls away. */}
-      <div className="relative bg-canvas">
         <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col items-center px-20 pt-16 pb-20 max-lg:px-5 max-lg:pt-10 max-lg:pb-12">
           <Badge>{page.badge}</Badge>
           <Heading as="h1" className="mt-6 w-full min-w-0 text-center">
@@ -77,7 +75,7 @@ export default async function NewsPage() {
             ))}
           </div>
         </div>
-      </div>
+      </FixedBackdrop>
     </main>
   );
 }
