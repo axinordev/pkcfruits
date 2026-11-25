@@ -51,7 +51,7 @@ export default function StorySection({
         <motion.div
           ref={frameRef}
           style={{ x: frameX, y: frameY }}
-          className="relative aspect-534/442 w-full max-w-133.5 min-w-0 overflow-hidden rounded-md shadow-[0_8px_28px_rgba(0,0,0,0.14)] lg:h-110.5 lg:w-133.5"
+          className="relative aspect-534/442 w-full max-w-80 min-w-0 overflow-hidden rounded-md shadow-[0_8px_28px_rgba(0,0,0,0.14)] lg:h-66.25 lg:w-80"
         >
           {story.image && cutout.sectionWidth > 0 ? (
             <motion.div
