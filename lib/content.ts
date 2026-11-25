@@ -5,7 +5,6 @@ import { cache } from "react";
 import { slugify } from "@/lib/cms/access";
 import { youtubeEmbed } from "@/lib/youtube";
 import type {
-  Award,
   ContactPage,
   Gallery,
   Media,
@@ -271,19 +270,6 @@ export const getHomePage = cache(async () => {
   };
 });
 
-function awardView(award: Award) {
-  const image = cmsImage(award.image, award.title);
-  return {
-    id: award.id,
-    title: award.title,
-    summary: award.summary ?? "",
-    image: image?.src ?? "",
-    imageAlt: image?.alt ?? award.title,
-    width: image?.width ?? 960,
-    height: image?.height ?? 720,
-  };
-}
-
 export function newsCard(story: News) {
   const image = cmsImage(story.image, story.title);
   return {
@@ -338,7 +324,7 @@ export const getAboutPage = cache(async () => {
 });
 
 async function pageHeading(
-  slug: "products-page" | "awards-page" | "gallery-page" | "news-page",
+  slug: "products-page" | "gallery-page" | "news-page",
 ) {
   const payload = await getCMS();
   const page = await payload.findGlobal({ slug, depth: 0 });
@@ -367,20 +353,6 @@ export const getProductsPage = cache(async () => {
       title: page.title,
       button: "Explore All",
     }),
-  };
-});
-
-export const getAwardsPage = cache(async () => {
-  const payload = await getCMS();
-  const [page, result] = await Promise.all([
-    pageHeading("awards-page"),
-    payload.find({ collection: "awards", limit: 100, depth: 1, sort: "order" }),
-  ]);
-  const [first = "", second = ""] = page.title.split("\n");
-  return {
-    ...page,
-    titleLines: [first, second],
-    awards: result.docs.map(awardView),
   };
 });
 

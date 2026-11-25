@@ -5,7 +5,6 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
-import { Awards } from "./collections/Awards";
 import { Enquiries } from "./collections/Enquiries";
 import { Gallery } from "./collections/Gallery";
 import { Media } from "./collections/Media";
@@ -16,7 +15,6 @@ import { Users } from "./collections/Users";
 import { AboutPage } from "./globals/AboutPage";
 import { HomePage } from "./globals/HomePage";
 import {
-  AwardsPage,
   ContactPage,
   GalleryPage,
   NewsPage,
@@ -55,21 +53,11 @@ export default buildConfig({
       },
     },
   },
-  collections: [
-    Users,
-    Media,
-    Products,
-    News,
-    Gallery,
-    Reviews,
-    Awards,
-    Enquiries,
-  ],
+  collections: [Users, Media, Products, News, Gallery, Reviews, Enquiries],
   globals: [
     HomePage,
     AboutPage,
     ProductsPage,
-    AwardsPage,
     GalleryPage,
     NewsPage,
     ContactPage,

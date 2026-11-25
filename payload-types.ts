@@ -73,7 +73,6 @@ export interface Config {
     news: News;
     gallery: Gallery;
     reviews: Review;
-    awards: Award;
     enquiries: Enquiry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -88,7 +87,6 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
-    awards: AwardsSelect<false> | AwardsSelect<true>;
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -103,7 +101,6 @@ export interface Config {
     'home-page': HomePage;
     'about-page': AboutPage;
     'products-page': ProductsPage;
-    'awards-page': AwardsPage;
     'gallery-page': GalleryPage;
     'news-page': NewsPage;
     'contact-page': ContactPage;
@@ -112,7 +109,6 @@ export interface Config {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'products-page': ProductsPageSelect<false> | ProductsPageSelect<true>;
-    'awards-page': AwardsPageSelect<false> | AwardsPageSelect<true>;
     'gallery-page': GalleryPageSelect<false> | GalleryPageSelect<true>;
     'news-page': NewsPageSelect<false> | NewsPageSelect<true>;
     'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
@@ -300,25 +296,6 @@ export interface Review {
   createdAt: string;
 }
 /**
- * Awards. Choose these on the home page.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "awards".
- */
-export interface Award {
-  id: string;
-  title: string;
-  summary?: string | null;
-  image: string | Media;
-  order: number;
-  /**
-   * Made automatically. You cannot edit this.
-   */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Messages sent from the contact form.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -380,10 +357,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reviews';
         value: string | Review;
-      } | null)
-    | ({
-        relationTo: 'awards';
-        value: string | Award;
       } | null)
     | ({
         relationTo: 'enquiries';
@@ -543,19 +516,6 @@ export interface ReviewsSelect<T extends boolean = true> {
   name?: T;
   review?: T;
   showOnHome?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "awards_select".
- */
-export interface AwardsSelect<T extends boolean = true> {
-  title?: T;
-  summary?: T;
-  image?: T;
-  order?: T;
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -755,19 +715,6 @@ export interface ProductsPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "awards-page".
- */
-export interface AwardsPage {
-  id: string;
-  seoTitle: string;
-  seoDescription: string;
-  badge: string;
-  title: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery-page".
  */
 export interface GalleryPage {
@@ -951,19 +898,6 @@ export interface AboutPageSelect<T extends boolean = true> {
  * via the `definition` "products-page_select".
  */
 export interface ProductsPageSelect<T extends boolean = true> {
-  seoTitle?: T;
-  seoDescription?: T;
-  badge?: T;
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "awards-page_select".
- */
-export interface AwardsPageSelect<T extends boolean = true> {
   seoTitle?: T;
   seoDescription?: T;
   badge?: T;
