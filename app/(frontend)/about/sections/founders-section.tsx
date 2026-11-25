@@ -1,3 +1,5 @@
+import { dmSans, newsreader } from "@/app/about/fonts";
+import AccentTitle from "@/app/home-page/components/accent-title";
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { siteGutter } from "@/shared/ui/gutter";
@@ -17,49 +19,43 @@ type FoundersSectionProps = {
 
 export default function FoundersSection({ founders }: FoundersSectionProps) {
   return (
-    <section className="bg-canvas text-ink">
+    <section className="bg-white bg-[url(/bg.webp)] bg-cover bg-top bg-no-repeat text-ink">
       <div
         className={`flex w-full flex-col items-center pt-30 pb-30 max-lg:py-14 ${siteGutter}`}
       >
         <Badge>{founders.badge}</Badge>
-        <Heading className="mt-5 text-center max-lg:mt-4">
-          {founders.title}
+        <Heading
+          className={`${dmSans.className} mt-5 text-center leading-13.5 font-semibold tracking-[-0.05em] max-lg:mt-4`}
+        >
+          <AccentTitle
+            text={founders.title}
+            accentClassName={`${newsreader.className} leading-none font-normal`}
+          />
         </Heading>
 
-        {/* Up to 1440px the cards reach the navbar's logo and Contact
-            button. Wider screens keep them at that size (82rem across),
-            centred, so the portraits never grow taller than the screen. */}
-        <div className="mt-12.5 grid w-full max-w-328 grid-cols-1 gap-5 md:grid-cols-2 max-lg:mt-8">
+        {/* Two 498px cards side by side, centred; on a phone they stack and
+            keep that width at most. */}
+        <div className="mt-10.5 grid w-full max-w-255 grid-cols-1 gap-6 max-md:max-w-124.5 max-lg:mt-8 md:grid-cols-2">
           {founders.members.map((member) => (
             <article
               key={member.name}
-              className="relative aspect-630/786 overflow-hidden rounded-2xl"
+              className="rounded-[20px] bg-white p-2.5 pb-6 text-center shadow-[0_2px_12px_rgba(33,34,33,0.05)]"
             >
-              <Image
-                src={member.image.src}
-                alt={member.image.alt}
-                width={1086}
-                height={1448}
-                sizes="(min-width: 768px) 630px, 100vw"
-                className="max-w-none"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "138%",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                }}
-              />
-              <div className="absolute inset-x-0 bottom-0 flex h-[73px] items-center justify-between border-t border-[rgba(195,208,196,0.2)] bg-black/20 px-6 backdrop-blur-[14px] sm:px-10">
-                <p className="font-riposte text-[18px] leading-[35px] font-light text-white sm:text-[20px]">
-                  {member.name}
-                </p>
-                <p className="font-riposte text-[18px] leading-[35px] font-light text-white sm:text-[20px]">
-                  {member.role}
-                </p>
+              <div className="relative aspect-478/530 overflow-hidden rounded-xl">
+                <Image
+                  src={member.image.src}
+                  alt={member.image.alt}
+                  fill
+                  sizes="(min-width: 768px) 480px, 100vw"
+                  className="object-cover"
+                />
               </div>
+              <p className="font-riposte mt-5.5 text-[20px] leading-7 font-light text-[#253326]">
+                {member.name}
+              </p>
+              <p className="font-riposte mt-0.5 text-[18px] leading-6.25 font-light text-[#71757A]">
+                {member.role}
+              </p>
             </article>
           ))}
         </div>

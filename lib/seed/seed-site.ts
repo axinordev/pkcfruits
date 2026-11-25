@@ -319,7 +319,7 @@ export async function seedSite(payload: Payload) {
         ),
         storyBody: text(aboutPageContent.story.paragraphs),
         foundersBadge: aboutPageContent.founders.badge,
-        foundersTitle: aboutPageContent.founders.title,
+        foundersTitle: aboutPageContent.founders.accentTitle,
         founders: await Promise.all(
           aboutPageContent.founders.members.map(async (member) => ({
             name: member.name,
