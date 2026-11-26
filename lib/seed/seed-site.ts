@@ -121,7 +121,7 @@ export async function seedSite(payload: Payload) {
       ),
     );
     const saved = await ensure("products", slug, {
-      name: detail?.name ?? fruit.name.replace(/[[\]]/g, ""),
+      name: detail?.name ?? fruit.name,
       slug,
       image: await photo(fruit.image, fruit.alt),
       origin: detail?.origin,

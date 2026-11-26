@@ -89,7 +89,7 @@ function cardFromProduct(product: Product): CatalogProduct | null {
   if (!image || !product.slug) return null;
   return {
     slug: product.slug,
-    name: `[${product.name}]`,
+    name: product.name,
     image: image.src,
     alt: image.alt,
     width: image.width,
