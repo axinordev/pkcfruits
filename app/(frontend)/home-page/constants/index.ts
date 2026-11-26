@@ -15,7 +15,7 @@ export const heroSectionContent = {
 export const heroFruitCards = [
   {
     label: "New Arrivals",
-    name: "[Australian Citrus]",
+    name: "Australian Citrus",
     image: "/orange.png",
     imageAlt: "Australian citrus oranges",
     imageWidth: 1536,
@@ -25,7 +25,7 @@ export const heroFruitCards = [
   },
   {
     label: "New Arrivals",
-    name: "[Red Apple]",
+    name: "Red Apple",
     image: "/apple.png",
     imageAlt: "Red apples",
     imageWidth: 648,
@@ -35,7 +35,7 @@ export const heroFruitCards = [
   },
   {
     label: "New Arrivals",
-    name: "[Kiwi]",
+    name: "Kiwi",
     image: "/kiwi.png",
     imageAlt: "Kiwi",
     imageWidth: 1536,

@@ -8,35 +8,35 @@
   },
   "fruits": {
     "cherry": {
-      "name": "[Cherry]",
+      "name": "Cherry",
       "image": "/cherry.png",
       "alt": "Cherries",
       "width": 1024,
       "height": 1024
     },
     "kiwi": {
-      "name": "[Kiwi]",
+      "name": "Kiwi",
       "image": "/kiwi.png",
       "alt": "Kiwi",
       "width": 1536,
       "height": 1024
     },
     "apple": {
-      "name": "[Red Apple]",
+      "name": "Red Apple",
       "image": "/apple.png",
       "alt": "Red apple",
       "width": 648,
       "height": 482
     },
     "apricot": {
-      "name": "[Apricot]",
+      "name": "Apricot",
       "image": "/apricot.png",
       "alt": "Apricots",
       "width": 1024,
       "height": 1024
     },
     "orange": {
-      "name": "[Orange]",
+      "name": "Orange",
       "image": "/orange.png",
       "alt": "Oranges",
       "width": 1536,
