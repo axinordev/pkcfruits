@@ -46,7 +46,7 @@ export default function ArticleSection({ article }: { article: ArticleView }) {
         </div>
 
         <div className="mt-6 flex flex-col items-start gap-5 lg:flex-row lg:justify-between lg:gap-10">
-          <Heading as="h1" className="max-w-[695px]">
+          <Heading as="h1" size="page" className="max-w-[695px]">
             {article.title}
           </Heading>
           <ShareLinks title={article.title} />

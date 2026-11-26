@@ -31,6 +31,7 @@ export default function IntroSection({ intro }: IntroSectionProps) {
             <Badge>{intro.badge}</Badge>
             <Heading
               as="h1"
+              size="page"
               className={`${dmSans.className} mt-7.5 leading-13.5 font-semibold tracking-[-0.05em] max-lg:mt-4 lg:max-w-98.5`}
             >
               <AccentTitle

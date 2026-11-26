@@ -26,6 +26,7 @@ export default function FoundersSection({ founders }: FoundersSectionProps) {
       >
         <Badge>{founders.badge}</Badge>
         <Heading
+          size="page"
           className={`${dmSans.className} mt-5 text-center leading-13.5 font-semibold tracking-[-0.05em] max-lg:mt-4`}
         >
           <AccentTitle

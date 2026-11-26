@@ -24,7 +24,11 @@ export default async function NewsPage() {
       <FixedBackdrop>
         <div className="mx-auto flex w-full min-w-0 max-w-360 flex-col items-center px-20 pt-16 pb-20 max-lg:px-5 max-lg:pt-10 max-lg:pb-12">
           <Badge>{page.badge}</Badge>
-          <Heading as="h1" className="mt-6 w-full min-w-0 text-center">
+          <Heading
+            as="h1"
+            size="page"
+            className="mt-6 w-full min-w-0 text-center"
+          >
             {page.title}
           </Heading>
 
