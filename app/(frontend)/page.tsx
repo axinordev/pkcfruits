@@ -7,7 +7,11 @@ import {
   ReviewsSection,
 } from "./home-page/sections";
 import FixedBackdrop from "./home-page/components/fixed-backdrop";
-import { HoldUnder, SlideOver } from "./home-page/components/slide-over";
+import {
+  ArchedSlideOver,
+  HoldUnder,
+  SlideOver,
+} from "./home-page/components/slide-over";
 import { getHomePage } from "@/lib/content";
 import { getSeoMetadata } from "@/shared/seo";
 
@@ -38,14 +42,15 @@ export default async function Home() {
         about={home.about}
       />
       {/* The products slide up over the hero, which holds itself still for
-          them, and the gallery slides up over the map. */}
+          them, and the gallery slides up over the map, its top edge an arch
+          that flattens as it comes up. */}
       <SlideOver>
         <ProductSection catalog={home.catalog} />
       </SlideOver>
       <HoldUnder>
         <MapSection {...home.world} />
       </HoldUnder>
-      <SlideOver>
+      <ArchedSlideOver>
         <FixedBackdrop>
           <GallerySection {...home.gallery} />
           <ReviewsSection
@@ -55,7 +60,7 @@ export default async function Home() {
           />
           <RecentNewsSection {...home.news} />
         </FixedBackdrop>
-      </SlideOver>
+      </ArchedSlideOver>
     </main>
   );
 }

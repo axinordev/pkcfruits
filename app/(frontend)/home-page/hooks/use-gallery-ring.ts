@@ -5,15 +5,16 @@ import { useEffect, useRef } from "react";
 // The ring as drawn in the design at 1440px wide. Cards stand on the inside of
 // a cylinder seen from in front, so the ones toward the sides come closer and
 // look taller, and each side card's outer edge is taller than its inner edge.
+// Landscape cards, 7:5.
 const CARD_WIDTH = 284;
-const CARD_HEIGHT = 320;
+const CARD_HEIGHT = 203;
 const CARD_RADIUS = 14;
 // Space between cards, measured along the ring.
 const CARD_GAP = 16;
 const RING_RADIUS = 592;
 const PERSPECTIVE = 1940;
 // The ring's height at full size: room for the tall cards at the screen edges.
-const RING_HEIGHT = 400;
+const RING_HEIGHT = 254;
 // Angle between neighbouring cards.
 const PITCH = (CARD_WIDTH + CARD_GAP) / RING_RADIUS;
 // How many cards from the middle a card starts fading, and is gone, as it
