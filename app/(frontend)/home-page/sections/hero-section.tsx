@@ -141,7 +141,9 @@ export default function HeroSection({
             <h1 className="-mt-1 text-center text-[28px] leading-[42px] font-bold tracking-tight lg:mt-1 lg:text-left lg:text-[72px] lg:leading-[92px]">
               {titleLead}
               {titleAccent && (
-                <em className={`${newsreader.className} font-normal`}>
+                <em
+                  className={`${newsreader.className} font-semibold tracking-normal`}
+                >
                   {titleAccent}
                 </em>
               )}

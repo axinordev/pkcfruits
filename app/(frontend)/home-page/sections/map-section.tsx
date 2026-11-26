@@ -86,7 +86,7 @@ export default function MapSection({
             {titleLead}
             {titleAccent && (
               <em
-                className={`${newsreader.className} font-normal text-brand-primary`}
+                className={`${newsreader.className} font-semibold text-brand-primary`}
               >
                 {titleAccent}
               </em>

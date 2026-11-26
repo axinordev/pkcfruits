@@ -11,7 +11,8 @@ export const navContent = {
 
 export const footerContent = {
   badge: "Contact",
-  title: "Let’s Bring Good Things Together",
+  // The accent words are set in the italic serif, in the heading's own color.
+  title: { lead: "Let’s Bring ", accent: "Good Things", trail: " Together" },
   description:
     "Whether you’re looking to source premium fruits or explore a partnership, we’d love to hear from you.",
   action: { label: "Contact Us", href: "/contact" },

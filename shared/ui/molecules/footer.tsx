@@ -1,3 +1,4 @@
+import { newsreader } from "@/app/fonts/newsreader";
 import { getSiteContact, type SocialPlatform } from "@/lib/content";
 import { footerContent } from "@/shared/constants/site";
 import Badge from "@/shared/ui/atoms/badge";
@@ -47,7 +48,11 @@ export default async function Footer() {
             {footerContent.badge}
           </Badge>
           <h2 className="mt-6 max-w-[18rem] text-center text-[32px] leading-tight font-bold lg:max-w-none lg:text-[40px] lg:leading-[50px] lg:whitespace-nowrap">
-            {footerContent.title}
+            {footerContent.title.lead}
+            <em className={`${newsreader.className} font-semibold`}>
+              {footerContent.title.accent}
+            </em>
+            {footerContent.title.trail}
           </h2>
           <p
             className={`${riposte} mt-4 max-w-[529px] text-center text-base leading-7 text-white/80 lg:text-lg`}
