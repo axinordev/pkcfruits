@@ -32,8 +32,8 @@ const ZOOM_VH = 80;
 const HOLD_VH = 30;
 // The zoomed photo keeps its shape and grows to this share of the screen's
 // height (of its width, on a screen too narrow for that).
-const ZOOM_HEIGHT = 0.8;
-const ZOOM_MAX_WIDTH = 0.9;
+const ZOOM_HEIGHT = 0.9;
+const ZOOM_MAX_WIDTH = 0.95;
 // Around the zoomed photo, at full zoom: how blurred, and how faded.
 const BACK_BLUR = 14;
 const BACK_OPACITY = 0.6;
