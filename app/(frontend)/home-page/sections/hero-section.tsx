@@ -138,7 +138,7 @@ export default function HeroSection({
             >
               {eyeLabel}
             </p>
-            <h1 className="-mt-1 text-center text-[28px] leading-[42px] font-bold tracking-tight lg:mt-1 lg:text-left lg:text-[72px] lg:leading-[92px]">
+            <h1 className="-mt-1 text-center text-[28px] leading-[42px] font-bold tracking-tight lg:mt-1 lg:text-left lg:text-[70px] lg:leading-[90px]">
               {titleLead}
               {titleAccent && (
                 <em

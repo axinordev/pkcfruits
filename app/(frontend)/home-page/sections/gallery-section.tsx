@@ -68,7 +68,7 @@ export default function GallerySection({
           className="flex flex-col items-center px-5 text-center"
         >
           <Badge>{badge}</Badge>
-          <Heading className="mt-5 lg:leading-15">
+          <Heading className="mt-5">
             {title}
             {highlight && (
               <em

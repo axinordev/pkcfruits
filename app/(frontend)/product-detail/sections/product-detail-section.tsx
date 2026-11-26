@@ -55,7 +55,7 @@ export default function ProductDetailSection({
           </Link>
 
           <Badge className="mt-8 w-fit">{product.badge}</Badge>
-          <Heading as="h1" className="mt-5 uppercase">
+          <Heading as="h1" size="page" className="mt-5 uppercase">
             {product.name}
           </Heading>
         </div>

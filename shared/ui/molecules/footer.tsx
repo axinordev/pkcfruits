@@ -47,7 +47,7 @@ export default async function Footer() {
           <Badge className="h-[30px] rounded-full px-3 text-sm">
             {footerContent.badge}
           </Badge>
-          <h2 className="mt-6 max-w-[18rem] text-center text-[32px] leading-tight font-bold lg:max-w-none lg:text-[40px] lg:leading-[50px] lg:whitespace-nowrap">
+          <h2 className="mt-6 max-w-[18rem] text-center text-[32px] leading-tight font-bold lg:max-w-none lg:text-[50px] lg:leading-15 lg:whitespace-nowrap">
             {footerContent.title.lead}
             <em className={`${newsreader.className} font-semibold`}>
               {footerContent.title.accent}

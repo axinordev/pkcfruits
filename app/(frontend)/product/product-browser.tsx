@@ -28,7 +28,7 @@ export default function ProductBrowser({
         <div className="flex items-end justify-between gap-8 max-lg:flex-col max-lg:items-start">
           <div>
             <Badge>{catalog.badge}</Badge>
-            <Heading as="h1" className="mt-4">
+            <Heading as="h1" size="page" className="mt-4">
               <AccentTitle text={catalog.title} />
             </Heading>
           </div>

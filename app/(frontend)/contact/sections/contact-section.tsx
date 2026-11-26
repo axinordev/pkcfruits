@@ -27,7 +27,7 @@ export default function ContactSection({ page }: { page: ContactPageView }) {
     <section className="text-ink">
       <div className="mx-auto w-full max-w-360 px-5 pt-12 pb-16 lg:px-20 lg:pt-20 lg:pb-24">
         <Badge>{badge}</Badge>
-        <Heading as="h1" className="mt-5">
+        <Heading as="h1" size="page" className="mt-5">
           {title}
         </Heading>
 
