@@ -10,6 +10,7 @@ import {
 import Badge from "@/shared/ui/atoms/badge";
 import Heading from "@/shared/ui/atoms/heading";
 import { cn } from "cn";
+import Image from "next/image";
 import type { CSSProperties } from "react";
 
 type Review = { id: string; name: string; review: string };
@@ -83,7 +84,7 @@ export default function ReviewsSection({
                   className="absolute inset-x-0 top-0 will-change-transform"
                 >
                   <figure className="relative rounded-2xl bg-white px-7.5 pt-7 pb-6 shadow-[0_12px_32px_rgba(33,34,33,0.08)] max-lg:px-5 max-lg:pt-6 max-lg:pb-5">
-                    <Bookmark />
+                    <CommentIcon />
                     <blockquote className="font-riposte line-clamp-4 pr-8 text-[16px] leading-6.5 font-light text-ink/75 max-lg:text-[15px] max-lg:leading-6">
                       “{review.review}”
                     </blockquote>
@@ -101,15 +102,15 @@ export default function ReviewsSection({
   );
 }
 
-function Bookmark() {
+function CommentIcon() {
   return (
-    <svg
+    <Image
+      src="/comment-icon.png"
+      alt=""
       aria-hidden
-      viewBox="0 0 20 24"
-      className="absolute top-0 right-7 h-6 w-5 text-brand-primary max-lg:right-5"
-    >
-      <path d="M0 0h20v24l-10-5.5L0 24z" fill="currentColor" />
-      <circle cx="10" cy="9.5" r="1.75" fill="white" />
-    </svg>
+      width={56}
+      height={67}
+      className="absolute top-0 right-7 h-6 w-5 max-lg:right-5"
+    />
   );
 }
