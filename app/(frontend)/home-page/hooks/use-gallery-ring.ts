@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { screenHeight } from "./screen-height";
 
 // The ring as drawn in the design at 1440px wide. Cards stand on the inside of
 // a cylinder seen from in front, so the ones toward the sides come closer and
@@ -130,11 +131,14 @@ export function useGalleryRing(photoCount: number) {
     // the middle of the screen.
     let zoomScale = 1;
     let zoomShift = 0;
+    // The scroll the cards were last placed for. Scroll anywhere outside the
+    // pin leaves it unchanged, so the cards aren't restyled on every scroll.
+    let placedFor = -1;
 
     const turn = () => {
       // How far into the pin, in viewport heights: the ring turns one photo
       // per SCROLL_PER_PHOTO_VH, then the photo back in the middle zooms in.
-      const distance = section.offsetHeight - window.innerHeight;
+      const distance = section.offsetHeight - screenHeight();
       const traveled = Math.min(
         Math.max(-section.getBoundingClientRect().top, 0),
         Math.max(distance, 0),
@@ -143,6 +147,8 @@ export function useGalleryRing(photoCount: number) {
         distance > 0 && !reduceMotion.matches
           ? (traveled / distance) * totalVh
           : 0;
+      if (scrolled === placedFor) return;
+      placedFor = scrolled;
       const offset = clamp01(scrolled / turnVh) * photoCount;
       const zoom = smooth(clamp01((scrolled - turnVh) / ZOOM_VH));
       const blur = zoom > 0 ? `blur(${(zoom * BACK_BLUR).toFixed(2)}px)` : "";
@@ -196,14 +202,16 @@ export function useGalleryRing(photoCount: number) {
       const ringBox = ring.getBoundingClientRect();
       const ringMiddle =
         ringBox.top + ringBox.height / 2 - pinned.getBoundingClientRect().top;
-      zoomShift = window.innerHeight / 2 - ringMiddle;
+      const screen = screenHeight();
+      zoomShift = screen / 2 - ringMiddle;
       zoomScale = Math.max(
         1,
         Math.min(
-          (window.innerHeight * ZOOM_HEIGHT) / cardHeight,
+          (screen * ZOOM_HEIGHT) / cardHeight,
           (width * ZOOM_MAX_WIDTH) / cardWidth,
         ),
       );
+      placedFor = -1;
       turn();
     };
 
@@ -212,12 +220,12 @@ export function useGalleryRing(photoCount: number) {
     resize.observe(stage);
     window.addEventListener("scroll", turn, { passive: true });
     window.addEventListener("resize", layout);
-    reduceMotion.addEventListener("change", turn);
+    reduceMotion.addEventListener("change", layout);
     return () => {
       resize.disconnect();
       window.removeEventListener("scroll", turn);
       window.removeEventListener("resize", layout);
-      reduceMotion.removeEventListener("change", turn);
+      reduceMotion.removeEventListener("change", layout);
     };
   }, [photoCount]);
 
