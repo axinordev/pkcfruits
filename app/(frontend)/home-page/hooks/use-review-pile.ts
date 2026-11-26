@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { screenHeight } from "./screen-height";
 
 // Where each card sits on the finished pile, from the top, as in the design: a
 // sideways nudge (for a 512px-wide card) and a tilt. Cards keep their tilt the
@@ -75,17 +76,22 @@ export function useReviewPile(count: number) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let cardHeight = DEFAULT_CARD_HEIGHT;
     let cardWidth = DESIGN_CARD_WIDTH;
+    // How far the pile was last gathered. Scroll anywhere outside the pin
+    // leaves it unchanged, so the cards aren't restyled on every scroll.
+    let placedAt = -1;
 
     const place = () => {
       // 0 → 1 while the section is pinned. Unpinned (one review, or reduced
       // motion), the finished pile shows.
-      const distance = section.offsetHeight - window.innerHeight;
+      const distance = section.offsetHeight - screenHeight();
       const traveled = Math.min(
         Math.max(-section.getBoundingClientRect().top, 0),
         Math.max(distance, 0),
       );
       const gathered =
         distance > 0 && !reduceMotion.matches ? traveled / distance : 1;
+      if (gathered === placedAt) return;
+      placedAt = gathered;
 
       cards.forEach((card, index) => {
         card.style.transform = pileCardTransform(
@@ -108,6 +114,7 @@ export function useReviewPile(count: number) {
         cardHeight,
         stage.clientHeight,
       );
+      placedAt = -1;
       place();
     };
 
@@ -116,11 +123,11 @@ export function useReviewPile(count: number) {
     const resize = new ResizeObserver(layout);
     resize.observe(stage);
     window.addEventListener("scroll", place, { passive: true });
-    reduceMotion.addEventListener("change", place);
+    reduceMotion.addEventListener("change", layout);
     return () => {
       resize.disconnect();
       window.removeEventListener("scroll", place);
-      reduceMotion.removeEventListener("change", place);
+      reduceMotion.removeEventListener("change", layout);
     };
   }, [count]);
 

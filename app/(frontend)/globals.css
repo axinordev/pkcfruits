@@ -1,5 +1,10 @@
 @import "tailwindcss";
-@plugin "daisyui";
+/* Light only. The site has no dark design; daisyUI's default also switches to
+   its dark theme on devices set to dark mode, which turned the page's own
+   background near-black wherever it shows between the home page's sections. */
+@plugin "daisyui" {
+  themes: light --default;
+}
 @source "./product-detail";
 
 @theme {

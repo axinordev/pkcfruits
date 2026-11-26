@@ -2,6 +2,7 @@
 
 import { useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { screenHeight } from "./screen-height";
 import { CLIP_CALM_END, CLIP_END } from "./use-scroll-frames";
 
 // How far the page scrolls while the hero is pinned, in viewport heights. The
@@ -70,7 +71,7 @@ const toBlur = (value: number) =>
 
 /** The scroll the texts and the clip are pinned for, in pixels. */
 export function heroPinDistance(section: HTMLElement) {
-  return section.offsetHeight - window.innerHeight * (1 + HERO_COVER_VH / 100);
+  return section.offsetHeight - screenHeight() * (1 + HERO_COVER_VH / 100);
 }
 
 export function useHeroSection() {
@@ -87,7 +88,7 @@ export function useHeroSection() {
       const distance = heroPinDistance(section);
       const traveled = Math.min(
         Math.max(-section.getBoundingClientRect().top, 0),
-        Math.max(distance + window.innerHeight, 0),
+        Math.max(distance + screenHeight(), 0),
       );
       scrollYProgress.set(distance > 0 ? traveled / distance : 0);
     };

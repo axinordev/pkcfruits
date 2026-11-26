@@ -1,11 +1,11 @@
 "use client";
 
+import { screenHeight } from "@/app/home-page/hooks/screen-height";
 import { cn } from "cn";
 import {
   motion,
+  useMotionValue,
   useReducedMotion,
-  useScroll,
-  useTransform,
   type MotionStyle,
 } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
@@ -26,7 +26,7 @@ export function HoldUnder({ children }: { children: ReactNode }) {
     if (!hold) return;
 
     const place = () => {
-      const top = Math.min(0, window.innerHeight - hold.offsetHeight);
+      const top = Math.min(0, screenHeight() - hold.offsetHeight);
       hold.style.top = `${top}px`;
     };
 
@@ -70,13 +70,30 @@ export function SlideOver({ children }: { children: ReactNode }) {
 export function ArchedSlideOver({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "start start"],
-  });
-  const arch = useTransform(scrollYProgress, (progress) =>
-    reduceMotion ? 0 : 1 - progress,
-  );
+  const arch = useMotionValue(reduceMotion ? 0 : 1);
+
+  useEffect(() => {
+    const edge = ref.current;
+    if (!edge) return;
+
+    // The edge's height on the screen, as a share of it: 1 at the bottom, 0
+    // at the top. Measured against 100vh, so the arch doesn't jump when a
+    // phone's address bar slides in or out.
+    const update = () => {
+      const top = edge.getBoundingClientRect().top;
+      arch.set(
+        reduceMotion ? 0 : Math.min(Math.max(top / screenHeight(), 0), 1),
+      );
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [arch, reduceMotion]);
 
   return (
     <motion.div
