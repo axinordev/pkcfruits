@@ -1,6 +1,17 @@
 "use client";
 
+import { cn } from "cn";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionStyle,
+} from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
+
+const SLIDE_OVER =
+  "relative -mt-[100vh] shadow-[0_-16px_40px_rgba(33,34,33,0.1)]";
 
 /**
  * Holds a section still for one screen of scroll once its bottom reaches the
@@ -47,9 +58,37 @@ export function HoldUnder({ children }: { children: ReactNode }) {
  * top. The soft shadow marks its top edge as it comes over.
  */
 export function SlideOver({ children }: { children: ReactNode }) {
+  return <div className={SLIDE_OVER}>{children}</div>;
+}
+
+/**
+ * A SlideOver whose top edge comes up as a tall arch, highest in the middle,
+ * and flattens as the section slides up: it is straight by the time the edge
+ * reaches the top of the screen. `--arch` runs from 1 (full arch, the edge at
+ * the bottom of the screen) to 0 (flat) and sets the arch's height.
+ */
+export function ArchedSlideOver({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start start"],
+  });
+  const arch = useTransform(scrollYProgress, (progress) =>
+    reduceMotion ? 0 : 1 - progress,
+  );
+
   return (
-    <div className="relative -mt-[100vh] shadow-[0_-16px_40px_rgba(33,34,33,0.1)]">
+    <motion.div
+      ref={ref}
+      style={{ "--arch": arch } as MotionStyle}
+      // Clipped rather than hidden, so the sticky sections inside still pin.
+      className={cn(
+        SLIDE_OVER,
+        "overflow-clip rounded-t-[50%_calc(var(--arch)*35vw)]",
+      )}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

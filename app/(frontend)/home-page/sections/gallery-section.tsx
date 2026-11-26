@@ -105,7 +105,7 @@ export default function GallerySection({
                     // The photo that zooms in grows to most of the screen.
                     sizes={
                       index === zoomIndex
-                        ? "(max-width: 1023px) 90vw, 50vw"
+                        ? "(max-width: 1023px) 90vw, 70vw"
                         : "(max-width: 1023px) 60vw, 28vw"
                     }
                     className="object-cover"
