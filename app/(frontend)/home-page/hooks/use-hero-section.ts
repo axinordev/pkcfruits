@@ -18,7 +18,7 @@ const vh = (value: number) => value / HERO_SCROLL_VH;
 // The clip frame the texts' pin ends on: the burst has cleared, and only a few
 // seeds are still falling. They finish while the products cover the hero (the
 // next screen of scroll), so no pinned scroll goes by with nothing moving.
-const CLIP_PINNED_END = 144;
+const CLIP_PINNED_END = 162;
 const HERO_GONE = 1 + vh(100);
 
 const HERO_EXIT = [vh(6), vh(60)];

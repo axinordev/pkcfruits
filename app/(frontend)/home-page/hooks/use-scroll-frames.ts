@@ -2,28 +2,30 @@
 
 import type { MotionValue } from "framer-motion";
 import { useEffect, useRef, useSyncExternalStore } from "react";
+import { preload } from "react-dom";
 
 // Positions in the source clip, public/pomegranates.mp4, in its own frames.
-/** Last frame before the pomegranate starts to crack (it shows in 47). */
-export const CLIP_CALM_END = 44;
+/** Last frame before the pomegranate starts to crack (it shows in 84). */
+export const CLIP_CALM_END = 81;
 /**
  * Last frame the hero plays: the last seed has just left the picture. The
- * clip's remaining frames (to 167) are an almost still orchard, which would
+ * clip's remaining frames (to 189) are an almost still orchard, which would
  * only be scroll where nothing happens.
  */
-export const CLIP_END = 154;
+export const CLIP_END = 174;
 
 /**
  * Pre-rendered frame sets, built by scripts/hero-frames.sh. Each has `calm`
  * frames per clip frame up to CLIP_CALM_END and `rest` per clip frame after,
  * so neighbouring frames barely differ and a blend of two never shows a
- * double image. The opening is densest on desktop: it rests under the hero
- * text, where a blend stays on screen longest.
+ * double image.
  */
 const FRAME_SETS = {
-  lg: { calm: 3, rest: 2 },
+  lg: { calm: 2, rest: 2 },
   // A portrait crop, so phones don't stretch a slice of a landscape frame.
-  sm: { calm: 2, rest: 2 },
+  // Its opening is the clip's own frames: the slow push-in still steps less
+  // than the burst does, and phones download 80 fewer frames.
+  sm: { calm: 1, rest: 2 },
 } as const;
 type FrameSet = keyof typeof FRAME_SETS;
 
@@ -53,6 +55,20 @@ function frameIndex(set: FrameSet, clipFrame: number) {
 
 const frameSrc = (set: FrameSet, index: number) =>
   `/hero-frames/${set}/${String(index + 1).padStart(3, "0")}.webp`;
+
+/**
+ * Fetches the clip's first frame, the hero's background until the player
+ * paints, at high priority and only in the set this screen uses. Otherwise
+ * the browser finds it only once the stylesheet naming it has loaded.
+ */
+export function preloadFirstFrame() {
+  const options = { as: "image", fetchPriority: "high" } as const;
+  preload(frameSrc("lg", 0), {
+    ...options,
+    media: `not all and ${PORTRAIT_PHONE}`,
+  });
+  preload(frameSrc("sm", 0), { ...options, media: PORTRAIT_PHONE });
+}
 
 function subscribeToFrameSet(onChange: () => void) {
   const query = window.matchMedia(PORTRAIT_PHONE);

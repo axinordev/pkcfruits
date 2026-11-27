@@ -8,7 +8,10 @@ import {
   heroPinDistance,
   useHeroSection,
 } from "@/app/home-page/hooks/use-hero-section";
-import { useScrollFrames } from "@/app/home-page/hooks/use-scroll-frames";
+import {
+  preloadFirstFrame,
+  useScrollFrames,
+} from "@/app/home-page/hooks/use-scroll-frames";
 import Button from "@/shared/ui/atoms/button";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
@@ -58,6 +61,7 @@ export default function HeroSection({
     aboutPointerEvents,
   } = useHeroSection();
   const reduceMotion = useReducedMotion();
+  preloadFirstFrame();
   const canvasRef = useScrollFrames(clipFrame, !reduceMotion);
   const lenis = useLenis();
   const [titleLead, titleAccent] = splitTitle(title);

@@ -4,14 +4,16 @@
 #   scripts/hero-frames.sh <video> <calm-end> <end>
 #
 # Both are 0-based frame indexes in the source clip. <calm-end> is the last
-# frame before the action starts (pomegranates.mp4: 44, the crack shows from
-# 47); <end> is the last frame worth scrolling through (pomegranates.mp4: 154,
-# after it the orchard is almost still).
+# frame before the action starts (pomegranates.mp4: 81, the crack shows from
+# 84); <end> is the last frame worth scrolling through (pomegranates.mp4: 174,
+# the last seed has just left and the orchard is almost still).
 #
 # The player cross-fades between neighbouring frames so motion stays
 # continuous at any scroll speed, and that only looks clean when neighbours
-# barely differ. So both segments are motion-interpolated: the opening, which
-# rests under the hero text, more densely on desktop. Afterwards, in
+# barely differ. So the burst is motion-interpolated to 2 frames per clip
+# frame. The opening is a slow push-in that moves about half as far per frame:
+# 2 per clip frame on desktop, where it rests under the hero text, and 1 on
+# phones, where the download weighs more. Afterwards, in
 # app/(frontend)/home-page/hooks/use-scroll-frames.ts, set CLIP_CALM_END and
 # CLIP_END, and keep FRAME_SETS' densities in step with the calls below.
 #
@@ -51,6 +53,6 @@ build() {
   echo "$set: $(ls "$out/$set" | wc -l) frames (expected $((opening + rest))), $(du -sh "$out/$set" | cut -f1)"
 }
 
-build lg "scale=1440:810:flags=lanczos" 76 3 2 &
-build sm "crop=ih*9/16:ih,scale=540:960:flags=lanczos" 74 2 2 &
+build lg "scale=1440:810:flags=lanczos" 76 2 2 &
+build sm "crop=ih*9/16:ih,scale=540:960:flags=lanczos" 74 1 2 &
 wait
