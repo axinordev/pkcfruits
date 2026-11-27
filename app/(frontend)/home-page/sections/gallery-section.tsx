@@ -6,7 +6,6 @@ import {
   ringCardStyle,
   ringCards,
   useGalleryRing,
-  zoomCardIndex,
 } from "@/app/home-page/hooks/use-gallery-ring";
 import type { CmsImage } from "@/lib/content";
 import Badge from "@/shared/ui/atoms/badge";
@@ -26,9 +25,8 @@ type GallerySectionProps = {
 
 /**
  * Gallery photos on a ring. The section pins while the page scrolls and the
- * ring turns with the scroll, one photo at a time. Once the photo it started
- * on is back in the middle, that photo zooms in while everything around it
- * blurs; then the section unpins and the page moves on.
+ * ring turns with the scroll, one photo at a time; once the photo it started
+ * on is back in the middle, the section unpins and the page moves on.
  */
 export default function GallerySection({
   badge,
@@ -38,7 +36,6 @@ export default function GallerySection({
   photos,
 }: GallerySectionProps) {
   const cards = ringCards(photos);
-  const zoomIndex = zoomCardIndex(photos.length, cards.length);
   const { sectionRef, stageRef, ringRef } = useGalleryRing(photos.length);
   const pinned = photos.length > 0;
 
@@ -63,10 +60,7 @@ export default function GallerySection({
             "sticky top-0 h-screen motion-reduce:static motion-reduce:h-auto",
         )}
       >
-        <div
-          data-gallery-around
-          className="flex flex-col items-center px-5 text-center"
-        >
+        <div className="flex flex-col items-center px-5 text-center">
           <Badge>{badge}</Badge>
           <Heading className="mt-5">
             {title}
@@ -102,12 +96,7 @@ export default function GallerySection({
                     src={photo.src}
                     alt={repeat ? "" : photo.alt}
                     fill
-                    // The photo that zooms in grows to most of the screen.
-                    sizes={
-                      index === zoomIndex
-                        ? "(max-width: 1023px) 95vw, 80vw"
-                        : "(max-width: 1023px) 60vw, 28vw"
-                    }
+                    sizes="(max-width: 1023px) 60vw, 28vw"
                     className="object-cover"
                   />
                 </li>
@@ -117,7 +106,6 @@ export default function GallerySection({
         )}
 
         <p
-          data-gallery-around
           className={cn(
             "font-riposte mx-auto max-w-142 px-5 text-center text-[16px] leading-6.5 font-light text-ink/70",
             !pinned && "mt-10",
